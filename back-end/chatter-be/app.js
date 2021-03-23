@@ -1,8 +1,6 @@
 const express = require('express')
 const app = express()
 const port = 5000
-const sql = require('./model/db')
-const query = require('./model/query')
 const dbConfig = require('./model/config')
 const session = require('express-session')
 const MySQLStore = require('express-mysql-session')(session)
@@ -12,7 +10,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 const loginRouter = require('./routes/login')
-
+const logoutRouter = require('./routes/logout')
 const sessionStore = new MySQLStore(dbConfig)
 
 app.use(session({
@@ -23,6 +21,7 @@ app.use(session({
 }))
 
 app.use(loginRouter)
+app.use(logoutRouter)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
