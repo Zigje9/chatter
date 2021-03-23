@@ -6,6 +6,10 @@ const query = require('./model/query')
 const dbConfig = require('./model/config')
 const session = require('express-session')
 const MySQLStore = require('express-mysql-session')(session)
+const bodyParser = require('body-parser'); 
+
+app.use(bodyParser.urlencoded({extended:true})); 
+app.use(bodyParser.json());
 
 const loginRouter = require('./routes/login')
 
@@ -19,11 +23,6 @@ app.use(session({
 }))
 
 app.use(loginRouter)
-
-app.get('/test', async (req, res) => {
-  const [result] = await sql(query.READ_USER);
-  res.send(result);
-})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
