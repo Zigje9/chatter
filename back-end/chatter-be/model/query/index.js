@@ -1,7 +1,7 @@
-import userQuery from './user'
+const userQuery = require('./user')
 
 const query = {
   ...userQuery,
 }
 
-export default query;
+module.exports = query;
