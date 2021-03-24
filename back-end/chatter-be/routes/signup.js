@@ -11,7 +11,8 @@ router.post('/signup', async (req, res) => {
     res.send("가입된 회원입니다.")
   }
   else{
-    //회원 가입 로직
+    await sql(query.INSERT_USER, [id, userName, pw])
+    res.send("회원가입 완료.")
   }
 })
 
