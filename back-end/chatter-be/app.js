@@ -11,6 +11,8 @@ app.use(bodyParser.json());
 
 const loginRouter = require('./routes/login')
 const logoutRouter = require('./routes/logout')
+const signupRouter = require('./routes/signup')
+
 const sessionStore = new MySQLStore(dbConfig)
 
 app.use(session({
@@ -22,6 +24,7 @@ app.use(session({
 
 app.use(loginRouter)
 app.use(logoutRouter)
+app.use(signupRouter)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
