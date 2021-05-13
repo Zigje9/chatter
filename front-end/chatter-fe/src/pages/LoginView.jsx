@@ -1,13 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
 import Container from '../components/Common/container';
+import IdForm from '../components/LoginView/idForm';
 
 const loginView = () => {
   return (
     <Container>
-      <div>로그인뷰</div>
+      <IdForm />
     </Container>
   );
 };
-
 export default loginView;

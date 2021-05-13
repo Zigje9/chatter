@@ -1,15 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  height: 50px;
-  width: 50px;
-  margin-top: 10%;
-  background-color: green;
+const IdForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 10%;
+`;
+
+const IdInfo = styled.div`
+  display: flex;
+  align-items: center;
+  height: 20%;
+  margin-bottom: 3%;
+`;
+
+const IdBox = styled.input`
+  height: 100%;
+  width: 50%;
 `;
 
 const idForm = () => {
-  return <Container></Container>;
+  return (
+    <IdForm>
+      <IdInfo>ID</IdInfo>
+      <IdBox></IdBox>
+    </IdForm>
+  );
 };
 
 export default idForm;
