@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import Container from '../components/Common/container';
 
-const LoginView = () => {
+const loginView = () => {
   return (
-    <>
+    <Container>
       <div>로그인뷰</div>
-    </>
+    </Container>
   );
 };
 
-export default LoginView;
+export default loginView;

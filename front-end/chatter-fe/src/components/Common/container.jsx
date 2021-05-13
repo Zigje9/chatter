@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Div = styled.div`
+const Container = styled.div`
   display: flex;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
+  background-color: #e6d4d4;
 `;
 
 const container = () => {
-  return <Div></Div>;
+  return <Container></Container>;
 };
 
 export default container;
