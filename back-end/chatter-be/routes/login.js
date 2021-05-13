@@ -10,8 +10,11 @@ router.post('/login', async (req, res) => {
   if (pw === result.user_password) {
     req.session.name = result.user_name;
     req.session.save(() => {
-      return res.send("welcome")
+      return res.status(200).send("welcome")
     })
+  }
+  else{
+    res.status(401).send("login failed")
   }
 })
 
