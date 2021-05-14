@@ -27,13 +27,16 @@ const PwBox = styled.input.attrs({
   width: 50%;
   border: 1px solid #3fb5d3;
   border-radius: 5px;
+  &:focus {
+    outline: none;
+  }
 `;
 
-const pwForm = ({ label }) => {
+const pwForm = ({ ...props }) => {
   return (
     <PwForm>
-      <PwLabel>{label}</PwLabel>
-      <PwBox></PwBox>
+      <PwLabel>{props.label}</PwLabel>
+      <PwBox onChange={props.onChange}></PwBox>
     </PwForm>
   );
 };

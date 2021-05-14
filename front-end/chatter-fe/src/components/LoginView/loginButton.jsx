@@ -21,8 +21,8 @@ const LoginButton = styled.button`
   }
 `;
 
-const loginButton = () => {
-  return <LoginButton>Login</LoginButton>;
+const loginButton = ({ ...props }) => {
+  return <LoginButton onClick={props.onClick}>Login</LoginButton>;
 };
 
 export default loginButton;

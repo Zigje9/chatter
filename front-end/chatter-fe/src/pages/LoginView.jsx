@@ -7,12 +7,32 @@ import ErrorMsg from '../utils/errorMsg';
 
 const LoginView = () => {
   const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
   const [error, setError] = useState(false);
 
   const idHandler = (e) => {
     setId(e.target.value);
     e.target.value.length > 8 ? setError(true) : setError(false);
-    console.log(id);
+  };
+
+  const pwHandler = (e) => {
+    setPw(e.target.value);
+  };
+
+  const submitHandler = () => {
+    console.log(`${id}, ${pw}, here`);
+    // if (id.length === 0 || pw.length === 0) {
+    //   alert('아이디 또는 비밀번호를 입력해 주세요');
+    // } else {
+    //   const req = {
+    //     id: id,
+    //     pw: pw,
+    //   };
+    //   const res = await postAxios('login/', req);
+    //   if (res.data) {
+    //     alert(res.data);
+    //   }
+    // }
   };
 
   return (
@@ -22,8 +42,8 @@ const LoginView = () => {
         error={error}
         label={error ? `${ErrorMsg.idLengthError}` : 'ID'}
       />
-      <PwForm label="Password" />
-      <LoginButton></LoginButton>
+      <PwForm label="Password" onChange={pwHandler} />
+      <LoginButton onClick={submitHandler}></LoginButton>
     </Container>
   );
 };
