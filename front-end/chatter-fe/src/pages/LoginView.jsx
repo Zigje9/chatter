@@ -5,7 +5,7 @@ import PwForm from '../components/LoginView/pwForm';
 
 const loginView = () => {
   return (
-    <Container>
+    <Container flexDirection="column">
       <IdForm label="ID" />
       <PwForm label="Password" />
     </Container>
