@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from '../components/Common/container';
 import IdForm from '../components/LoginView/idForm';
 import PwForm from '../components/LoginView/pwForm';
 import LoginButton from '../components/LoginView/loginButton';
+import ErrorMsg from '../utils/errorMsg';
 
-const loginView = () => {
+const LoginView = () => {
+  const [id, setId] = useState('');
+  const [error, setError] = useState(false);
+
+  const idHandler = (e) => {
+    setId(e.target.value);
+    e.target.value.length > 8 ? setError(true) : setError(false);
+    console.log(id);
+  };
+
   return (
     <Container flexDirection="column">
-      <IdForm label="ID" />
+      <IdForm
+        label="ID"
+        onChange={idHandler}
+        error={error}
+        helperText={error ? `${ErrorMsg.idLengthError}` : ' '}
+      />
       <PwForm label="Password" />
       <LoginButton></LoginButton>
     </Container>
   );
 };
-export default loginView;
+export default LoginView;
