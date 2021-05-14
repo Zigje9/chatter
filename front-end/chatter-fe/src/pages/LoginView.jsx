@@ -5,7 +5,7 @@ import IdForm from '../components/LoginView/idForm';
 const loginView = () => {
   return (
     <Container>
-      <IdForm />
+      <IdForm label="ID" />
     </Container>
   );
 };
