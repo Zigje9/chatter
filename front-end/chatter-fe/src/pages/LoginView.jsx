@@ -18,10 +18,9 @@ const LoginView = () => {
   return (
     <Container flexDirection="column">
       <IdForm
-        label="ID"
         onChange={idHandler}
         error={error}
-        helperText={error ? `${ErrorMsg.idLengthError}` : ' '}
+        label={error ? `${ErrorMsg.idLengthError}` : 'ID'}
       />
       <PwForm label="Password" />
       <LoginButton></LoginButton>
