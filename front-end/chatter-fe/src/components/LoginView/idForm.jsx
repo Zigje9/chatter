@@ -8,7 +8,7 @@ const IdForm = styled.div`
   align-items: center;
   width: 50%;
   height: 10%;
-  border: 1px solid green;
+  margin-bottom: 2%;
 `;
 
 const IdLabel = styled.div`
