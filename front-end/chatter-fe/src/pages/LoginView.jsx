@@ -1,52 +1,70 @@
 import React, { useState } from 'react';
+import {Formik, Form} from "formik";
+import * as Yup from "yup";
+import styled from "styled-components";
 import Container from '../components/Common/container';
-import IdForm from '../components/LoginView/idForm';
-import PwForm from '../components/LoginView/pwForm';
-import LoginButton from '../components/LoginView/loginButton';
-import ErrorMsg from '../utils/errorMsg';
+import CustomInput from "../components/Common/customInput";
 import { postAxios } from '../utils/axios';
+import LoginButton from "../components/LoginView/loginButton";
+
+
+const LoginForm = styled(Form)`
+  width: 70%;
+`
+
+const LoginTitle = styled.h2`
+  color: #4285F4;
+  margin-bottom: 20px;
+`
 
 const LoginView = () => {
-  const [id, setId] = useState('');
-  const [pw, setPw] = useState('');
-  const [error, setError] = useState(false);
 
-  const idHandler = (e) => {
-    setId(e.target.value);
-    e.target.value.length > 8 ? setError(true) : setError(false);
-  };
-
-  const pwHandler = (e) => {
-    setPw(e.target.value);
-  };
-
-  const submitHandler = async () => {
-    if (id.length === 0 || pw.length === 0) {
-      alert('아이디 또는 비밀번호를 입력해 주세요');
-    } else {
-      const req = {
-        id: id,
-        pw: pw,
-      };
-      try {
-        const res = await postAxios('login/', req);
-        console.log(res.data);
-      } catch (error) {
-        console.log(error);
-      }
+  const submitHandler = async (values, {setErrors, setFieldError}) => {
+    const {id, pw} = values
+    const req = {
+      id,
+      pw,
+    };
+    try {
+      const res = await postAxios('login/', req);
+      console.log(res.data);
+    } catch (error) {
+      setFieldError("id", "Hello")
     }
   };
 
   return (
-    <Container flexDirection="column">
-      <IdForm
-        onChange={idHandler}
-        error={error}
-        label={error ? `${ErrorMsg.idLengthError}` : 'ID'}
-      />
-      <PwForm label="Password" onChange={pwHandler} />
-      <LoginButton onClick={submitHandler}></LoginButton>
+    <Container flexDirection="column" bgColor="#84D9EF">
+      <Container flexDirection="column" bgColor="#fefefe" width="40%" height="400px">
+        <Formik
+            initialValues={{id: "", pw: ""}}
+            validationSchema={Yup.object({
+              id: Yup.string()
+                  .max(8, "형식이 올바르지 않습니다.")
+                  .required("ID를 입력해 주세요."),
+              pw: Yup.string()
+                  .required("Password를 입력해 주세요.")
+            })}
+            onSubmit={submitHandler}
+        >
+          <LoginForm>
+            <LoginTitle>ACCOUNT LOGIN</LoginTitle>
+            <CustomInput
+              name="id"
+              type="text"
+              placeholder="Username"
+            />
+            <CustomInput
+              name="pw"
+              type="password"
+              placeholder="Password"
+            />
+            <LoginButton/>
+          </LoginForm>
+        </Formik>
+      </Container>
     </Container>
   );
 };
+
 export default LoginView;
