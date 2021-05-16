@@ -8,7 +8,7 @@ export const getAxios = (reqUrl, reqParams = {}) => {
   setHeader();
   return axios
     .create({
-      baseURL: 'http://localhost:5000/',
+      baseURL: 'http://118.67.131.239:5000/',
       method: 'get',
       timeout: 10000,
       params: reqParams,
@@ -20,7 +20,7 @@ export const postAxios = (reqUrl, reqData) => {
   setHeader();
   return axios
     .create({
-      baseURL: 'http://localhost:5000/',
+      baseURL: 'http://118.67.131.239:5000/',
       method: 'post',
       timeout: 10000,
     })
