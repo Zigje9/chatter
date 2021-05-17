@@ -31,7 +31,7 @@ app.use(session({
     httpOnly: true,
     secure: false,
     // maxAge: 600000,
-    maxAge: 10000
+    maxAge: 10000,
   }
 }))
 
