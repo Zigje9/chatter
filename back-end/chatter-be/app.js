@@ -7,9 +7,14 @@ const MySQLStore = require('express-mysql-session')(session)
 const bodyParser = require('body-parser'); 
 const cors = require('cors')
 
+const corsOptions = {
+  origin: '*',
+  credential: true
+}
+
 app.use(bodyParser.urlencoded({extended:true})); 
 app.use(bodyParser.json());
-app.use(cors())
+app.use(cors(corsOptions))
 
 const loginRouter = require('./routes/login')
 const logoutRouter = require('./routes/logout')
