@@ -6,8 +6,9 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: ${(props) => props.flexDirection};
-  height: 100vh;
-  width: 100vw;
+  height: ${(props) => props.height ? props.height: "100vh"};
+  width: ${(props) => props.width ? props.width: "100vw"};
+  background-color: ${(props) => props.bgColor ? props.bgColor : "none"};
 `;
 
 const container = ({ children, ...props }) => {
