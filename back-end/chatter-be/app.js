@@ -32,6 +32,7 @@ app.use(session({
     secure: false,
     // maxAge: 600000,
     maxAge: 10000,
+    sameSite: 'none'
   }
 }))
 
