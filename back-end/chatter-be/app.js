@@ -22,6 +22,11 @@ app.use(session({
   store: sessionStore,
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    Secure: true,
+    maxAge: 600000,
+  }
 }))
 
 app.use(loginRouter)
