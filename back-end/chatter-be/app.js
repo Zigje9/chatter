@@ -29,15 +29,15 @@ app.use(session({
   store: sessionStore,
   // resave: false,
   saveUninitialized: false,
-  cookie: {
-    httpOnly: true,
-    secure: false,
-    // maxAge: 600000,
-    // domain: 'http://localhost:3000',
-    domain: '118.67.131.239:5000',
-    maxAge: 20000,
-    // sameSite: 'None',
-  }
+  // cookie: {
+  //   httpOnly: true,
+  //   secure: false,
+  //   // maxAge: 600000,
+  //   // domain: 'http://localhost:3000',
+  //   domain: '118.67.131.239:5000',
+  //   maxAge: 20000,
+  //   // sameSite: 'None',
+  // }
 }))
 
 app.use(loginRouter)

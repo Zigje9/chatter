@@ -10,7 +10,11 @@ router.post('/login', async (req, res) => {
   if (pw === result.user_password) {
     req.session.name = result.user_name;
     req.session.save(() => {
-      res.cookie("a", "b")
+      res.cookie("a", "b", {
+        httpOnly: true,
+        secure: false,
+        maxAge: 20000,
+      })
       // res.cookie('user_name', req.session.name)
       return res.status(200).send("Hello")
     })
