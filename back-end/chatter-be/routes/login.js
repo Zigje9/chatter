@@ -17,7 +17,7 @@ router.post('/login', async (req, res) => {
         sameSite: "lax"
       })
       // res.cookie('user_name', req.session.name)
-      return res.status(200).send("Hello")
+      return res.status(200).send(req.session)
     })
   }
   else{
