@@ -1,7 +1,8 @@
-import React, {useState, useRef} from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import Container from '../Common/container'
 import ToggleButton from "./toggleButton";
+import HamburgerBar from "./hamburgerBar";
 
 
 const left = {
@@ -12,7 +13,6 @@ const left = {
 
 const SignUpForm = ({onChangeHeight}) => {
   const [curLeft, setLeft] = useState(left.default)
-  const formRef = useRef(null)
 
   const handleHoverForm = (e) => {
     const {type} = e
@@ -40,18 +40,18 @@ const SignUpForm = ({onChangeHeight}) => {
 
   return (
     <Container
-      width="70%"
+      width="100%"
       height="600px"
-      bgColor="green"
+      bgColor="#4286f5"
       position="absolute"
       top="0px"
       left={curLeft}
       transition="0.5s ease"
-      ref={formRef}
       onOver={handleHoverForm}
       onLeave={handleHoverForm}
       onClick={handleToggleForm}
     >
+      {curLeft === left.default && <HamburgerBar vertical={true} top="3%" left="1.5%"/>}
       <ToggleButton onClose={handleToggleForm}/>
     </Container>
   )
