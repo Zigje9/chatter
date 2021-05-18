@@ -27,13 +27,14 @@ const sessionStore = new MySQLStore(dbConfig)
 app.use(session({
   secret: '!@#$%^&',
   store: sessionStore,
-  resave: false,
+  // resave: false,
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
     secure: false,
     // maxAge: 600000,
     // domain: 'http://localhost:3000',
+    domain: '118.67.131.239:5000',
     maxAge: 20000,
     // sameSite: 'None',
   }

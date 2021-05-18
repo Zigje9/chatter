@@ -12,8 +12,7 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       res.cookie("a", "b")
       // res.cookie('user_name', req.session.name)
-      // return res.status(200).send("welcome")
-      return res.status(200).send(res.cookie("a", "b"))
+      return res.status(200).send("Hello")
     })
   }
   else{

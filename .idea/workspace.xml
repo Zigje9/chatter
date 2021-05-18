@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de243a9d-014b-4392-8505-a11882fdef3c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/back-end/chatter-be/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/chatter-be/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/chatter-be/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/chatter-be/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/chatter-be/routes/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/chatter-be/routes/login.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +71,7 @@
       <workItem from="1621180446742" duration="8228000" />
       <workItem from="1621239595471" duration="8674000" />
       <workItem from="1621259189258" duration="2735000" />
-      <workItem from="1621265868021" duration="24331000" />
+      <workItem from="1621265868021" duration="25403000" />
     </task>
     <servers />
   </component>
