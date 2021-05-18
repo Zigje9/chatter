@@ -7,6 +7,7 @@ import CustomInput from "../components/Common/customInput";
 import { postAxios } from '../utils/axios';
 import LoginButton from "../components/LoginView/loginButton";
 import ToggleButton from "../components/LoginView/toggleButton";
+import SignUpForm from "../components/LoginView/signUpForm";
 
 
 const LoginForm = styled(Form)`
@@ -19,6 +20,7 @@ const LoginTitle = styled.h2`
 `
 
 const LoginView = () => {
+  const [formHeight, setFormHeight] = useState("400px")
 
   const submitHandler = async (values, {setErrors, setFieldError}) => {
     const {id, pw} = values
@@ -34,9 +36,19 @@ const LoginView = () => {
     }
   };
 
+
   return (
     <Container flexDirection="column" bgColor="#84D9EF">
-      <Container flexDirection="column" bgColor="#fefefe" width="40%" height="400px">
+      <Container
+        flexDirection="column"
+        bgColor="#fefefe"
+        width="40%"
+        height={formHeight}
+        position="relative"
+        overflow="hidden"
+        transition="0.5s ease"
+      >
+        <SignUpForm onChangeHeight={(height) => setFormHeight(height)}/>
         <Formik
             initialValues={{id: "", pw: ""}}
             validationSchema={Yup.object({

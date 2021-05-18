@@ -28,9 +28,9 @@ const StyledToggleButton = styled.button`
   }
 `
 
-const ToggleButton = () => {
+const ToggleButton = ({onClose}) => {
   return (
-    <StyledToggleButton/>
+    <StyledToggleButton onClick={onClose}/>
   )
 }
 
