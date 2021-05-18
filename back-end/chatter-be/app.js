@@ -33,7 +33,7 @@ app.use(session({
     httpOnly: true,
     secure: false,
     // maxAge: 600000,
-    domain: 'http://localhost:3000',
+    // domain: 'http://localhost:3000',
     maxAge: 20000,
     // sameSite: 'None',
   }
