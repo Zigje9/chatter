@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {Formik, Form} from "formik";
+import {useCookies} from 'react-cookie'
 import * as Yup from "yup";
 import styled from "styled-components";
 import { postAxios } from '../utils/axios';
@@ -21,6 +22,7 @@ const LoginTitle = styled.h2`
 `
 
 const LoginView = () => {
+  const [cookies, setCookie] = useCookies(["sid"])
   const [formHeight, setFormHeight] = useState("400px")
 
   const submitHandler = async (values, {setErrors, setFieldError}) => {
@@ -31,7 +33,14 @@ const LoginView = () => {
     };
     try {
       const res = await postAxios('login/', req);
-      console.log(res.data);
+      console.log(res.data)
+      const {data: {cookie, sid}} = res
+      console.log(cookie)
+      setCookie("sid", sid, {
+        path: cookie.path,
+        maxAge: cookie.maxAge,
+        expires: new Date(cookie.expires)
+      })
     } catch (error) {
       setFieldError("id", "Hello")
     }
