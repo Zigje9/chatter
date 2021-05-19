@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import {Formik, Form} from "formik"
+import * as Yup from "yup"
 import styled from 'styled-components'
+import errorMsg from "../../utils/errorMsg";
 import Container from '../Common/container'
 import ToggleButton from "./toggleButton";
 import HamburgerBar from "./hamburgerBar";
@@ -57,6 +59,14 @@ const SignUpForm = ({onChangeHeight}) => {
     }
   }
 
+  const handleRegister = async (values, {setErrors}) => {
+    const {password, confirmPassword} = values
+    if (password !== confirmPassword) {
+      setErrors({confirmPassword: errorMsg.passwordNotEqual})
+      return
+    }
+  }
+
   return (
     <Container
       width="100%"
@@ -79,7 +89,18 @@ const SignUpForm = ({onChangeHeight}) => {
           password: "",
           confirmPassword: ""
         }}
-        onSubmit={() => console.log("register")}>
+        validationSchema={Yup.object({
+          name: Yup.string()
+            .required(errorMsg.nameRequired),
+          id: Yup.string()
+            .max(8, errorMsg.idLengthError)
+            .required(errorMsg.idRequired),
+          password: Yup.string()
+            .required(errorMsg.passwordRequired),
+          confirmPassword: Yup.string()
+            .required(errorMsg.passwordRequired)
+        })}
+        onSubmit={handleRegister}>
         <StyledRegisterForm>
           <Container width="100%" height="auto" justifyContent="space-between">
             <StyledRegisterTitle>REGISTER ACCOUNT</StyledRegisterTitle>
