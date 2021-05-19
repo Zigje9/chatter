@@ -8,6 +8,8 @@ router.post('/signup', async (req, res) => {
   const {id, pw, userName} = req.body;
   const [result] = await sql(query.READ_USER, id)
   if (result){
+    console.log("headers", req.headers)
+    console.log("header", req.header)
     res.send("가입된 회원입니다.")
   }
   else{
