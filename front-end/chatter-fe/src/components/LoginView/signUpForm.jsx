@@ -60,6 +60,7 @@ const SignUpForm = ({onChangeHeight}) => {
   }
 
   const handleRegister = async (values, {setErrors}) => {
+    console.log("Hello")
     const {password, confirmPassword} = values
     if (password !== confirmPassword) {
       setErrors({confirmPassword: errorMsg.passwordNotEqual})
@@ -70,7 +71,7 @@ const SignUpForm = ({onChangeHeight}) => {
   return (
     <Container
       width="100%"
-      height="500px"
+      height="600px"
       bgColor="#4286f5"
       position="absolute"
       top="0px"
@@ -100,7 +101,8 @@ const SignUpForm = ({onChangeHeight}) => {
           confirmPassword: Yup.string()
             .required(errorMsg.passwordRequired)
         })}
-        onSubmit={handleRegister}>
+        onSubmit={handleRegister}
+      >
         <StyledRegisterForm>
           <Container width="100%" height="auto" justifyContent="space-between">
             <StyledRegisterTitle>REGISTER ACCOUNT</StyledRegisterTitle>
