@@ -9,8 +9,8 @@ router.post('/signup', async (req, res) => {
   const [result] = await sql(query.READ_USER, id)
   if (result){
     console.log("headers", req.headers)
-    console.log("cookie". req.headers.cookie)
-    res.send("가입된 회원입니다.")
+    console.log("cookie". req.cookies)
+    return res.status(200).send("가입된 회원입니다.")
   }
   else{
     await sql(query.INSERT_USER, [id, userName, pw])
