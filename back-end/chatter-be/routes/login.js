@@ -10,8 +10,7 @@ router.post('/login', async (req, res) => {
   if (pw === result.user_password) {
     req.session.name = result.user_name;
     req.session.save(() => {
-      console.log(req.sessionID)
-      console.log(req.session)
+      req.session.sid = req.sessionID
       return res.status(200).send(req.session)
     })
   }
