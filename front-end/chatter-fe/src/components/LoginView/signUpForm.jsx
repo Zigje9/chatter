@@ -70,17 +70,19 @@ const SignUpForm = ({onChangeHeight}) => {
 
   return (
     <Container
-      width="100%"
-      height="600px"
-      bgColor="#4286f5"
-      position="absolute"
-      top="0px"
-      left={curLeft}
-      transition="0.5s ease"
-      padding="5% 10% 10% 5%"
+      styles={{
+        width: "100%",
+        height: "600px",
+        bgColor: "#4286f5",
+        position: "absolute",
+        top: "0px",
+        left: curLeft,
+        transition: "0.5s ease",
+        padding: "5% 10% 10% 5%"
+      }}
       onOver={handleHoverForm}
       onLeave={handleHoverForm}
-      onClick={handleToggleForm}
+      onOpen={handleToggleForm}
     >
       {curLeft === left.default && <HamburgerBar vertical={true} top="3%" left="1%"/>}
       <Formik

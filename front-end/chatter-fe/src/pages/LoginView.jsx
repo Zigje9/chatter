@@ -7,7 +7,6 @@ import errorMsg from "../utils/errorMsg";
 import Container from '../components/Common/container';
 import CustomInput from "../components/Common/customInput";
 import SubmitButton from "../components/LoginView/submitButton";
-import ToggleButton from "../components/LoginView/toggleButton";
 import SignUpForm from "../components/LoginView/signUpForm";
 
 
@@ -39,15 +38,21 @@ const LoginView = () => {
 
 
   return (
-    <Container flexDirection="column" bgColor="#84D9EF">
+    <Container styles={{
+      flexDirection: "column",
+      bgColor: "#84d9ef",
+    }}>
       <Container
-        flexDirection="column"
-        bgColor="#fefefe"
-        width="40%"
-        height={formHeight}
-        position="relative"
-        overflow="hidden"
-        transition="0.5s ease"
+        styles={{
+          flexDirection: "column",
+          bgColor: "#fefefe",
+          width: "40%",
+          height: formHeight,
+          borderRadius: "10px",
+          position: "relative",
+          overflow: "hidden",
+          transition: "0.5s ease"
+        }}
       >
         <SignUpForm onChangeHeight={(height) => setFormHeight(height)}/>
         <Formik

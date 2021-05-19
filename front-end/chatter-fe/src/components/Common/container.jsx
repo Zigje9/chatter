@@ -8,6 +8,7 @@ const Container = styled.div`
   flex-direction: ${(props) => props.flexDirection};
   height: ${(props) => props.height};
   width: ${(props) => props.width};
+  border-radius: ${(props) => props.borderRadius};
   padding: ${(props) => props.padding};
   overflow: ${(props) => props.overflow};
   position: ${(props) => props.position};
@@ -25,6 +26,7 @@ Container.defaultProps = {
   position: "static",
   height: "100vh",
   width: "100vw",
+  borderRadius: "0",
   padding: "0px",
   bgColor: "none",
   overflow: "visible",
@@ -35,13 +37,14 @@ Container.defaultProps = {
   right: "auto",
 }
 
-const container = ({ children, onOver, onLeave, onOpen, ...props }) => {
+const container = ({ children, styles, onOver, onLeave, onOpen, ...props }) => {
   return (
     <Container
+      {...styles}
+      {...props}
       onMouseEnter={onOver}
       onMouseLeave={onLeave}
       onClick={onOpen}
-      {...props}
     >
       {children}
     </Container>);
