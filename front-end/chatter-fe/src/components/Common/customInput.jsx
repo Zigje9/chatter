@@ -36,7 +36,7 @@ const ErrorMessage = styled.div`
 const CustomInput = ({label, styles, ...props}) => {
     const [field, meta] = useField(props)
 
-    return (
+  return (
         <InputContainer>
           {label && <label>{label}</label>}
           <Input

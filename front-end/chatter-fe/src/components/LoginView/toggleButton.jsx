@@ -4,8 +4,8 @@ import styled from "styled-components"
 const StyledToggleButton = styled.button`
   background-color: #ffffff;
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   border-radius: 100%;
   &:before,
   &:after {
@@ -30,7 +30,7 @@ const StyledToggleButton = styled.button`
 
 const ToggleButton = ({onClose}) => {
   return (
-    <StyledToggleButton onClick={onClose}/>
+    <StyledToggleButton type="button" onClick={onClose}/>
   )
 }
 
