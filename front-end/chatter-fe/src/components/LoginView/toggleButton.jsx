@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 const StyledToggleButton = styled.button`
-  background-color: blue;
+  background-color: #ffffff;
   position: relative;
   width: 60px;
   height: 60px;
@@ -17,7 +17,7 @@ const StyledToggleButton = styled.button`
     width: 50%;
     height: 3px;
     margin: 0 auto;
-    background-color: green;
+    background-color: #4286f5;
     transform: translate(-50%, -50%);
   };
   &:before {

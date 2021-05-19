@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Container from '../components/Common/container';
 import CustomInput from "../components/Common/customInput";
 import { postAxios } from '../utils/axios';
-import LoginButton from "../components/LoginView/loginButton";
+import SubmitButton from "../components/LoginView/submitButton";
 import ToggleButton from "../components/LoginView/toggleButton";
 import SignUpForm from "../components/LoginView/signUpForm";
 
@@ -72,7 +72,9 @@ const LoginView = () => {
               type="password"
               placeholder="Password"
             />
-            <LoginButton/>
+            <SubmitButton>
+              LOGIN
+            </SubmitButton>
           </LoginForm>
         </Formik>
       </Container>
