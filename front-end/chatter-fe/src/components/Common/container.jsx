@@ -3,16 +3,48 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: ${(props) => props.justifyContent};
   align-items: center;
   flex-direction: ${(props) => props.flexDirection};
-  height: ${(props) => props.height ? props.height: "100vh"};
-  width: ${(props) => props.width ? props.width: "100vw"};
-  background-color: ${(props) => props.bgColor ? props.bgColor : "none"};
+  height: ${(props) => props.height};
+  width: ${(props) => props.width};
+  padding: ${(props) => props.padding};
+  overflow: ${(props) => props.overflow};
+  position: ${(props) => props.position};
+  background-color: ${(props) => props.bgColor};
+  top: ${(props) => props.top};
+  bottom: ${(props) => props.bottom};
+  left: ${(props) => props.left};
+  right: ${(props) => props.right};
+  transition: ${(props) => props.transition};
 `;
 
-const container = ({ children, ...props }) => {
-  return <Container {...props}>{children}</Container>;
+Container.defaultProps = {
+  flexDirection: "row",
+  justifyContent: "center",
+  position: "static",
+  height: "100vh",
+  width: "100vw",
+  padding: "0px",
+  bgColor: "none",
+  overflow: "visible",
+  transition: "all 0s ease 0s",
+  top: "auto",
+  bottom: "auto",
+  left: "auto",
+  right: "auto",
+}
+
+const container = ({ children, onOver, onLeave, onOpen, ...props }) => {
+  return (
+    <Container
+      onMouseEnter={onOver}
+      onMouseLeave={onLeave}
+      onClick={onOpen}
+      {...props}
+    >
+      {children}
+    </Container>);
 };
 
 export default container;

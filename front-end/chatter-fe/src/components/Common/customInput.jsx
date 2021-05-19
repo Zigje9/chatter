@@ -8,7 +8,8 @@ const InputContainer = styled.div`
 
 const Input = styled.input`
     width: 100%;
-    background-color: #E5E5E5;
+    background-color: ${(props) => props.bgColor};
+    color: ${(props) => props.color};
     padding: 10px;
     font-size: 20px;
     border-radius: 5px;
@@ -21,19 +22,29 @@ const Input = styled.input`
     }
 `
 
+Input.defaultProps = {
+  bgColor: "#E5E5E5",
+  color: "#000000"
+}
+
 const ErrorMessage = styled.div`
   font-size: 15px;
   margin-top: 5px;
   color: red;
 `
 
-const CustomInput = ({label, ...props}) => {
+const CustomInput = ({label, styles, ...props}) => {
     const [field, meta] = useField(props)
 
     return (
         <InputContainer>
           {label && <label>{label}</label>}
-          <Input {...field} {...props} isError={meta.touched && meta.error}/>
+          <Input
+            {...field}
+            {...props}
+            {...styles}
+            isError={meta.touched && meta.error}
+          />
           {meta.touched && meta.error ? (
             <ErrorMessage>{meta.error}</ErrorMessage>
           ) : null}
