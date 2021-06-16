@@ -20,7 +20,9 @@ export const postAxios = (reqUrl, reqData) => {
   setHeader();
   return axios
     .create({
-      baseURL: 'http://118.67.131.239:5000/',
+      // baseURL: 'http://localhost:5000/',
+      baseURL: "http://118.67.131.239:5000/",
+      withCredentials: true,
       method: 'post',
       timeout: 10000,
     })
