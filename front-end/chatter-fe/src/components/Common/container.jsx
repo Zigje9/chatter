@@ -21,33 +21,28 @@ const Container = styled.div`
 `;
 
 Container.defaultProps = {
-  flexDirection: "row",
-  justifyContent: "center",
-  position: "static",
-  height: "100vh",
-  width: "100vw",
-  borderRadius: "0",
-  padding: "0px",
-  bgColor: "none",
-  overflow: "visible",
-  transition: "all 0s ease 0s",
-  top: "auto",
-  bottom: "auto",
-  left: "auto",
-  right: "auto",
-}
+  flexDirection: 'row',
+  justifyContent: 'center',
+  position: 'static',
+  height: '100vh',
+  width: '100vw',
+  borderRadius: '0',
+  padding: '0px',
+  bgColor: 'none',
+  overflow: 'visible',
+  transition: 'all 0s ease 0s',
+  top: 'auto',
+  bottom: 'auto',
+  left: 'auto',
+  right: 'auto',
+};
 
 const container = ({ children, styles, onOver, onLeave, onOpen, ...props }) => {
   return (
-    <Container
-      {...styles}
-      {...props}
-      onMouseEnter={onOver}
-      onMouseLeave={onLeave}
-      onClick={onOpen}
-    >
+    <Container {...styles} {...props} onMouseEnter={onOver} onMouseLeave={onLeave} onClick={onOpen}>
       {children}
-    </Container>);
+    </Container>
+  );
 };
 
 export default container;

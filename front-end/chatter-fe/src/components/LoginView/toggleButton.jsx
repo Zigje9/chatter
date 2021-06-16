@@ -1,5 +1,5 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react';
+import styled from 'styled-components';
 
 const StyledToggleButton = styled.button`
   background-color: #ffffff;
@@ -19,19 +19,17 @@ const StyledToggleButton = styled.button`
     margin: 0 auto;
     background-color: #4286f5;
     transform: translate(-50%, -50%);
-  };
+  }
   &:before {
     transform: translate(-50%, -50%) rotate(45deg);
-  };
-  &:after {
-    transform: translate(-50%, -50%) rotate(-45deg)
   }
-`
+  &:after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+`;
 
-const ToggleButton = ({onClose}) => {
-  return (
-    <StyledToggleButton type="button" onClick={onClose}/>
-  )
-}
+const ToggleButton = ({ onClose }) => {
+  return <StyledToggleButton type="button" onClick={onClose} />;
+};
 
-export default ToggleButton
+export default ToggleButton;

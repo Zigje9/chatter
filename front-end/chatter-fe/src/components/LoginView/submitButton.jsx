@@ -21,15 +21,15 @@ const StyledSubmitButton = styled.button`
 `;
 
 StyledSubmitButton.defaultProps = {
-  bgColor: "#4285F4",
-  color: "#ffffff"
-}
+  bgColor: '#4285F4',
+  color: '#ffffff',
+};
 
-const SubmitButton = ({children, styles}) => {
+const SubmitButton = ({ children, styles }) => {
   return (
     <StyledSubmitButton type="submit" {...styles}>
-    {children}
-  </StyledSubmitButton>
+      {children}
+    </StyledSubmitButton>
   );
 };
 

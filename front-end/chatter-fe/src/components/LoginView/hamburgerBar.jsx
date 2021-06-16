@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from "styled-components"
+import React from 'react';
+import styled from 'styled-components';
 
 const StyledHamburgerBar = styled.div`
   display: flex;
@@ -18,24 +18,24 @@ const StyledHamburgerBar = styled.div`
     height: 2px;
     background-color: #679df6;
   }
-`
+`;
 
 StyledHamburgerBar.defaultProps = {
-  transform: "none",
-  top: "auto",
-  bottom: "auto",
-  left: "auto",
-  right: "auto"
-}
+  transform: 'none',
+  top: 'auto',
+  bottom: 'auto',
+  left: 'auto',
+  right: 'auto',
+};
 
-const HamburgerBar = ({vertical, ...props}) => {
+const HamburgerBar = ({ vertical, ...props }) => {
   return (
-    <StyledHamburgerBar transform={vertical && "rotate(90deg)"} {...props}>
-      <div/>
-      <div/>
-      <div/>
+    <StyledHamburgerBar transform={vertical && 'rotate(90deg)'} {...props}>
+      <div />
+      <div />
+      <div />
     </StyledHamburgerBar>
-  )
-}
+  );
+};
 
-export default HamburgerBar
+export default HamburgerBar;
