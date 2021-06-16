@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Formik, Form} from "formik"
 import * as Yup from "yup"
+import {postAxios} from "../../utils/axios";
 import styled from 'styled-components'
 import errorMsg from "../../utils/errorMsg";
 import Container from '../Common/container'
@@ -60,11 +61,20 @@ const SignUpForm = ({onChangeHeight}) => {
   }
 
   const handleRegister = async (values, {setErrors}) => {
-    console.log("Hello")
-    const {password, confirmPassword} = values
+    const {name, id, password, confirmPassword} = values
     if (password !== confirmPassword) {
       setErrors({confirmPassword: errorMsg.passwordNotEqual})
       return
+    }
+    const req = {
+      userName: name,
+      id,
+      pw: password
+    }
+    try {
+      const res = await postAxios('signup', req)
+    } catch (error) {
+      console.log(error)
     }
   }
 
