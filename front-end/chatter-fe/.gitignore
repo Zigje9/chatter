@@ -26,4 +26,4 @@ yarn-error.log*
 .eslintcache
 .eslintrc.json
 .prettierrc
-.idea
+.idea/
