@@ -9,6 +9,8 @@ import Container from '../components/Common/container';
 import CustomInput from '../components/Common/customInput';
 import SubmitButton from '../components/LoginView/submitButton';
 import SignUpForm from '../components/LoginView/signUpForm';
+import { useDispatch } from 'react-redux';
+import { login } from '../actions/user';
 
 const LoginForm = styled(Form)`
   width: 70%;
@@ -20,6 +22,7 @@ const LoginTitle = styled.h2`
 `;
 
 const LoginView = () => {
+  const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies(['sid']);
   const [formHeight, setFormHeight] = useState('400px');
 
@@ -32,6 +35,7 @@ const LoginView = () => {
     try {
       const res = await postAxios('login/', req);
       console.log(res.data);
+      dispatch(login('zzzzzz'));
       const {
         data: { cookie, sid },
       } = res;
