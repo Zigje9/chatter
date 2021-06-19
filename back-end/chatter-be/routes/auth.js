@@ -8,7 +8,8 @@ router.get('/auth', async (req, res) => {
   if (sid) {
     try {
       const [result] = await sql(query.READ_SESSION_USER, sid)
-      console.log("result data", result.data.cookie)
+      console.log("result data", result.data)
+      console.log("result json data", result.data.json())
       const userName = result.data.cookie.name
       console.log("userName", userName)
       return res.status(200).send(userName)
