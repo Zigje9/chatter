@@ -21,6 +21,7 @@ app.use(cookieParser())
 const loginRouter = require('./routes/login')
 const logoutRouter = require('./routes/logout')
 const signupRouter = require('./routes/signup')
+const authRouter = require('./routes/auth')
 
 const sessionStore = new MySQLStore(dbConfig)
 
@@ -39,6 +40,7 @@ app.use(session({
 app.use(loginRouter)
 app.use(logoutRouter)
 app.use(signupRouter)
+app.use(authRouter)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
