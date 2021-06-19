@@ -11,7 +11,7 @@ const initialState = {
 
 (() => {
   try {
-    const { data } = getAxios('/base');
+    const { data } = getAxios('/auth');
     initialState.user = { isLogin: data.isLogin, userName: data.userName };
   } catch (error) {
     console.log(error);
