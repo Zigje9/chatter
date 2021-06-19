@@ -26,3 +26,5 @@ yarn-error.log*
 .eslintcache
 .eslintrc.json
 .prettierrc
+.env
+**/.idea/
