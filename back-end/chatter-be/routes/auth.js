@@ -4,6 +4,7 @@ const query = require('../model/query/user')
 const router = express.Router();
 
 router.get('/auth', async (req, res) => {
+  console.log("headers!!!",req.headers)
   const sid = req.headers.cookies
   console.log("sid", sid)
   if (sid) {
