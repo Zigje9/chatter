@@ -2,8 +2,10 @@ import axios from 'axios';
 import 'dotenv/config';
 
 const setHeader = () => {
+  if (document.cookie) {
+    axios.defaults.headers.common['cookies'] = document.cookie.slice(4);
+  }
   axios.defaults.headers.post['Content-Type'] = 'application/json';
-  axios.defaults.headers.common['cookies'] = 'a';
 };
 
 export const getAxios = (reqUrl, reqParams = {}) => {
