@@ -5,10 +5,13 @@ const router = express.Router();
 
 router.get('/auth', async (req, res) => {
   const sid = req.headers.cookies
+  console.log("sid", sid)
   if (sid) {
     try {
       const [result] = await sql(query.READ_SESSION_USER, sid)
+      console.log("result", result)
       const userName = result.data.cookie.name
+      console.log("userName", userName)
       return res.status(200).send(userName)
     } catch (error) {
       console.log(error)
