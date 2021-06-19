@@ -4,13 +4,11 @@ const query = require('../model/query/user')
 const router = express.Router();
 
 router.get('/auth', async (req, res) => {
-  console.log("headers!!!",req.headers)
   const sid = req.headers.cookies
-  console.log("sid", sid)
   if (sid) {
     try {
       const [result] = await sql(query.READ_SESSION_USER, sid)
-      console.log("result", result)
+      console.log("result data", result.data)
       const userName = result.data.cookie.name
       console.log("userName", userName)
       return res.status(200).send(userName)
