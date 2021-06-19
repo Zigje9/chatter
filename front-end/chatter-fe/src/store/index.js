@@ -9,10 +9,11 @@ const initialState = {
   user: { isLogin: false, userName: null },
 };
 
-(() => {
+(async () => {
   try {
-    const { data } = getAxios('/auth');
+    const { data } = await getAxios('/auth');
     initialState.user = { isLogin: data.isLogin, userName: data.userName };
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
