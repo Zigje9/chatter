@@ -1,36 +1,29 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {login} from '../actions/user'
+import { loginSuccess } from '../actions/user';
 import * as type from '../actions/type';
-import {postAxios} from '../utils/axios';
-
-// function* getPostsSaga() {
-//   try {
-//     const posts = yield call(postsAPI.getPosts); // call 을 사용하면 특정 함수를 호출하고, 결과물이 반환 될 때까지 기다려줄 수 있습니다.
-//     yield put({
-//       type: GET_POSTS_SUCCESS,
-//       payload: posts
-//     }); // 성공 액션 디스패치
-//   } catch (e) {
-//     yield put({
-//       type: GET_POSTS_ERROR,
-//       error: true,
-//       payload: e
-//     }); // 실패 액션 디스패치
-//   }
-// }
+import { postAxios } from '../utils/axios';
+import Cookies from 'js-cookie';
 
 function* loginSaga(action) {
-  const req = action.payload
+  const req = action.payload;
   try {
-    const res = yield call(postAxios('login/', req));
-    put(login("test"))
+    const res = yield call(postAxios, ...['login/', req]);
+    const {
+      data: { cookie, sid, name },
+    } = res;
+    yield put(loginSuccess(name));
+    Cookies.set('sid', sid, {
+      path: cookie.path,
+      maxAge: cookie.maxAge,
+      expires: new Date(cookie.expire),
+    });
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 }
 
 function* watchLoginSaga() {
-  yield takeEvery(type.LOGIN_REQUEST, loginSaga)
+  yield takeEvery(type.LOGIN_REQUEST, loginSaga);
 }
 
-export default [watchLoginSaga()]
+export default [watchLoginSaga()];

@@ -17,13 +17,13 @@ export const logout = () => {
 export const loginRequest = (userInfo) => {
   return {
     type: type.LOGIN_REQUEST,
-    payload: userInfo
-  }
-}
+    payload: userInfo,
+  };
+};
 
 export const loginSuccess = (userName = null) => {
   return {
     type: type.LOGIN_SUCCESS,
-    payload: userName
-  }
-}
+    payload: userName,
+  };
+};

@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { useCookies } from 'react-cookie';
 import * as Yup from 'yup';
 import styled from 'styled-components';
-import { postAxios } from '../utils/axios';
 import errorMsg from '../utils/errorMsg';
 import Container from '../components/Common/container';
 import CustomInput from '../components/Common/customInput';
 import SubmitButton from '../components/LoginView/submitButton';
 import SignUpForm from '../components/LoginView/signUpForm';
 import { useDispatch } from 'react-redux';
-import { login } from '../actions/user';
+import { loginRequest } from '../actions/user';
 
 const LoginForm = styled(Form)`
   width: 70%;
@@ -23,31 +21,11 @@ const LoginTitle = styled.h2`
 
 const LoginView = () => {
   const dispatch = useDispatch();
-  const [cookies, setCookie] = useCookies(['sid']);
   const [formHeight, setFormHeight] = useState('400px');
 
   const submitHandler = async (values, { setErrors, setFieldError }) => {
     const { id, pw } = values;
-    const req = {
-      id,
-      pw,
-    };
-    try {
-      const res = await postAxios('login/', req);
-      console.log(res.data);
-      dispatch(login('zzzzzz'));
-      const {
-        data: { cookie, sid },
-      } = res;
-      console.log(cookie);
-      setCookie('sid', sid, {
-        path: cookie.path,
-        maxAge: cookie.maxAge,
-        expires: new Date(cookie.expires),
-      });
-    } catch (error) {
-      setFieldError('id', 'Hello');
-    }
+    dispatch(loginRequest({ id, pw }));
   };
 
   return (
