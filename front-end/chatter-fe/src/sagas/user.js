@@ -1,5 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {postAxios} from "../utils/axios";
+import {login} from '../actions/user'
+import * as type from '../actions/type';
+import {postAxios} from '../utils/axios';
 
 // function* getPostsSaga() {
 //   try {
@@ -21,8 +23,14 @@ function* loginSaga(action) {
   const req = action.payload
   try {
     const res = yield call(postAxios('login/', req));
-
+    put(login("test"))
   } catch (e) {
-
+    console.log(e)
   }
 }
+
+function* watchLoginSaga() {
+  yield takeEvery(type.LOGIN_REQUEST, loginSaga)
+}
+
+export default [watchLoginSaga()]
