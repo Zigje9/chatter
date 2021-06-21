@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '../reducers/index';
+import rootSaga from '../sagas/index'
 import { getAxios } from '../utils/axios';
-
-const middleware = [];
 
 const initialState = {
   user: { isLogin: false, userName: null },
@@ -19,10 +19,13 @@ const initialState = {
   }
 })();
 
+const sagaMiddleWare = createSagaMiddleware()
 const store = createStore(
   rootReducer,
   initialState,
-  composeWithDevTools(applyMiddleware(...middleware)),
+  composeWithDevTools(applyMiddleware(sagaMiddleWare)),
 );
+
+sagaMiddleWare.run(rootSaga);
 
 export default store;
