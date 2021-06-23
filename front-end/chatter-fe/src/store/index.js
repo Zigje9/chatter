@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '../reducers/index';
 import rootSaga from '../sagas/index';
 import { getAxios } from '../utils/axios';
+import { loginInit } from '../actions/user';
 
 const initialState = {
   user: { isLogin: false, userName: null },
@@ -12,8 +13,8 @@ const initialState = {
 (async () => {
   try {
     const { data } = await getAxios('/auth');
-    initialState.user = { isLogin: data.isLogin, userName: data.userName };
-    console.log(data);
+    const { isLogin, userName } = data;
+    store.dispatch(loginInit({ isLogin, userName }));
   } catch (error) {
     console.log(error);
   }
