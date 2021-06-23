@@ -13,6 +13,13 @@ export const logout = () => {
   };
 };
 
+export const loginInit = (isLogin, userName) => {
+  return {
+    type: type.LOGIN_INIT,
+    payload: { isLogin, userName },
+  };
+};
+
 // redux-saga ver
 export const loginRequest = (userInfo) => {
   return {
