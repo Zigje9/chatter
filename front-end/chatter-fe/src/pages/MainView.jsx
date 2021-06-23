@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Container from '../components/Common/container';
 import { useSelector } from 'react-redux';
 import { getAxios } from '../utils/axios';
+import UserList from '../components/UserList/userList';
 
 /* 
 TODO
@@ -35,9 +36,9 @@ const MainView = () => {
 
   return (
     <Container flexDirection="row">
+      <UserList></UserList>
       <div>메인 페이지</div>
       <h2>{userName}</h2>
-      {/* <h3>{userList}</h3> */}
     </Container>
   );
 };
