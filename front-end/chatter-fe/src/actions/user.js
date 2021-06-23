@@ -13,10 +13,10 @@ export const logout = () => {
   };
 };
 
-export const loginInit = (isLogin, userName) => {
+export const loginInit = (loginInfo) => {
   return {
     type: type.LOGIN_INIT,
-    payload: { isLogin, userName },
+    payload: loginInfo,
   };
 };
 

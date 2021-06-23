@@ -11,18 +11,19 @@ function App() {
   const serviceRouter = (
     <>
       <Switch>
-        <Route path="/main" component={MainView}></Route>
-        <Redirect from="*" to="/main"></Redirect>
+        <Route path="/main" component={MainView} />
+        <Redirect from="*" to="/main" />
       </Switch>
     </>
   );
 
   const unAuthorizedRouter = (
     <>
-      <Route path="/login" component={LoginView}></Route>
-      <Redirect from="*" to="/login"></Redirect>
+      <Route path="/login" component={LoginView} />
+      <Redirect from="*" to="/login" />
     </>
   );
+
   return (
     <>
       <BrowserRouter>

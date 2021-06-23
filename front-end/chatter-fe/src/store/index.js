@@ -13,7 +13,8 @@ const initialState = {
 (async () => {
   try {
     const { data } = await getAxios('/auth');
-    store.dispatch(loginInit(data.isLogin, data.userName));
+    const { isLogin, userName } = data;
+    store.dispatch(loginInit({ isLogin, userName }));
   } catch (error) {
     console.log(error);
   }
