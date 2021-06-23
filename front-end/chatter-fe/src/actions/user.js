@@ -12,3 +12,25 @@ export const logout = () => {
     type: type.LOGOUT,
   };
 };
+
+export const loginInit = (isLogin, userName) => {
+  return {
+    type: type.LOGIN_INIT,
+    payload: { isLogin, userName },
+  };
+};
+
+// redux-saga ver
+export const loginRequest = (userInfo) => {
+  return {
+    type: type.LOGIN_REQUEST,
+    payload: userInfo,
+  };
+};
+
+export const loginSuccess = (userName = null) => {
+  return {
+    type: type.LOGIN_SUCCESS,
+    payload: userName,
+  };
+};
