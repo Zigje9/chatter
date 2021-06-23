@@ -19,11 +19,11 @@ const MainView = () => {
 
   const getUserList = async () => {
     try {
-      const res = await getAxios('members/');
-      console.log('res', res);
-      console.log('data', res.data);
-      console.log('members', res.data.members);
-      res.data.members.map((e) => (userList[e.userName] = e.userId));
+      const { data } = await getAxios('members/');
+      for (const [key, value] of Object.entries(data)) {
+        userList[key] = value;
+      }
+      console.log(userList);
     } catch (error) {
       console.log(error);
     }
@@ -37,7 +37,7 @@ const MainView = () => {
     <Container flexDirection="row">
       <div>메인 페이지</div>
       <h2>{userName}</h2>
-      <h3>{userList}</h3>
+      {/* <h3>{userList}</h3> */}
     </Container>
   );
 };
