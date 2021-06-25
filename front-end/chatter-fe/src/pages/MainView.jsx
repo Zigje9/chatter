@@ -15,8 +15,7 @@ TODO
 
 const MainView = () => {
   const dispatch = useDispatch();
-
-  const getUserList = async () => {
+  const getUserList = () => {
     try {
       dispatch(getAllUserRequest());
     } catch (error) {
@@ -31,7 +30,6 @@ const MainView = () => {
   return (
     <Container flexDirection="row">
       <UserList></UserList>
-      <div>메인 페이지</div>
     </Container>
   );
 };

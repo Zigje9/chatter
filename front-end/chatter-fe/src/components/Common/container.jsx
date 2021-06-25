@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  display: flex;
+  display: ${(props) => props.display};
   justify-content: ${(props) => props.justifyContent};
   align-items: center;
   flex-direction: ${(props) => props.flexDirection};
@@ -18,9 +18,11 @@ const Container = styled.div`
   left: ${(props) => props.left};
   right: ${(props) => props.right};
   transition: ${(props) => props.transition};
+  margin: ${(props) => props.margin};
 `;
 
 Container.defaultProps = {
+  display: 'flex',
   flexDirection: 'row',
   justifyContent: 'center',
   position: 'static',
@@ -35,6 +37,7 @@ Container.defaultProps = {
   bottom: 'auto',
   left: 'auto',
   right: 'auto',
+  margin: '0px',
 };
 
 const container = ({ children, styles, onOver, onLeave, onOpen, ...props }) => {
