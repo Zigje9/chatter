@@ -9,6 +9,7 @@ router.post('/login', async (req, res) => {
   const [result] = await sql(query.READ_USER, id)
   if (pw === result.user_password) {
     req.session.name = result.user_name;
+    req.session.profile = result.user_profile;
     req.session.save(() => {
       req.session.sid = req.sessionID
       return res.status(200).send(req.session)
