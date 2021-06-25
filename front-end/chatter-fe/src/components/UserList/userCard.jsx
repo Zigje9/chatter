@@ -1,26 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
-import CardContainer from '../Common/container';
+import CardListContainer from '../Common/container';
+import { LightbulbFill } from '@styled-icons/bootstrap';
+import { LightbulbOff } from '@styled-icons/bootstrap/LightbulbOff';
 
 const Card = styled.div`
   display: flex;
-  background-color: red;
 `;
 
-const UserCard = ({ userName }) => {
+const OnlineIcon = styled(LightbulbFill)`
+  color: yellow;
+  width: 40px;
+`;
+const OfflineIcon = styled(LightbulbOff)`
+  color: gray;
+  width: 40px;
+`;
+
+const CardContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const UserCard = ({ userName, isLogin }) => {
   return (
-    <CardContainer
+    <CardListContainer
       styles={{
         display: 'block',
-        // flexDirection: 'column',
         bgColor: 'green',
         width: '80%',
         height: '100px',
         margin: '10px auto 0 auto',
       }}
     >
-      <Card>{userName}</Card>
-    </CardContainer>
+      <CardContainer>
+        <Card>{userName}</Card>
+        {isLogin ? <OnlineIcon /> : <OfflineIcon />}
+      </CardContainer>
+    </CardListContainer>
   );
 };
 

@@ -10,7 +10,6 @@ const UserList = () => {
   return (
     <Container
       styles={{
-        // flexDirection: 'column',
         display: 'block',
         bgColor: '#84d9ef',
         width: '300px',
@@ -20,7 +19,7 @@ const UserList = () => {
     >
       <SelfInfo />
       {members.map((info) => {
-        return <UserCard key={info.userId} userName={info.userName} />;
+        return <UserCard key={info.userId} userName={info.userName} isLogin={info.isLogin} />;
       })}
     </Container>
   );
