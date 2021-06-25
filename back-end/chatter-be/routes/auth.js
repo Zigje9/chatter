@@ -9,7 +9,8 @@ router.get('/auth', async (req, res) => {
     try {
       const [result] = await sql(query.READ_SESSION_USER, sid)
       const userName = JSON.parse(result.data).name
-      return res.status(200).json({isLogin: true, userName: userName})
+      const userProfileIdx = JSON.parse(result.data).profile
+      return res.status(200).json({isLogin: true, userName: userName, userProfile: userProfileIdx})
     } catch (error) {
       console.log(error)
     }
