@@ -1,8 +1,18 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { loginSuccess } from '../actions/user';
+import { loginInitSuccess, loginSuccess } from '../actions/user';
 import * as type from '../actions/type';
-import { postAxios } from '../utils/axios';
+import { getAxios, postAxios } from '../utils/axios';
 import Cookies from 'js-cookie';
+
+function* loginInitSaga() {
+  try {
+    const { data } = yield call(getAxios, '/auth');
+    const { isLogin, userName, userProfile } = data;
+    yield put(loginInitSuccess({ isLogin, userName, userProfile }));
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 function* loginSaga(action) {
   const req = action.payload;
@@ -22,8 +32,12 @@ function* loginSaga(action) {
   }
 }
 
+function* watchLoginInitSaga() {
+  yield takeEvery(type.LOGIN_INIT_REQUEST, loginInitSaga);
+}
+
 function* watchLoginSaga() {
   yield takeEvery(type.LOGIN_REQUEST, loginSaga);
 }
 
-export default [watchLoginSaga()];
+export default [watchLoginSaga(), watchLoginInitSaga()];

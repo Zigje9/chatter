@@ -2,7 +2,7 @@ import * as type from '../actions/type';
 
 const user = (state = {}, action) => {
   switch (action.type) {
-    case type.LOGIN_INIT:
+    case type.LOGIN_INIT_SUCCESS:
       return {
         isLogin: action.payload.isLogin,
         userName: action.payload.userName,

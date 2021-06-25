@@ -3,6 +3,9 @@ export const LOGOUT = 'LOGOUT';
 export const LOGIN_INIT = 'LOGIN_INIT';
 
 //redux-saga ver
+export const LOGIN_INIT_REQUEST = 'LOGIN_INIT_REQUEST';
+export const LOGIN_INIT_SUCCESS = 'LOGIN_INIT_SUCCESS';
+
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 

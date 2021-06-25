@@ -6,9 +6,15 @@ export const logout = () => {
   };
 };
 
-export const loginInit = (loginInfo) => {
+export const loginInitRequest = () => {
   return {
-    type: type.LOGIN_INIT,
+    type: type.LOGIN_INIT_REQUEST,
+  };
+};
+
+export const loginInitSuccess = (loginInfo) => {
+  return {
+    type: type.LOGIN_INIT_SUCCESS,
     payload: loginInfo,
   };
 };
