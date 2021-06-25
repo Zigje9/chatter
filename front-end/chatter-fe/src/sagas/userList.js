@@ -6,7 +6,7 @@ import { getAxios } from '../utils/axios';
 function* getAllUserSaga() {
   try {
     const { data } = yield call(getAxios, 'members/');
-    const userList = Object.entries(data).map(([userName, userId], idx) => {
+    const userList = Object.entries(data).map(([userName, { user_id }], idx) => {
       if (idx === 1) {
         return { userName, userId, isLogin: true };
       }
