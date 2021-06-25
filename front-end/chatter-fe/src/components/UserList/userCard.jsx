@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CardListContainer from '../Common/container';
 import { LightbulbFill } from '@styled-icons/bootstrap';
 import { LightbulbOff } from '@styled-icons/bootstrap/LightbulbOff';
+import getProfile from '../../utils/getProfile';
 
 const Card = styled.div`
   display: flex;
@@ -17,13 +18,20 @@ const OfflineIcon = styled(LightbulbOff)`
   width: 40px;
 `;
 
+const CardProfile = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  src: ${(props) => props.src};
+`;
+
 const CardContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
 
-const UserCard = ({ userName, isLogin }) => {
+const UserCard = ({ userName, isLogin, userProfile }) => {
   return (
     <CardListContainer
       styles={{
@@ -35,6 +43,7 @@ const UserCard = ({ userName, isLogin }) => {
       }}
     >
       <CardContainer>
+        <CardProfile src={getProfile(userProfile)}></CardProfile>
         <Card>{userName}</Card>
         {isLogin ? <OnlineIcon /> : <OfflineIcon />}
       </CardContainer>

@@ -19,7 +19,14 @@ const UserList = () => {
     >
       <SelfInfo />
       {members.map((info) => {
-        return <UserCard key={info.userId} userName={info.userName} isLogin={info.isLogin} />;
+        return (
+          <UserCard
+            key={info.userId}
+            userName={info.userName}
+            isLogin={info.isLogin}
+            userProfile={info.userProfile}
+          />
+        );
       })}
     </Container>
   );
