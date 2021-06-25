@@ -9,16 +9,16 @@ function* loginSaga(action) {
   try {
     const res = yield call(postAxios, ...['login/', req]);
     const {
-      data: { cookie, sid, name },
+      data: { cookie, sid, name, profile },
     } = res;
-    yield put(loginSuccess(name));
+    yield put(loginSuccess(name, profile));
     Cookies.set('sid', sid, {
       path: cookie.path,
       maxAge: cookie.maxAge,
       expires: new Date(cookie.expire),
     });
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
   }
 }
 

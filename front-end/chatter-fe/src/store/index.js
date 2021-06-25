@@ -7,14 +7,14 @@ import { getAxios } from '../utils/axios';
 import { loginInit } from '../actions/user';
 
 const initialState = {
-  user: { isLogin: false, userName: null },
+  user: { isLogin: false, userName: null, userProfile: null },
 };
 
 (async () => {
   try {
     const { data } = await getAxios('/auth');
-    const { isLogin, userName } = data;
-    store.dispatch(loginInit({ isLogin, userName }));
+    const { isLogin, userName, userProfile } = data;
+    store.dispatch(loginInit({ isLogin, userName, userProfile }));
   } catch (error) {
     console.log(error);
   }

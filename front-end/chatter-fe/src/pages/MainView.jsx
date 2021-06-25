@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from '../components/Common/container';
-import { useSelector } from 'react-redux';
+import UserList from '../components/UserList/userList';
+import { useDispatch } from 'react-redux';
+import { getAllUserRequest } from '../actions/userList';
 
 /* 
 TODO
@@ -12,11 +14,22 @@ TODO
 */
 
 const MainView = () => {
-  const userName = useSelector((state) => state.user.userName);
+  const dispatch = useDispatch();
+  const getUserList = () => {
+    try {
+      dispatch(getAllUserRequest());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserList();
+  }, []);
+
   return (
     <Container flexDirection="row">
-      <div>메인 페이지</div>
-      <h2>{userName}</h2>
+      <UserList></UserList>
     </Container>
   );
 };
