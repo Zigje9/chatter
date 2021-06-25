@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import Container from '../components/Common/container';
-import { useSelector } from 'react-redux';
-import { getAxios } from '../utils/axios';
 import UserList from '../components/UserList/userList';
+import { useDispatch } from 'react-redux';
+import { getAllUserRequest } from '../actions/userList';
 
 /* 
 TODO
@@ -14,17 +14,11 @@ TODO
 */
 
 const MainView = () => {
-  const userName = useSelector((state) => state.user.userName);
-
-  const userList = {};
+  const dispatch = useDispatch();
 
   const getUserList = async () => {
     try {
-      const { data } = await getAxios('members/');
-      for (const [key, value] of Object.entries(data)) {
-        userList[key] = value;
-      }
-      console.log(userList);
+      dispatch(getAllUserRequest());
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +32,6 @@ const MainView = () => {
     <Container flexDirection="row">
       <UserList></UserList>
       <div>메인 페이지</div>
-      <h2>{userName}</h2>
     </Container>
   );
 };

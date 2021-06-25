@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const SelfCard = styled.div`
   width: 80%;
@@ -10,11 +11,8 @@ const SelfCard = styled.div`
 `;
 
 const SelfInfo = () => {
-  return (
-    <SelfCard>
-      <h3>안녕</h3>
-    </SelfCard>
-  );
+  const userName = useSelector((state) => state.user.userName);
+  return <SelfCard>{userName}</SelfCard>;
 };
 
 export default SelfInfo;

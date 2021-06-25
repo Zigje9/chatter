@@ -17,8 +17,8 @@ function* loginSaga(action) {
       maxAge: cookie.maxAge,
       expires: new Date(cookie.expire),
     });
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
   }
 }
 
