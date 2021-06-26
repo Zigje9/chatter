@@ -50,7 +50,7 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
-const server = require('http').createServer(app);
+const server = require('socket.io').createServer(app);
 const io = io.listen(server);
 server.listen(port);
 
