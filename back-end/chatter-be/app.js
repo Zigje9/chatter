@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
   console.log('connect!!');
 });
 
-server.listen(port, () => {
+server.listen(8000, () => {
   console.log('Socket Server Listening');
 });
 
