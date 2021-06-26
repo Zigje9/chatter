@@ -7,7 +7,7 @@ const io = createChatServer(server, {
   cors: { origin: '*', credentials: true },
 });
 
-io.on('connection', (socket) => {
+io.sockets.on('connection', (socket) => {
   console.log('here');
 });
 
