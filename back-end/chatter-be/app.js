@@ -7,6 +7,8 @@ const MySQLStore = require('express-mysql-session')(session);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const { Server } = require('socket.io');
+const http = require('http');
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -50,17 +52,14 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
-const server = require('socket.io').createServer(app);
-const io = io.listen(server);
-server.listen(port);
-
-// const io = require('socket.io')(server, {
-//   cors: {
-//     origin: '*',
-//     methods: ['GET', 'POST'],
-//     credentials: true,
-//   },
-// });
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+    credentials: true,
+  },
+});
 
 io.on('connection', (socket) => {
   console.log('connect!!');
