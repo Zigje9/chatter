@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../components/Common/container';
 import UserList from '../components/UserList/userList';
+import { io } from 'socket.io-client';
+import 'dotenv/config';
 import { useDispatch } from 'react-redux';
 import { getAllUserRequest } from '../actions/userList';
 
@@ -14,6 +16,7 @@ TODO
 */
 
 const MainView = () => {
+  const [socket, setSocket] = useState(null);
   const dispatch = useDispatch();
   const getUserList = () => {
     try {
@@ -25,7 +28,20 @@ const MainView = () => {
 
   useEffect(() => {
     getUserList();
+    if (socket === null) {
+      setSocket(io(process.env.REACT_APP_SOCKET_SERVER));
+    }
   }, []);
+
+  if (socket !== null) {
+    console.log(socket);
+    socket.on('connect', () => {
+      console.log('connect');
+    });
+    socket.onAny((event, ...args) => {
+      console.log(event, args);
+    });
+  }
 
   return (
     <Container flexDirection="row">

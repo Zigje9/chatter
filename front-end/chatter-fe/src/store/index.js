@@ -1,10 +1,9 @@
-import { createStore, applyMiddleware } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '../reducers/index';
 import rootSaga from '../sagas/index';
-import { getAxios } from '../utils/axios';
-import { loginInit, loginInitRequest } from '../actions/user';
+import { loginInitRequest } from '../actions/user';
 
 const initialState = {
   user: { isLogin: false, userName: null, userProfile: null },
