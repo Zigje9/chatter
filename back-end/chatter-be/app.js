@@ -49,11 +49,15 @@ app.use(memberRouter);
 const server = app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
-const listen = require('socket.io');
-const io = listen(server);
-io.on('connection', function (socket) {
-  console.log('socket connection!!!!!!');
-  socket.on('client message', function (data) {
-    io.emit('server message', data.message);
-  });
+
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+    credentials: true,
+  },
+});
+
+io.on('connection', (socket) => {
+  console.log('connect!!');
 });
