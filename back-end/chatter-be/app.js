@@ -62,10 +62,10 @@ io.on('connection', (socket) => {
   console.log('connect!!');
 });
 
-server.listen(8000, () => {
+server.listen(port, () => {
   console.log('Socket Server Listening');
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Example app listening at http://localhost:${port}`);
+// });
