@@ -58,6 +58,7 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
+  console.log(socket);
   console.log('connect!!');
 });
 
