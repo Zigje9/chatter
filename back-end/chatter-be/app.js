@@ -7,8 +7,8 @@ const MySQLStore = require('express-mysql-session')(session);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const { Server } = require('socket.io');
-const http = require('http');
+
+const socketServer = require('./socket');
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -48,24 +48,6 @@ app.use(signupRouter);
 app.use(authRouter);
 app.use(memberRouter);
 
-const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: '*',
-    methods: ['GET', 'POST'],
-    credentials: true,
-  },
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
 });
-
-io.on('connection', (socket) => {
-  console.log(socket);
-  console.log('connect!!');
-});
-
-server.listen(port, () => {
-  console.log('Socket Server Listening');
-});
-
-// app.listen(port, () => {
-//   console.log(`Example app listening at http://localhost:${port}`);
-// });
