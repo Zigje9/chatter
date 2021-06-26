@@ -48,10 +48,6 @@ app.use(signupRouter);
 app.use(authRouter);
 app.use(memberRouter);
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
-
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -63,4 +59,8 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
   console.log('connect!!');
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
 });
