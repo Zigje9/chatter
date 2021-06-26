@@ -5,48 +5,52 @@ import { LightbulbFill } from '@styled-icons/bootstrap';
 import { LightbulbOff } from '@styled-icons/bootstrap/LightbulbOff';
 import getProfile from '../../utils/getProfile';
 
-const Card = styled.div`
-  display: flex;
-`;
-
 const OnlineIcon = styled(LightbulbFill)`
   color: yellow;
-  width: 40px;
+  width: 20px;
 `;
 const OfflineIcon = styled(LightbulbOff)`
   color: gray;
-  width: 40px;
+  width: 20px;
 `;
 
 const CardProfile = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   border-radius: 100%;
-  src: ${(props) => props.src};
+  margin-right: 15px;
 `;
 
-const CardContainer = styled.div`
+const CardInfo = styled.div`
+  flex: 3;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+`;
+
+const CardName = styled.span`
+  color: #32415a;
+  font-weight: bold;
 `;
 
 const UserCard = ({ userName, isLogin, userProfile }) => {
   return (
     <CardListContainer
       styles={{
-        display: 'block',
-        bgColor: 'green',
-        width: '80%',
+        bgColor: '#ffffff',
+        width: '100%',
         height: '100px',
+        padding: '15px',
         margin: '10px auto 0 auto',
+        borderRadius: '5px',
+        boxShadow: '3px 3px 2px #e7ebf1;',
       }}
     >
-      <CardContainer>
-        <CardProfile src={getProfile(userProfile)}></CardProfile>
-        <Card>{userName}</Card>
+      <CardProfile src={getProfile(userProfile)} />
+      <CardInfo>
+        <CardName>{userName}</CardName>
         {isLogin ? <OnlineIcon /> : <OfflineIcon />}
-      </CardContainer>
+      </CardInfo>
     </CardListContainer>
   );
 };

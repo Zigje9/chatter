@@ -11,9 +11,10 @@ const UserList = () => {
     <Container
       styles={{
         display: 'block',
-        bgColor: '#84d9ef',
+        bgColor: '#e8f6ff',
         width: '300px',
         margin: '0 auto 0 0',
+        padding: '10px',
         overflow: 'scroll',
       }}
     >

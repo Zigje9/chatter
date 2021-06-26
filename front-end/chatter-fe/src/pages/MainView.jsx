@@ -29,7 +29,7 @@ const MainView = () => {
 
   return (
     <Container flexDirection="row">
-      <UserList></UserList>
+      <UserList />
     </Container>
   );
 };

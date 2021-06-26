@@ -19,6 +19,7 @@ const Container = styled.div`
   right: ${(props) => props.right};
   transition: ${(props) => props.transition};
   margin: ${(props) => props.margin};
+  box-shadow: ${(props) => props.boxShadow};
 `;
 
 Container.defaultProps = {
@@ -38,6 +39,7 @@ Container.defaultProps = {
   left: 'auto',
   right: 'auto',
   margin: '0px',
+  boxShadow: 'none',
 };
 
 const container = ({ children, styles, onOver, onLeave, onOpen, ...props }) => {
