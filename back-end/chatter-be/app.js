@@ -46,17 +46,21 @@ app.use(signupRouter);
 app.use(authRouter);
 app.use(memberRouter);
 
-const server = app.listen(port, () => {
+app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
-const io = require('socket.io')(server, {
-  cors: {
-    origin: '*',
-    methods: ['GET', 'POST'],
-    credentials: true,
-  },
-});
+const server = require('http').createServer(app);
+const io = io.listen(server);
+server.listen(port);
+
+// const io = require('socket.io')(server, {
+//   cors: {
+//     origin: '*',
+//     methods: ['GET', 'POST'],
+//     credentials: true,
+//   },
+// });
 
 io.on('connection', (socket) => {
   console.log('connect!!');
