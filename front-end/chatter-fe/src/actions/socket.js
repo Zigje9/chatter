@@ -13,3 +13,9 @@ export const connectSocketInitSuccess = (socket) => {
     payload: socket,
   };
 };
+
+export const broadcasting = () => {
+  return {
+    type: type.BROADCASTING,
+  };
+};

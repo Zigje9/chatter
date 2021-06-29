@@ -4,7 +4,7 @@ import UserList from '../components/UserList/userList';
 import 'dotenv/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUserRequest } from '../actions/userList';
-import { connectSocketInitRequest } from '../actions/socket';
+import { broadcasting, connectSocketInitRequest } from '../actions/socket';
 
 /* 
 TODO
@@ -45,9 +45,7 @@ const MainView = () => {
     socket.on('connect', () => {
       console.log('connect');
     });
-    socket.on('broadCasting', (users) => {
-      console.log(users);
-    });
+    dispatch(broadcasting());
     socket.onAny((event, ...args) => {
       console.log(event, args);
     });

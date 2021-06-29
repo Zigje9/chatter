@@ -12,3 +12,10 @@ export const getAllUserSuccess = (userList) => {
     payload: userList,
   };
 };
+
+export const changeAllUserOnline = (onUsers) => {
+  return {
+    type: type.CHANGE_ALL_USER_ONLINE,
+    payload: onUsers,
+  };
+};
