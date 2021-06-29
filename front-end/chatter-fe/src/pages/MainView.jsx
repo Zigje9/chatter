@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Container from '../components/Common/container';
 import UserList from '../components/UserList/userList';
-import { io } from 'socket.io-client';
 import 'dotenv/config';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllUserRequest } from '../actions/userList';
+import { connectSocketInitRequest } from '../actions/socket';
 
 /* 
 TODO
@@ -16,8 +16,10 @@ TODO
 */
 
 const MainView = () => {
-  const [socket, setSocket] = useState(null);
   const dispatch = useDispatch();
+  const userName = useSelector((state) => state.user.userName);
+  const socket = useSelector((state) => state.socket.socket);
+
   const getUserList = () => {
     try {
       dispatch(getAllUserRequest());
@@ -26,17 +28,25 @@ const MainView = () => {
     }
   };
 
+  const createSocket = () => {
+    try {
+      dispatch(connectSocketInitRequest(userName));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getUserList();
-    if (socket === null) {
-      setSocket(io(process.env.REACT_APP_SOCKET_SERVER));
-    }
+    createSocket();
   }, []);
 
   if (socket !== null) {
-    console.log(socket);
     socket.on('connect', () => {
       console.log('connect');
+    });
+    socket.on('broadCasting', (users) => {
+      console.log(users);
     });
     socket.onAny((event, ...args) => {
       console.log(event, args);
