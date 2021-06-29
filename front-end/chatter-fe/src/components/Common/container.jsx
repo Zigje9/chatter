@@ -20,6 +20,7 @@ const Container = styled.div`
   transition: ${(props) => props.transition};
   margin: ${(props) => props.margin};
   box-shadow: ${(props) => props.boxShadow};
+  ${(props) => (props.isHover ? '&:hover { background-color: #fcbb7e; cursor: pointer;}' : '')};
 `;
 
 Container.defaultProps = {
@@ -40,6 +41,7 @@ Container.defaultProps = {
   right: 'auto',
   margin: '0px',
   boxShadow: 'none',
+  isHover: false,
 };
 
 const container = ({ children, styles, onOver, onLeave, onOpen, ...props }) => {

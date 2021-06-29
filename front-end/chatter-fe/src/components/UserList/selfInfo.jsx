@@ -27,6 +27,9 @@ const SelfInfo = () => {
         width: '80%',
         height: '150px',
         margin: '0 auto 0 auto',
+        borderRadius: '5px',
+        bgColor: 'white',
+        boxShadow: '3px 3px 2px #e7ebf1;',
       }}
     >
       <SelfProfile src={getProfile(userProfile)} />

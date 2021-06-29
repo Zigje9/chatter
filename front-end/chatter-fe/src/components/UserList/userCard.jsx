@@ -44,6 +44,7 @@ const UserCard = ({ userName, isLogin, userProfile }) => {
         margin: '10px auto 0 auto',
         borderRadius: '5px',
         boxShadow: '3px 3px 2px #e7ebf1;',
+        isHover: true,
       }}
     >
       <CardProfile src={getProfile(userProfile)} />
