@@ -16,6 +16,8 @@ io.on('connection', (socket) => {
   io.emit('broadCasting', onUsers);
 
   socket.on('disconnect', () => {
+    console.log(socket.id);
+    delete onUsers[socket.id];
     socket.broadcast.emit('broadCasting', onUsers);
   });
 });
