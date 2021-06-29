@@ -8,15 +8,16 @@ const io = createChatServer(server, {
 });
 
 io.on('connection', (socket) => {
-  const onUsers = [];
+  const onUsers = {};
   for (const [id, socket] of io.of('/').sockets) {
-    onUsers.push({
-      userID: id,
-      userName: socket.handshake.auth.userName,
-    });
+    onUsers[id] = socket.handshake.auth.userName;
   }
   console.log('onUsers', onUsers);
   io.emit('broadCasting', onUsers);
+
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('broadCasting', onUsers);
+  });
 });
 
 server.listen(8000, () => {
