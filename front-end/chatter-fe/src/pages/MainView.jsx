@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Container from '../components/Common/container';
 import UserList from '../components/UserList/userList';
 import 'dotenv/config';
@@ -18,7 +18,6 @@ TODO
 const MainView = () => {
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.user.userName);
-  const socket = useSelector((state) => state.socket.socket);
 
   const getUserList = () => {
     try {
@@ -36,20 +35,19 @@ const MainView = () => {
     }
   };
 
+  const broadcastingSocket = () => {
+    try {
+      dispatch(broadcasting());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getUserList();
     createSocket();
+    broadcastingSocket();
   }, []);
-
-  if (socket !== null) {
-    socket.on('connect', () => {
-      console.log('connect');
-    });
-    dispatch(broadcasting());
-    socket.onAny((event, ...args) => {
-      console.log(event, args);
-    });
-  }
 
   return (
     <Container flexDirection="row">

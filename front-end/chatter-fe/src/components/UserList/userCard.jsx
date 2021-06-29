@@ -6,7 +6,7 @@ import { LightbulbOff } from '@styled-icons/bootstrap/LightbulbOff';
 import getProfile from '../../utils/getProfile';
 
 const OnlineIcon = styled(LightbulbFill)`
-  color: yellow;
+  color: springgreen;
   width: 20px;
 `;
 const OfflineIcon = styled(LightbulbOff)`
