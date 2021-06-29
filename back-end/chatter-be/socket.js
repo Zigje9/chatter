@@ -8,6 +8,8 @@ const io = createChatServer(server, {
 });
 
 io.on('connection', (socket) => {
+  const userName = socket.handshake.auth.userName;
+  console.log(userName);
   io.emit('test', 'aa');
   console.log('here');
 });
