@@ -7,8 +7,8 @@ import Cookies from 'js-cookie';
 function* loginInitSaga() {
   try {
     const { data } = yield call(getAxios, '/auth');
-    const { isLogin, userName, userProfile } = data;
-    yield put(loginInitSuccess({ isLogin, userName, userProfile }));
+    const { isLogin, userName, userProfile, userId } = data;
+    yield put(loginInitSuccess({ isLogin, userName, userProfile, userId }));
   } catch (error) {
     console.log(error);
   }
@@ -19,9 +19,9 @@ function* loginSaga(action) {
   try {
     const res = yield call(postAxios, ...['login/', req]);
     const {
-      data: { cookie, sid, name, profile },
+      data: { cookie, sid, name, profile, userId },
     } = res;
-    yield put(loginSuccess(name, profile));
+    yield put(loginSuccess(name, profile, userId));
     Cookies.set('sid', sid, {
       path: cookie.path,
       maxAge: cookie.maxAge,

@@ -7,12 +7,14 @@ const user = (state = {}, action) => {
         isLogin: action.payload.isLogin,
         userName: action.payload.userName,
         userProfile: action.payload.userProfile,
+        userId: action.payload.userId,
       };
     case type.LOGIN_SUCCESS:
       return {
         isLogin: true,
         userName: action.payload.userName,
         userProfile: action.payload.userProfile,
+        userId: action.payload.userId,
       };
     case type.LOGOUT:
       return { isLogin: false, userName: null, userProfile: null };

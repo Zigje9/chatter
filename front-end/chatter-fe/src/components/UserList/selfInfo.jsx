@@ -19,7 +19,7 @@ const SelfCard = styled.div`
 
 const SelfInfo = () => {
   const userInfo = useSelector((state) => state.user);
-  const { userName, userProfile } = userInfo;
+  const { userName, userProfile, userId } = userInfo;
   return (
     <SelfCardContainer
       styles={{
@@ -33,7 +33,9 @@ const SelfInfo = () => {
       }}
     >
       <SelfProfile src={getProfile(userProfile)} />
-      <SelfCard>{userName}</SelfCard>
+      <SelfCard>
+        {userId}({userName})
+      </SelfCard>
     </SelfCardContainer>
   );
 };

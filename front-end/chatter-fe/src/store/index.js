@@ -6,7 +6,7 @@ import rootSaga from '../sagas/index';
 import { loginInitRequest } from '../actions/user';
 
 const initialState = {
-  user: { isLogin: false, userName: null, userProfile: null },
+  user: { isLogin: false, userName: null, userProfile: null, userId: null },
 };
 
 const sagaMiddleWare = createSagaMiddleware();
