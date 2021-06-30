@@ -29,7 +29,8 @@ const MainView = () => {
 
   const createSocket = () => {
     try {
-      dispatch(connectSocketInitRequest(userName));
+      // dispatch(connectSocketInitRequest(userName));
+      dispatch({ type: 'TEMP_CONNECT', payload: userName });
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +47,7 @@ const MainView = () => {
   useEffect(() => {
     getUserList();
     createSocket();
-    broadcastingSocket();
+    // broadcastingSocket();
   }, []);
 
   return (

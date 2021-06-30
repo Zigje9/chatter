@@ -1,12 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
 import Container from '../Common/container';
 import SelfInfo from '../UserList/selfInfo';
 import UserCard from './userCard';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 const UserList = () => {
+  const userInfo = useSelector((state) => state.user);
   const members = useSelector((state) => state.userList.members);
+  const dispatch = useDispatch();
+
+  const handshakeHandler = (receiverId) => {
+    const userAccounts = [userInfo.userId, receiverId];
+    userAccounts.sort();
+    dispatch({ type: 'USER_ACCOUNTS', payload: userAccounts });
+  };
+
   return (
     <Container
       styles={{
@@ -26,6 +34,7 @@ const UserList = () => {
             userName={info.userName}
             isLogin={info.isLogin}
             userProfile={info.userProfile}
+            onClick={() => handshakeHandler(info.userId)}
           />
         );
       })}

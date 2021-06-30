@@ -33,7 +33,7 @@ const CardName = styled.span`
   font-weight: bold;
 `;
 
-const UserCard = ({ userName, isLogin, userProfile }) => {
+const UserCard = ({ userName, isLogin, userProfile, onClick }) => {
   return (
     <CardListContainer
       styles={{
@@ -46,6 +46,7 @@ const UserCard = ({ userName, isLogin, userProfile }) => {
         boxShadow: '3px 3px 2px #e7ebf1;',
         isHover: true,
       }}
+      onOpen={onClick}
     >
       <CardProfile src={getProfile(userProfile)} />
       <CardInfo>
