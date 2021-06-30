@@ -15,6 +15,10 @@ io.on('connection', (socket) => {
   console.log('onUsers', onUsers);
   io.emit('BROADCASTING', onUsers);
 
+  socket.on('USER_ACCOUNTS', (a) => {
+    console.log(a);
+  });
+
   socket.on('disconnect', () => {
     console.log(socket.id);
     delete onUsers[socket.id];
