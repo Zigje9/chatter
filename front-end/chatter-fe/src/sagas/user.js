@@ -32,12 +32,12 @@ function* loginSaga(action) {
   }
 }
 
-function* watchLoginInitSaga() {
+export function* watchLoginInitSaga() {
   yield takeEvery(type.LOGIN_INIT_REQUEST, loginInitSaga);
 }
 
-function* watchLoginSaga() {
+export function* watchLoginSaga() {
   yield takeEvery(type.LOGIN_REQUEST, loginSaga);
 }
 
-export default [watchLoginSaga(), watchLoginInitSaga()];
+// export default [watchLoginSaga(), watchLoginInitSaga()];

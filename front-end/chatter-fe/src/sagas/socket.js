@@ -1,90 +1,53 @@
-import { call, put, take, takeEvery, apply } from 'redux-saga/effects';
-import * as type from '../actions/type';
-import { connectSocketInitSuccess } from '../actions/socket';
-import { createSocketChannel } from './createSocketChannel';
+import { call, fork, put, take } from 'redux-saga/effects';
+import { createChannel } from './createChannel';
 import { io } from 'socket.io-client';
 import 'dotenv/config';
-import { changeAllUserOnline } from '../actions/userList';
-import store from '../store';
 
-function* connectInitSaga(action) {
-  try {
-    const socket = yield call(
-      io,
-      ...[
-        process.env.REACT_APP_SOCKET_SERVER,
-        {
-          auth: {
-            userName: action.payload,
-          },
-        },
-      ],
-    );
-    yield put(connectSocketInitSuccess(socket));
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-function tempConnectInitSaga(userName) {
+const connect = (userName) => {
   const socket = io(process.env.REACT_APP_SOCKET_SERVER, {
     auth: {
       userName,
     },
   });
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     socket.on('connect', () => {
       resolve(socket);
     });
   });
-}
+};
 
-function* broadcastingSaga(socket) {
-  const channel = yield call(createSocketChannel, socket);
+function* read(socket) {
+  console.log(socket);
+  const channel = yield call(createChannel, socket);
+  console.log(channel);
 
   while (true) {
-    const onUsers = yield take(channel);
-    yield put(changeAllUserOnline(onUsers));
+    console.log('b');
+    let action = yield take(channel);
+    console.log('a');
+    yield put(action);
   }
 }
 
-function* createRoomSaga(action) {
-  const currentSocket = store.getState().socket.socket;
-  yield apply(currentSocket, currentSocket.emit, ['USER_ACCOUNTS', action.payload]);
-  const channel = yield call(createSocketChannel, action.type);
-
+function* write(socket) {
   while (true) {
-    yield take(channel);
+    const { payload } = yield take('SENDMESSAGE');
+    socket.emit('message', payload);
   }
 }
 
-function* watchConnectInitSaga() {
-  yield takeEvery(type.CONNECT_SOCKET_INIT_REQUEST, connectInitSaga);
-}
-
-function* watchBroadcasting() {
-  yield takeEvery(type.BROADCASTING, broadcastingSaga);
-}
-
-function* watchCreateRoom() {
-  yield takeEvery('USER_ACCOUNTS', createRoomSaga);
+function* handleIO(socket) {
+  yield fork(read, socket);
+  yield fork(write, socket);
 }
 
 function* flow() {
-  try {
-    const action = yield take('TEMP_CONNECT');
-    const socket = yield call(tempConnectInitSaga, ...[action.payload]);
-
-    const channel = yield createSocketChannel(socket);
-
-    while (true) {
-      const onUsers = yield take(channel);
-      yield put(changeAllUserOnline(onUsers));
-    }
-  } catch (error) {
-    console.log(error);
+  while (true) {
+    const { payload } = yield take('CONNECT_SOCKET_INIT_REQUEST');
+    const socket = yield call(connect, payload);
+    const task = yield fork(handleIO, socket);
+    console.log(task);
   }
 }
 
-// export default [flow(), watchBroadcasting(), watchCreateRoom()];
-export default [flow()];
+export default flow;

@@ -16,8 +16,8 @@ function* getAllUserSaga() {
   }
 }
 
-function* watchGetAllUserSaga() {
+export function* watchGetAllUserSaga() {
   yield takeEvery(type.GET_ALL_USER_REQUEST, getAllUserSaga);
 }
 
-export default [watchGetAllUserSaga()];
+// export default [watchGetAllUserSaga()];

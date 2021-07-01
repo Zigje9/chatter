@@ -29,8 +29,7 @@ const MainView = () => {
 
   const createSocket = () => {
     try {
-      // dispatch(connectSocketInitRequest(userName));
-      dispatch({ type: 'TEMP_CONNECT', payload: userName });
+      dispatch(connectSocketInitRequest(userName));
     } catch (error) {
       console.log(error);
     }
