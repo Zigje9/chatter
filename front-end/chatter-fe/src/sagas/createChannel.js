@@ -2,17 +2,15 @@ import { eventChannel } from 'redux-saga';
 import * as type from '../actions/type';
 import { changeAllUserOnline } from '../actions/userList';
 
-export function* createChannel(socket) {
-  console.log(socket);
+export function createChannel(socket) {
   return eventChannel((emit) => {
-    socket.on(type.BROADCASTING, (onUsers) => {
-      console.log(onUsers);
+    socket.on('BROADCASTING', (onUsers) => {
       emit(changeAllUserOnline(onUsers));
     });
     return () => {
-      // socket.off(type.BROADCASTING, (onUsers) => {
-      //   emit(changeAllUserOnline(onUsers));
-      // });
+      socket.off(type.BROADCASTING, (onUsers) => {
+        emit(changeAllUserOnline(onUsers));
+      });
     };
   });
 }

@@ -46,7 +46,7 @@ const MainView = () => {
   useEffect(() => {
     getUserList();
     createSocket();
-    // broadcastingSocket();
+    broadcastingSocket();
   }, []);
 
   return (

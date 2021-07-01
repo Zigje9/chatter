@@ -1,19 +1,10 @@
 import { all, fork } from 'redux-saga/effects';
-// import user from './user';
-import { watchLoginSaga, watchLoginInitSaga } from './user';
-// import userList from './userList';
-import { watchGetAllUserSaga } from './userList';
+import user from './user';
 import socket from './socket';
+import userList from './userList';
 
-export default function* () {
-  // yield all([...user, ...userList, fork(socket)]);
-  yield all([
-    fork(watchLoginSaga),
-    fork(watchLoginInitSaga),
-    fork(watchGetAllUserSaga),
-    fork(socket),
-  ]);
-  // yield fork(watchLoginInitSaga)
-  // yield fork(watchLoginSaga)
-  // yield fork(watchLog)
+function* rootSaga() {
+  yield all([fork(user), fork(userList), fork(socket)]);
 }
+
+export default rootSaga;

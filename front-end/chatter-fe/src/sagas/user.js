@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
 import { loginInitSuccess, loginSuccess } from '../actions/user';
 import * as type from '../actions/type';
 import { getAxios, postAxios } from '../utils/axios';
@@ -32,12 +32,14 @@ function* loginSaga(action) {
   }
 }
 
-export function* watchLoginInitSaga() {
+function* watchLoginInitSaga() {
   yield takeEvery(type.LOGIN_INIT_REQUEST, loginInitSaga);
 }
 
-export function* watchLoginSaga() {
+function* watchLoginSaga() {
   yield takeEvery(type.LOGIN_REQUEST, loginSaga);
 }
 
-// export default [watchLoginSaga(), watchLoginInitSaga()];
+export default function* userSaga() {
+  yield all([fork(watchLoginInitSaga), fork(watchLoginSaga)]);
+}
