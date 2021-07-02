@@ -10,7 +10,7 @@ const io = createChatServer(server, {
 io.on('connection', (socket) => {
   const onUsers = {};
   for (const [id, socket] of io.of('/').sockets) {
-    onUsers[id] = socket.handshake.auth.userName;
+    onUsers[id] = socket.handshake.auth.userInfo.userId;
   }
   console.log('onUsers', onUsers);
   // io.emit('BROADCASTING', onUsers);
