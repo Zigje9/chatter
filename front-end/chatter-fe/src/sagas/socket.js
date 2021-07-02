@@ -1,12 +1,13 @@
 import { call, fork, put, take, all } from 'redux-saga/effects';
 import { createChannel } from './createChannel';
 import { io } from 'socket.io-client';
+import * as type from '../actions/type';
 import 'dotenv/config';
 
-const connect = (userName) => {
+const connect = (userInfo) => {
   const socket = io(process.env.REACT_APP_SOCKET_SERVER, {
     auth: {
-      userName,
+      userInfo,
     },
   });
   return new Promise((resolve) => {
@@ -20,7 +21,7 @@ function* read(socket) {
   const channel = yield call(createChannel, socket);
 
   while (true) {
-    let action = yield take(channel);
+    const action = yield take(channel);
     yield put(action);
   }
 }
@@ -28,20 +29,29 @@ function* read(socket) {
 function* write(socket) {
   while (true) {
     const { payload } = yield take('SENDMESSAGE');
-    socket.emit('message', payload);
+    socket.emit('MESSAGE', payload);
+  }
+}
+
+function* sendToAllMsg(socket) {
+  while (true) {
+    const { payload } = yield take('SEND_TO_ALL_MSG');
+    socket.emit('MESSAGE', payload);
   }
 }
 
 function* handleIO(socket) {
   yield fork(read, socket);
   yield fork(write, socket);
+  yield fork(sendToAllMsg, socket);
 }
 
 function* flow() {
   while (true) {
-    const { payload } = yield take('CONNECT_SOCKET_INIT_REQUEST');
+    const { payload } = yield take(type.CONNECT_SOCKET_INIT_REQUEST);
     const socket = yield call(connect, payload);
     yield fork(handleIO, socket);
+    socket.emit(type.BROADCASTING);
   }
 }
 

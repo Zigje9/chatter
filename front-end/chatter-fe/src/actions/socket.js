@@ -1,9 +1,9 @@
 import * as type from './type';
 
-export const connectSocketInitRequest = (userName) => {
+export const connectSocketInitRequest = (userInfo) => {
   return {
     type: type.CONNECT_SOCKET_INIT_REQUEST,
-    payload: userName,
+    payload: userInfo,
   };
 };
 

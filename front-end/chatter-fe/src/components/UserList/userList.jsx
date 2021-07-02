@@ -12,7 +12,8 @@ const UserList = () => {
   const handshakeHandler = (receiverId) => {
     const userAccounts = [userInfo.userId, receiverId];
     userAccounts.sort();
-    dispatch({ type: 'USER_ACCOUNTS', payload: userAccounts });
+    // dispatch({ type: 'USER_ACCOUNTS', payload: userAccounts });
+    dispatch({ type: 'SEND_TO_ALL_MSG', payload: 'This is Test' });
   };
 
   return (

@@ -6,6 +6,7 @@ const Container = styled.div`
   justify-content: ${(props) => props.justifyContent};
   align-items: center;
   flex-direction: ${(props) => props.flexDirection};
+  flex-grow: ${(props) => props.flexGrow};
   height: ${(props) => props.height};
   width: ${(props) => props.width};
   border-radius: ${(props) => props.borderRadius};
@@ -26,6 +27,7 @@ const Container = styled.div`
 Container.defaultProps = {
   display: 'flex',
   flexDirection: 'row',
+  flexGrow: '0',
   justifyContent: 'center',
   position: 'static',
   height: '100vh',

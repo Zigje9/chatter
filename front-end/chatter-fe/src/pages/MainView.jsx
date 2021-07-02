@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import Container from '../components/Common/container';
 import UserList from '../components/UserList/userList';
+import PublicChatRoom from '../components/PublicChatRoom';
 import 'dotenv/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUserRequest } from '../actions/userList';
-import { broadcasting, connectSocketInitRequest } from '../actions/socket';
+import { connectSocketInitRequest } from '../actions/socket';
 
 /* 
 TODO
@@ -17,7 +18,7 @@ TODO
 
 const MainView = () => {
   const dispatch = useDispatch();
-  const userName = useSelector((state) => state.user.userName);
+  const { userId, userName } = useSelector((state) => state.user);
 
   const getUserList = () => {
     try {
@@ -29,15 +30,7 @@ const MainView = () => {
 
   const createSocket = () => {
     try {
-      dispatch(connectSocketInitRequest(userName));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const broadcastingSocket = () => {
-    try {
-      dispatch(broadcasting());
+      dispatch(connectSocketInitRequest({ userId, userName }));
     } catch (error) {
       console.log(error);
     }
@@ -46,13 +39,15 @@ const MainView = () => {
   useEffect(() => {
     getUserList();
     createSocket();
-    broadcastingSocket();
   }, []);
 
   return (
-    <Container flexDirection="row">
-      <UserList />
-    </Container>
+    <>
+      <Container>
+        <UserList />
+        <PublicChatRoom />
+      </Container>
+    </>
   );
 };
 

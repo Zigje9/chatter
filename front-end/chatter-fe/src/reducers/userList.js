@@ -11,11 +11,11 @@ const userList = (state = initialState, action) => {
       };
     case type.CHANGE_ALL_USER_ONLINE:
       const onUsersName = Object.values(action.payload);
-      const changeMembers = state.members.map(({ userName, isLogin, ...rest }) => {
-        if (onUsersName.includes(userName)) {
-          return { userName, isLogin: true, ...rest };
+      const changeMembers = state.members.map(({ userId, isLogin, ...rest }) => {
+        if (onUsersName.includes(userId)) {
+          return { userId, isLogin: true, ...rest };
         } else {
-          return { userName, isLogin: false, ...rest };
+          return { userId, isLogin: false, ...rest };
         }
       });
       return {

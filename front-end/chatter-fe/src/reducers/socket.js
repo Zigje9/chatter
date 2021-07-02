@@ -10,6 +10,9 @@ const socket = (state = initialState, action) => {
       return {
         socket: action.payload,
       };
+    case 'RECEIVE_MSG':
+      console.log(action.payload);
+      return state;
     default:
       return state;
   }
