@@ -23,6 +23,10 @@ io.on('connection', (socket) => {
     io.emit('BROADCASTING', onUsers);
   });
 
+  socket.on('MESSAGE', (a) => {
+    socket.broadcast.emit('MESSAGE', a);
+  });
+
   socket.on('disconnect', () => {
     console.log(socket.id);
     delete onUsers[socket.id];
