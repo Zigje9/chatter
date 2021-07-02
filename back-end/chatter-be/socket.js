@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('MESSAGE', (a) => {
-    socket.emit('MESSAGE', a);
+    io.sockets.emit('MESSAGE', a);
   });
 
   socket.on('disconnect', () => {
