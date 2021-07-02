@@ -13,10 +13,14 @@ io.on('connection', (socket) => {
     onUsers[id] = socket.handshake.auth.userName;
   }
   console.log('onUsers', onUsers);
-  io.emit('BROADCASTING', onUsers);
+  // io.emit('BROADCASTING', onUsers);
 
   socket.on('USER_ACCOUNTS', (a) => {
     console.log(a);
+  });
+
+  socket.on('BROADCASTING', () => {
+    io.emit('BROADCASTING', onUsers);
   });
 
   socket.on('disconnect', () => {
