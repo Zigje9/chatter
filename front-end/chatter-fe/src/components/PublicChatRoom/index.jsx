@@ -7,11 +7,10 @@ const PublicChatRoom = () => {
     <RoomContainer
       styles={{
         height: '50vh',
-        width: '60vw',
+        width: '80vw',
         bgColor: 'red',
-        margin: '0 10% 0 0',
-        position: 'relative',
-        top: '0',
+        flexGrow: '1',
+        margin: '20px 40px',
       }}
     >
       //

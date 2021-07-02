@@ -43,7 +43,7 @@ const MainView = () => {
 
   return (
     <>
-      <Container>
+      <Container styles={{ alignItems: 'flex-start' }}>
         <UserList />
         <PublicChatRoom />
       </Container>

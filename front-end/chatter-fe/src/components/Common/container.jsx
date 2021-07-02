@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: ${(props) => props.display};
   justify-content: ${(props) => props.justifyContent};
-  align-items: center;
+  align-items: ${(props) => props.alignItems};
   flex-direction: ${(props) => props.flexDirection};
   flex-grow: ${(props) => props.flexGrow};
   height: ${(props) => props.height};
@@ -29,6 +29,7 @@ Container.defaultProps = {
   flexDirection: 'row',
   flexGrow: '0',
   justifyContent: 'center',
+  alignItems: 'center',
   position: 'static',
   height: '100vh',
   width: '100vw',
