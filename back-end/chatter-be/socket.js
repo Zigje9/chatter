@@ -30,6 +30,12 @@ io.on('connection', (socket) => {
     io.sockets.emit('MESSAGE', res);
   });
 
+  socket.on('REQUEST_CREATE_ROOM', (req) => {
+    const [userA, userB] = req;
+    console.log(userA, userB);
+    console.log(io.of('/').sockets);
+  });
+
   socket.on('disconnect', () => {
     console.log(socket.id);
     delete onUsers[socket.id];
