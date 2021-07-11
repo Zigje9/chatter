@@ -1,8 +1,8 @@
-import { call, fork, put, take, all } from "redux-saga/effects";
-import { createChannel } from "./createChannel";
-import { io } from "socket.io-client";
-import * as type from "../actions/type";
-import "dotenv/config";
+import { call, fork, put, take, all } from 'redux-saga/effects';
+import { createChannel } from './createChannel';
+import { io } from 'socket.io-client';
+import * as type from '../actions/type';
+import 'dotenv/config';
 
 const connect = (userInfo) => {
   const socket = io(process.env.REACT_APP_SOCKET_SERVER, {
@@ -11,7 +11,7 @@ const connect = (userInfo) => {
     },
   });
   return new Promise((resolve) => {
-    socket.on("connect", () => {
+    socket.on('connect', () => {
       resolve(socket);
     });
   });
@@ -35,8 +35,8 @@ function* read(socket) {
 
 function* sendToAllMsg(socket) {
   while (true) {
-    const { payload } = yield take("SEND_TO_ALL_MSG");
-    socket.emit("MESSAGE", payload);
+    const { payload } = yield take('SEND_TO_ALL_MSG');
+    socket.emit('MESSAGE', payload);
   }
 }
 

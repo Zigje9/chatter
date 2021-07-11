@@ -1,9 +1,9 @@
-import React from "react";
-import Container from "../Common/container";
-import SelfInfo from "../UserList/selfInfo";
-import UserCard from "./userCard";
-import { useSelector, useDispatch } from "react-redux";
-import { requestCreateRoom } from "../../actions/socket";
+import React from 'react';
+import Container from '../Common/container';
+import SelfInfo from '../UserList/selfInfo';
+import UserCard from './userCard';
+import { useSelector, useDispatch } from 'react-redux';
+import { requestCreateRoom } from '../../actions/socket';
 
 const UserList = () => {
   const userInfo = useSelector((state) => state.user);
@@ -16,19 +16,19 @@ const UserList = () => {
       userAccounts.sort();
       dispatch(requestCreateRoom(userAccounts));
     } else {
-      console.log("NO");
+      console.log('NO');
     }
   };
 
   return (
     <Container
       styles={{
-        display: "block",
-        bgColor: "#e8f6ff",
-        width: "300px",
-        margin: "0 auto 0 0",
-        padding: "10px",
-        overflow: "scroll",
+        display: 'block',
+        bgColor: '#e8f6ff',
+        width: '300px',
+        margin: '0 auto 0 0',
+        padding: '10px',
+        overflow: 'scroll',
       }}
     >
       <SelfInfo />

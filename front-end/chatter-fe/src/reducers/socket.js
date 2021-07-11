@@ -1,4 +1,4 @@
-import * as type from "../actions/type";
+import * as type from '../actions/type';
 
 const initialState = {
   socket: null,
@@ -22,7 +22,7 @@ const socket = (state = initialState, action) => {
         ...state,
         rooms: [...state.rooms, action.payload],
       };
-    case "RECEIVE_MSG":
+    case 'RECEIVE_MSG':
       console.log(action.payload);
       return state;
     default:
