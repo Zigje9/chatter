@@ -36,8 +36,8 @@ io.on('connection', (socket) => {
     const roomName = userA + userB;
     socket.join(roomName);
     socket.emit('SUCCESS_CREATE_ROOM', roonName);
-    for (const [id, socket] of io.of('/').sockets) {
-      if (id === userB) {
+    for (const [socket] of io.of('/').sockets) {
+      if (socket.handshake.auth.userInfo.userId === userB) {
         socket.join(roomName);
         socket.emit('SUCCESS_CREATE_ROOM', roonName);
         break;
