@@ -16,7 +16,8 @@
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.5",
     "express-session": "^1.17.1",
-    "mysql2": "^2.2.5"
+    "mysql2": "^2.2.5",
+    "socket.io": "^4.1.2"
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.1.0",
