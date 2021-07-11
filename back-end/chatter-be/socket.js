@@ -40,7 +40,6 @@ io.on('connection', (socket) => {
       ) {
         socket.join(roomName);
         socket.emit('SUCCESS_CREATE_ROOM', roomName);
-        break;
       }
     }
   });
