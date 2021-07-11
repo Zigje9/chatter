@@ -23,8 +23,11 @@ io.on('connection', (socket) => {
     io.emit('BROADCASTING', onUsers);
   });
 
-  socket.on('MESSAGE', (a) => {
-    io.sockets.emit('MESSAGE', a);
+  socket.on('MESSAGE', (req) => {
+    console.log(req);
+    const res = { message: req.message, from: req.from };
+    console.log(res);
+    io.sockets.emit('MESSAGE', res);
   });
 
   socket.on('disconnect', () => {
