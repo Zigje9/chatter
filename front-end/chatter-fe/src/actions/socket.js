@@ -40,3 +40,10 @@ export const addPrivateRoom = (roomName) => {
     payload: roomName,
   };
 };
+
+export const sendPrivateMsg = (msgInfo) => {
+  return {
+    type: type.SEND_PRIVATE_MSG,
+    payload: msgInfo,
+  };
+};

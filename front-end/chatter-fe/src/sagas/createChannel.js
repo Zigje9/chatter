@@ -17,6 +17,10 @@ export function createChannel(socket) {
       console.log(roomName);
       emit(addPrivateRoom(roomName));
     });
+
+    socket.on(type.RECEIVE_PRIVATE_MSG, (msg) => {
+      console.log(msg);
+    });
     return () => {
       socket.off(type.BROADCASTING, (onUsers) => {
         emit(changeAllUserOnline(onUsers));

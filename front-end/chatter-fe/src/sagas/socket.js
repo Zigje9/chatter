@@ -43,8 +43,14 @@ function* sendToAllMsg(socket) {
 function* requestCreateRoom(socket) {
   while (true) {
     const { payload } = yield take(type.REQUEST_CREATE_ROOM);
-    console.log(payload);
     socket.emit(type.REQUEST_CREATE_ROOM, payload);
+  }
+}
+
+function* sendPrivateMsg(socket) {
+  while (true) {
+    const { payload } = yield take(type.SEND_PRIVATE_MSG);
+    socket.emit(type.SEND_PRIVATE_MSG, payload);
   }
 }
 
@@ -53,6 +59,7 @@ function* handleIO(socket) {
   // yield fork(write, socket);
   yield fork(sendToAllMsg, socket);
   yield fork(requestCreateRoom, socket);
+  yield fork(sendPrivateMsg, socket);
 }
 
 function* flow() {

@@ -50,7 +50,11 @@ const MainView = () => {
         <PublicChatRoom />
         <div style={{ width: "300px", height: "100vh", background: "red" }}>
           {rooms.map((room) => (
-            <PrivateChatRoom key={room} roomName={room} />
+            <PrivateChatRoom
+              key={room}
+              roomName={room}
+              from={{ userName, userId }}
+            />
           ))}
         </div>
       </Container>
