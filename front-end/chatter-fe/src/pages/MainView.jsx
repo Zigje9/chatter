@@ -46,6 +46,7 @@ const MainView = () => {
       <Container styles={{ alignItems: 'flex-start' }}>
         <UserList />
         <PublicChatRoom />
+        <div style={{ width: '300px', height: '100vh', background: 'red' }} />
       </Container>
     </>
   );

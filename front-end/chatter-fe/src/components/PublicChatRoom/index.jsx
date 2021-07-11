@@ -1,19 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
 import RoomContainer from '../Common/container';
+import ChatInput from '../Common/chatInput';
+
+const ChatHeader = styled.div`
+  width: 100%;
+  height: 30px;
+  background-color: yellow;
+`;
 
 const PublicChatRoom = () => {
   return (
     <RoomContainer
       styles={{
-        height: '50vh',
-        width: '80vw',
-        bgColor: 'red',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        height: '80vh',
+        width: '50vw',
+        bgColor: 'green',
+        margin: '25px',
         flexGrow: '1',
-        margin: '20px 40px',
       }}
     >
-      //
+      <ChatHeader />
+      <div style={{ width: '100%', height: '100%', backgroundColor: 'red' }}></div>
+      <ChatInput />
     </RoomContainer>
   );
 };
