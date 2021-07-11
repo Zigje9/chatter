@@ -26,3 +26,17 @@ export const publicChatLog = (payload) => {
     payload,
   };
 };
+
+export const requestCreateRoom = (payload) => {
+  return {
+    type: type.REQUEST_CREATE_ROOM,
+    payload,
+  };
+};
+
+export const addPrivateRoom = (roomName) => {
+  return {
+    type: type.ADD_PRIVATE_ROOM,
+    payload: roomName,
+  };
+};

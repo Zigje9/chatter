@@ -20,7 +20,7 @@ const ChatInput = () => {
   const dispatch = useDispatch();
 
   const sendHandler = () => {
-    dispatch({ type: "SENDMESSAGE", payload: { message, from: userId } });
+    dispatch({ type: "SEND_TO_ALL_MSG", payload: { message, from: userId } });
   };
 
   const messageHandler = (e) => {
