@@ -32,13 +32,12 @@ io.on('connection', (socket) => {
 
   socket.on('REQUEST_CREATE_ROOM', (req) => {
     const [userA, userB] = req;
-    console.log(userA, userB);
     const roomName = `${userA}_${userB}`;
-    socket.join(roomName);
-    socket.emit('SUCCESS_CREATE_ROOM', roomName);
     for (const [_, socket] of io.of('/').sockets) {
-      if (socket.handshake.auth.userInfo.userId === userB) {
-        console.log('here', socket.handshake.auth.userInfo.userId);
+      if (
+        socket.handshake.auth.userInfo.userId === userB ||
+        socket.handshake.auth.userInfo.userId === userA
+      ) {
         socket.join(roomName);
         socket.emit('SUCCESS_CREATE_ROOM', roomName);
         break;
