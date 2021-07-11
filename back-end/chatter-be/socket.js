@@ -44,6 +44,12 @@ io.on('connection', (socket) => {
     }
   });
 
+  socket.on('SEND_PRIVATE_MSG', (req) => {
+    const { roomName, from, msg } = req;
+    console.log(roomName, from, msg);
+    io.to(roomName).emit('RECEIVE_PRIVATE_MSG', { from, msg });
+  });
+
   socket.on('disconnect', () => {
     console.log(socket.id);
     delete onUsers[socket.id];
