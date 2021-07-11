@@ -1,4 +1,4 @@
-import * as type from './type';
+import * as type from "./type";
 
 export const connectSocketInitRequest = (userInfo) => {
   return {
@@ -17,5 +17,12 @@ export const connectSocketInitSuccess = (socket) => {
 export const broadcasting = () => {
   return {
     type: type.BROADCASTING,
+  };
+};
+
+export const publicChatLog = (payload) => {
+  return {
+    type: type.PUBLIC_CHAT_LOG,
+    payload,
   };
 };

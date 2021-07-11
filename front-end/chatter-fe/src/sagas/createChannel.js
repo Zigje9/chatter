@@ -1,6 +1,7 @@
-import { eventChannel } from 'redux-saga';
-import * as type from '../actions/type';
-import { changeAllUserOnline } from '../actions/userList';
+import { eventChannel } from "redux-saga";
+import * as type from "../actions/type";
+import { changeAllUserOnline } from "../actions/userList";
+import { publicChatLog } from "../actions/socket";
 
 export function createChannel(socket) {
   return eventChannel((emit) => {
@@ -8,8 +9,9 @@ export function createChannel(socket) {
       emit(changeAllUserOnline(onUsers));
     });
 
-    socket.on('MESSAGE', (message) => {
-      emit({ type: 'RECEIVE_MSG', payload: message });
+    socket.on("MESSAGE", (message) => {
+      console.log(message);
+      emit(publicChatLog(message));
     });
     return () => {
       socket.off(type.BROADCASTING, (onUsers) => {

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import InputContainer from './container';
-import { Send } from '@styled-icons/feather/Send';
-import { useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import styled from "styled-components";
+import InputContainer from "./container";
+import { Send } from "@styled-icons/feather/Send";
+import { useDispatch, useSelector } from "react-redux";
 
 const Chat = styled.input`
   width: 100%;
@@ -15,11 +15,12 @@ const SendIcon = styled(Send)`
 `;
 
 const ChatInput = () => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
+  const { userId } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const sendHandler = () => {
-    dispatch({ type: 'SENDMESSAGE', payload: message });
+    dispatch({ type: "SENDMESSAGE", payload: { message, from: userId } });
   };
 
   const messageHandler = (e) => {
@@ -28,7 +29,7 @@ const ChatInput = () => {
   };
 
   return (
-    <InputContainer styles={{ width: '100%', height: 'auto' }}>
+    <InputContainer styles={{ width: "100%", height: "auto" }}>
       <Chat value={message} onChange={messageHandler} />
       <SendIcon onClick={() => sendHandler()} />
     </InputContainer>

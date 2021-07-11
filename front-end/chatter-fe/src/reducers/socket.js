@@ -1,7 +1,8 @@
-import * as type from '../actions/type';
+import * as type from "../actions/type";
 
 const initialState = {
   socket: null,
+  publicChatLog: [],
 };
 
 const socket = (state = initialState, action) => {
@@ -10,7 +11,12 @@ const socket = (state = initialState, action) => {
       return {
         socket: action.payload,
       };
-    case 'RECEIVE_MSG':
+    case type.PUBLIC_CHAT_LOG:
+      return {
+        ...state,
+        publicChatLog: [...state.publicChatLog, action.payload],
+      };
+    case "RECEIVE_MSG":
       console.log(action.payload);
       return state;
     default:
