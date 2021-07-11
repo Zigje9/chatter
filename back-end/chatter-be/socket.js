@@ -33,7 +33,16 @@ io.on('connection', (socket) => {
   socket.on('REQUEST_CREATE_ROOM', (req) => {
     const [userA, userB] = req;
     console.log(userA, userB);
-    console.log(io.of('/').sockets);
+    const roomName = userA + userB;
+    socket.join(roomName);
+    socket.emit('SUCCESS_CREATE_ROOM', roonName);
+    for (const [id, socket] of io.of('/').sockets) {
+      if (id === userB) {
+        socket.join(roomName);
+        socket.emit('SUCCESS_CREATE_ROOM', roonName);
+        break;
+      }
+    }
   });
 
   socket.on('disconnect', () => {
