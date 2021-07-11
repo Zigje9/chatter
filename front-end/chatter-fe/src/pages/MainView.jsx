@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
 import Container from '../components/Common/container';
 import UserList from '../components/UserList/userList';
-import { useDispatch } from 'react-redux';
+import PublicChatRoom from '../components/PublicChatRoom';
+import 'dotenv/config';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllUserRequest } from '../actions/userList';
+import { connectSocketInitRequest } from '../actions/socket';
+import PrivateChatRoom from '../components/PrivateChatRoom';
 
 /* 
 TODO
@@ -15,6 +19,9 @@ TODO
 
 const MainView = () => {
   const dispatch = useDispatch();
+  const { userId, userName } = useSelector((state) => state.user);
+  const { rooms } = useSelector((state) => state.socket);
+
   const getUserList = () => {
     try {
       dispatch(getAllUserRequest());
@@ -23,14 +30,31 @@ const MainView = () => {
     }
   };
 
+  const createSocket = () => {
+    try {
+      dispatch(connectSocketInitRequest({ userId, userName }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getUserList();
+    createSocket();
   }, []);
 
   return (
-    <Container flexDirection="row">
-      <UserList></UserList>
-    </Container>
+    <>
+      <Container styles={{ alignItems: 'flex-start' }}>
+        <UserList />
+        <PublicChatRoom />
+        <div style={{ width: '300px', height: '100vh', background: 'red' }}>
+          {rooms.map((room) => (
+            <PrivateChatRoom key={room} roomName={room} from={{ userName, userId }} />
+          ))}
+        </div>
+      </Container>
+    </>
   );
 };
 
