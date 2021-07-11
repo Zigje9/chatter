@@ -6,7 +6,7 @@ import { LightbulbOff } from '@styled-icons/bootstrap/LightbulbOff';
 import getProfile from '../../utils/getProfile';
 
 const OnlineIcon = styled(LightbulbFill)`
-  color: yellow;
+  color: springgreen;
   width: 20px;
 `;
 const OfflineIcon = styled(LightbulbOff)`
@@ -33,7 +33,7 @@ const CardName = styled.span`
   font-weight: bold;
 `;
 
-const UserCard = ({ userName, isLogin, userProfile }) => {
+const UserCard = ({ userName, isLogin, userProfile, onClick }) => {
   return (
     <CardListContainer
       styles={{
@@ -44,7 +44,9 @@ const UserCard = ({ userName, isLogin, userProfile }) => {
         margin: '10px auto 0 auto',
         borderRadius: '5px',
         boxShadow: '3px 3px 2px #e7ebf1;',
+        isHover: true,
       }}
+      onOpen={onClick}
     >
       <CardProfile src={getProfile(userProfile)} />
       <CardInfo>

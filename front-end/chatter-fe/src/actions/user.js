@@ -27,9 +27,9 @@ export const loginRequest = (userInfo) => {
   };
 };
 
-export const loginSuccess = (userName = null, userProfile = null) => {
+export const loginSuccess = (userName = null, userProfile = null, userId = null) => {
   return {
     type: type.LOGIN_SUCCESS,
-    payload: { userName, userProfile },
+    payload: { userName, userProfile, userId },
   };
 };

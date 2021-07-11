@@ -1,12 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
 import Container from '../Common/container';
 import SelfInfo from '../UserList/selfInfo';
 import UserCard from './userCard';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { requestCreateRoom } from '../../actions/socket';
 
 const UserList = () => {
+  const userInfo = useSelector((state) => state.user);
   const members = useSelector((state) => state.userList.members);
+  const dispatch = useDispatch();
+
+  const handshakeHandler = (receiverId, receiverName) => {
+    if (window.confirm(`\n${receiverName}님과 채팅을 시작하시겠습니까?`)) {
+      const userAccounts = [userInfo.userId, receiverId];
+      userAccounts.sort();
+      dispatch(requestCreateRoom(userAccounts));
+    } else {
+      console.log('NO');
+    }
+  };
+
   return (
     <Container
       styles={{
@@ -26,6 +39,7 @@ const UserList = () => {
             userName={info.userName}
             isLogin={info.isLogin}
             userProfile={info.userProfile}
+            onClick={() => handshakeHandler(info.userId, info.userName)}
           />
         );
       })}
