@@ -2,11 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import RoomContainer from '../Common/container';
 import ChatInput from '../Common/chatInput';
+import { useSelector } from 'react-redux';
 
 const ChatHeader = styled.div`
   width: 100%;
   height: 30px;
   background-color: yellow;
+`;
+
+const BackDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: red;
 `;
 
 const MyMessageBox = styled.div`
@@ -30,6 +37,7 @@ const MyMessageContent = styled.div`
   -moz-border-radius: 10px;
   border-radius: 10px;
   right: 10px;
+  margin: 3px 0;
   text-overflow: ellipsis;
   &:after {
     content: '';
@@ -66,6 +74,7 @@ const OtherMessageContent = styled.span`
   -moz-border-radius: 10px;
   border-radius: 10px;
   left: 20px;
+  margin: 3px 0;
   &:after {
     content: '';
     position: absolute;
@@ -96,6 +105,9 @@ const PublicChatUser = styled.div`
 `;
 
 const PublicChatRoom = () => {
+  const { userId } = useSelector((state) => state.user);
+  const { publicChatLog } = useSelector((state) => state.socket);
+  console.log(publicChatLog);
   return (
     <RoomContainer
       styles={{
@@ -109,17 +121,26 @@ const PublicChatRoom = () => {
       }}
     >
       <ChatHeader />
-      <div style={{ width: '100%', height: '100%', backgroundColor: 'red' }}></div>
-      <MyMessageBox>
-        <MyMessageContent>hasdasdashasdasdasdsdsddsdsd</MyMessageContent>
-      </MyMessageBox>
-      <MyMessageBox>
-        <MyMessageContent>asdjba</MyMessageContent>
-      </MyMessageBox>
-      <OtherMessageBox>
-        <PublicChatUser>일론머스크</PublicChatUser>
-        <OtherMessageContent>zz</OtherMessageContent>
-      </OtherMessageBox>
+      <BackDiv></BackDiv>
+      {publicChatLog.map((log, idx) => {
+        const fromUserId = log.from.userId;
+        const fromUserName = log.from.userName;
+        const msg = log.message;
+        if (fromUserId === userId) {
+          return (
+            <MyMessageBox key={`${fromUserId}_${idx}`}>
+              <MyMessageContent>{msg}</MyMessageContent>
+            </MyMessageBox>
+          );
+        } else {
+          return (
+            <OtherMessageBox key={`${fromUserId}_${idx}`}>
+              <PublicChatUser>{fromUserName}</PublicChatUser>
+              <OtherMessageContent>{msg}</OtherMessageContent>
+            </OtherMessageBox>
+          );
+        }
+      })}
       <ChatInput />
     </RoomContainer>
   );

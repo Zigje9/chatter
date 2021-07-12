@@ -29,9 +29,16 @@ const ChatInput = () => {
     setMessage(value);
   };
 
+  const messageKeyHandler = (e) => {
+    if (e.code === 'Enter') {
+      setMessage(e.target.value);
+      dispatch({ type: type.SEND_TO_ALL_MSG, payload: { message, from: { userId, userName } } });
+    }
+  };
+
   return (
     <InputContainer styles={{ width: '100%', height: 'auto' }}>
-      <Chat value={message} onChange={messageHandler} />
+      <Chat value={message} onKeyPress={messageKeyHandler} onChange={messageHandler} />
       <SendIcon onClick={() => sendHandler()} />
     </InputContainer>
   );
