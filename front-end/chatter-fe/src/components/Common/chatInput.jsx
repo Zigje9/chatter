@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import InputContainer from './container';
+import * as type from '../../actions/type';
 import { Send } from '@styled-icons/feather/Send';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,11 +17,11 @@ const SendIcon = styled(Send)`
 
 const ChatInput = () => {
   const [message, setMessage] = useState('');
-  const { userId } = useSelector((state) => state.user);
+  const { userId, userName } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const sendHandler = () => {
-    dispatch({ type: 'SEND_TO_ALL_MSG', payload: { message, from: userId } });
+    dispatch({ type: type.SEND_TO_ALL_MSG, payload: { message, from: { userId, userName } } });
   };
 
   const messageHandler = (e) => {
