@@ -13,13 +13,11 @@ const ChatHeader = styled.div`
 const BackDiv = styled.div`
   width: 100%;
   height: 100%;
-  background-color: red;
+  background-color: white;
 `;
 
 const MyMessageBox = styled.div`
   background-color: white;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
   width: 100%;
   height: 80px;
   display: flex;
@@ -55,8 +53,6 @@ const MyMessageContent = styled.div`
 
 const OtherMessageBox = styled.div`
   background-color: white;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
   width: 100%;
   height: 80px;
   display: flex;
@@ -107,7 +103,6 @@ const PublicChatUser = styled.div`
 const PublicChatRoom = () => {
   const { userId } = useSelector((state) => state.user);
   const { publicChatLog } = useSelector((state) => state.socket);
-  console.log(publicChatLog);
   return (
     <RoomContainer
       styles={{
@@ -115,9 +110,13 @@ const PublicChatRoom = () => {
         justifyContent: 'flex-end',
         height: '80vh',
         width: '50vw',
-        bgColor: 'green',
+        bgColor: 'white',
         margin: '25px',
         flexGrow: '1',
+        border: '2px solid skyblue',
+        borderRadius: '15px',
+        padding: '5px',
+        boxShadow: '6px 6px 2px 1px #b1c1f5',
       }}
     >
       <ChatHeader />

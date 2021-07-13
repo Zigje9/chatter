@@ -8,11 +8,21 @@ import { useDispatch, useSelector } from 'react-redux';
 const Chat = styled.input`
   width: 100%;
   height: 30px;
+  border: 1px solid blue;
+  border-radius: 15px;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const SendIcon = styled(Send)`
   width: 30px;
   color: lightblue;
+  &:hover {
+    transform: scale(1.3);
+    cursor: pointer;
+    fill: lightblue;
+  }
 `;
 
 const ChatInput = () => {
@@ -38,7 +48,12 @@ const ChatInput = () => {
 
   return (
     <InputContainer styles={{ width: '100%', height: 'auto' }}>
-      <Chat value={message} onKeyPress={messageKeyHandler} onChange={messageHandler} />
+      <Chat
+        placeholder=" 메시지를 입력하세요."
+        value={message}
+        onKeyPress={messageKeyHandler}
+        onChange={messageHandler}
+      />
       <SendIcon onClick={() => sendHandler()} />
     </InputContainer>
   );

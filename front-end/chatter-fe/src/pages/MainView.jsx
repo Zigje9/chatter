@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import Container from '../components/Common/container';
 import UserList from '../components/UserList/userList';
 import PublicChatRoom from '../components/PublicChatRoom';
@@ -16,6 +17,15 @@ TODO
 - 소켓으로 들어와있는 사람들 브로드캐스팅 알림 
 - 채팅 Room UI
 */
+
+const PrivateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 100vh;
+  align-items: center;
+  background-color: #e8f7ff;
+`;
 
 const MainView = () => {
   const dispatch = useDispatch();
@@ -48,11 +58,11 @@ const MainView = () => {
       <Container styles={{ alignItems: 'flex-start' }}>
         <UserList />
         <PublicChatRoom />
-        <div style={{ width: '300px', height: '100vh', background: 'red' }}>
+        <PrivateContainer>
           {rooms.map((room) => (
             <PrivateChatRoom key={room} roomName={room} from={{ userName, userId }} />
           ))}
-        </div>
+        </PrivateContainer>
       </Container>
     </>
   );
