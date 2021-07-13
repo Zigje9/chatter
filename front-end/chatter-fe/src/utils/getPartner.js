@@ -1,6 +1,6 @@
-export const getPartner = (roomName, myName) => {
+export const getPartner = (roomName, myId) => {
   const whoAmI = roomName.split('_');
-  return whoAmI[0] === myName ? whoAmI[1] : whoAmI[0];
+  return whoAmI[0] === myId ? whoAmI[1] : whoAmI[0];
 };
 
 export const getPartnerInfo = (members, partnerId) => {
