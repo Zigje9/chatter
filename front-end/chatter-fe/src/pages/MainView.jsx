@@ -25,6 +25,7 @@ const PrivateContainer = styled.div`
   height: 100vh;
   align-items: center;
   background-color: #e8f7ff;
+  overflow-y: scroll;
 `;
 
 const MainView = () => {

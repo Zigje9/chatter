@@ -113,10 +113,9 @@ const PublicChatRoom = () => {
         bgColor: 'white',
         margin: '25px',
         flexGrow: '1',
-        border: '2px solid skyblue',
+        border: '10px solid #e8f7ff',
         borderRadius: '15px',
         padding: '5px',
-        boxShadow: '6px 6px 2px 1px #b1c1f5',
       }}
     >
       <ChatHeader />

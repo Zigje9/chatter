@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const Chat = styled.input`
   width: 100%;
   height: 30px;
-  border: 1px solid blue;
+  border: 1px solid #e8f7ff;
   border-radius: 15px;
   &:focus {
     outline: none;
