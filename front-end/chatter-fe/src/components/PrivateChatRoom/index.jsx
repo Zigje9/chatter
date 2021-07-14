@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PrivateProfile from './privateProfile';
 import PrivateName from './privateName';
@@ -23,6 +23,10 @@ const ChatIcon = styled(ChatDots)`
   width: 30px;
   color: purple;
   margin-left: 15px;
+  &:hover {
+    cursor: pointer;
+    fill: red;
+  }
 `;
 
 const ModalContainer = styled.div`
