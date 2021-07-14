@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CloseCircleOutline } from '@styled-icons/evaicons-outline/CloseCircleOutline';
+import PrivateChatInput from '../Common/privateChatInput';
 
 const ChatBox = styled.div`
   position: fixed;
@@ -42,13 +43,16 @@ const ChatContent = styled.div`
   background-color: #e8f6ff;
 `;
 
-const PrivateChat = () => {
+const PrivateChat = ({ ...props }) => {
+  const close = props.modalClose;
+  const { from, roomName } = props.roomInfo;
   return (
     <ChatBox>
       <ChatHeader>
-        <CloseIcon></CloseIcon>
+        <CloseIcon onClick={() => close()}></CloseIcon>
       </ChatHeader>
       <ChatContent></ChatContent>
+      <PrivateChatInput roomInfo={{ from, roomName }}></PrivateChatInput>
     </ChatBox>
   );
 };
