@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { CloseCircleOutline } from '@styled-icons/evaicons-outline/CloseCircleOutline';
 import PrivateChatInput from '../Common/privateChatInput';
+import { useSelector } from 'react-redux';
+import getSpecificChatLog from '../../utils/getSpecificChatLog';
 
 const ChatBox = styled.div`
   position: fixed;
@@ -46,6 +48,9 @@ const ChatContent = styled.div`
 const PrivateChat = ({ ...props }) => {
   const close = props.modalClose;
   const { from, roomName } = props.roomInfo;
+  const everyPrivateLog = useSelector((state) => state.socket.privateChatLog);
+  const specificChatLog = getSpecificChatLog(everyPrivateLog, roomName);
+  console.log(specificChatLog);
   return (
     <ChatBox>
       <ChatHeader>
