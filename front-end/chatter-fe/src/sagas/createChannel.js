@@ -1,7 +1,7 @@
 import { eventChannel } from 'redux-saga';
 import * as type from '../actions/type';
 import { changeAllUserOnline } from '../actions/userList';
-import { publicChatLog, addPrivateRoom } from '../actions/socket';
+import { publicChatLog, addPrivateRoom, addPrivateMsg } from '../actions/socket';
 
 export function createChannel(socket) {
   return eventChannel((emit) => {
@@ -14,12 +14,11 @@ export function createChannel(socket) {
     });
 
     socket.on(type.SUCCESS_CREATE_ROOM, (roomName) => {
-      console.log(roomName);
       emit(addPrivateRoom(roomName));
     });
 
-    socket.on(type.RECEIVE_PRIVATE_MSG, (msg) => {
-      console.log(msg);
+    socket.on(type.RECEIVE_PRIVATE_MSG, (msgInfo) => {
+      emit(addPrivateMsg(msgInfo));
     });
     return () => {
       socket.off(type.BROADCASTING, (onUsers) => {

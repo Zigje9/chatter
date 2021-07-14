@@ -4,6 +4,7 @@ const initialState = {
   socket: null,
   publicChatLog: [],
   rooms: [],
+  privateChatLog: [],
 };
 
 const socket = (state = initialState, action) => {
@@ -22,9 +23,11 @@ const socket = (state = initialState, action) => {
         ...state,
         rooms: [...state.rooms, action.payload],
       };
-    case 'RECEIVE_MSG':
-      console.log(action.payload);
-      return state;
+    case type.ADD_PRIVATE_MSG:
+      return {
+        ...state,
+        privateChatLog: [...state.privateChatLog, action.payload],
+      };
     default:
       return state;
   }

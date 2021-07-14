@@ -47,3 +47,10 @@ export const sendPrivateMsg = (msgInfo) => {
     payload: msgInfo,
   };
 };
+
+export const addPrivateMsg = (msgInfo) => {
+  return {
+    type: type.ADD_PRIVATE_MSG,
+    payload: msgInfo,
+  };
+};
