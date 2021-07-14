@@ -46,8 +46,13 @@ io.on('connection', (socket) => {
 
   socket.on('SEND_PRIVATE_MSG', (req) => {
     const { roomName, from, msg } = req;
-    console.log(roomName, from, msg);
-    io.to(roomName).emit('RECEIVE_PRIVATE_MSG', { from, msg });
+    const roomArr = roomName.split("_");
+    const to = roomArr[0] === from ? roomArr[1] : roomArr[0]
+    const msg_date = new Date()
+    const res = {}
+    res[roomName] = {from, to, msg, msg_date}
+    console.log(res)
+    io.to(roomName).emit('RECEIVE_PRIVATE_MSG', res);
   });
 
   socket.on('disconnect', () => {
