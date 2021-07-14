@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { CloseCircleOutline } from '@styled-icons/evaicons-outline/CloseCircleOutline';
 import PrivateChatInput from '../Common/privateChatInput';
@@ -45,18 +45,127 @@ const ChatContent = styled.div`
   background-color: #e8f6ff;
 `;
 
+const ChatContainer = styled.div`
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: #e8f6ff;
+  overflow-y: scroll;
+`;
+
+const MyMessageBox = styled.div`
+  background-color: #e8f6ff;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const MyMessageContent = styled.div`
+  position: relative;
+  color: white;
+  height: 45px;
+  padding: 15px;
+  background: #9ac5ff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  right: 10px;
+  margin: 3px 0;
+  text-overflow: ellipsis;
+  &:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 5px 0 5px 10px;
+    border-color: transparent #9ac5ff;
+    display: block;
+    width: 0;
+    z-index: 1;
+    right: -10px;
+    top: 16px;
+  }
+`;
+
+const OtherMessageBox = styled.div`
+  background-color: #e8f6ff;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+`;
+
+const OtherMessageContent = styled.div`
+  position: relative;
+  height: 45px;
+  padding: 15px;
+  background: pink;
+  color: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  left: 10px;
+  margin: 3px 0;
+  &:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 5px 10px 5px 0;
+    border-color: transparent pink;
+    display: block;
+    width: 0;
+    z-index: 1;
+    left: -10px;
+    top: 16px;
+  }
+`;
+
 const PrivateChat = ({ ...props }) => {
   const close = props.modalClose;
   const { from, roomName } = props.roomInfo;
   const everyPrivateLog = useSelector((state) => state.socket.privateChatLog);
+  const { userId } = useSelector((state) => state.user);
   const specificChatLog = getSpecificChatLog(everyPrivateLog, roomName);
-  console.log(specificChatLog);
+
+  const scrollRef = useRef();
+
+  const scrollToBottom = () => {
+    const { scrollHeight, clientHeight } = scrollRef.current;
+    scrollRef.current.scrollTop = scrollHeight - clientHeight;
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [specificChatLog]);
+
   return (
     <ChatBox>
       <ChatHeader>
         <CloseIcon onClick={() => close()}></CloseIcon>
       </ChatHeader>
-      <ChatContent></ChatContent>
+      <ChatContent>
+        <ChatContainer ref={scrollRef}>
+          {specificChatLog.map((log, idx) => {
+            const { from, to, msg, msg_date } = log[roomName];
+            console.log(userId, from, to);
+            if (to !== userId) {
+              return (
+                <MyMessageBox key={`${from}_${to}_${idx}`}>
+                  <MyMessageContent>{msg}</MyMessageContent>
+                </MyMessageBox>
+              );
+            } else {
+              return (
+                <OtherMessageBox key={`${from}_${to}_${idx}`}>
+                  <OtherMessageContent>{msg}</OtherMessageContent>
+                </OtherMessageBox>
+              );
+            }
+          })}
+        </ChatContainer>
+      </ChatContent>
       <PrivateChatInput roomInfo={{ from, roomName }}></PrivateChatInput>
     </ChatBox>
   );

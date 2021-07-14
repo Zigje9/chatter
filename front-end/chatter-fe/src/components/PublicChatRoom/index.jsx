@@ -60,7 +60,7 @@ const OtherMessageBox = styled.div`
   justify-content: end;
 `;
 
-const OtherMessageContent = styled.span`
+const OtherMessageContent = styled.div`
   position: relative;
   height: 45px;
   padding: 15px;
