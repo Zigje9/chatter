@@ -21,6 +21,7 @@ const Container = styled.div`
   transition: ${(props) => props.transition};
   margin: ${(props) => props.margin};
   box-shadow: ${(props) => props.boxShadow};
+  border: ${(props) => props.border};
   ${(props) => (props.isHover ? '&:hover { background-color: #fcbb7e; cursor: pointer;}' : '')};
 `;
 

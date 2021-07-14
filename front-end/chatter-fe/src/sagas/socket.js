@@ -35,7 +35,7 @@ function* read(socket) {
 
 function* sendToAllMsg(socket) {
   while (true) {
-    const { payload } = yield take('SEND_TO_ALL_MSG');
+    const { payload } = yield take(type.SEND_TO_ALL_MSG);
     socket.emit('MESSAGE', payload);
   }
 }
