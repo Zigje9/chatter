@@ -2,13 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import RoomContainer from '../Common/container';
 import ChatInput from '../Common/chatInput';
+import PublicHeader from './header';
 import { useSelector } from 'react-redux';
-
-const ChatHeader = styled.div`
-  width: 100%;
-  height: 30px;
-  background-color: yellow;
-`;
 
 const BackDiv = styled.div`
   width: 100%;
@@ -118,7 +113,7 @@ const PublicChatRoom = () => {
         padding: '5px',
       }}
     >
-      <ChatHeader />
+      <PublicHeader />
       <BackDiv></BackDiv>
       {publicChatLog.map((log, idx) => {
         const fromUserId = log.from.userId;
