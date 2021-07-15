@@ -5,19 +5,20 @@ import ChatInput from '../Common/chatInput';
 import PublicHeader from './header';
 import { useSelector } from 'react-redux';
 
-const BackDiv = styled.div`
-  width: 100%;
+const ChatContainer = styled.div`
+  flex-direction: column;
   height: 100%;
-  background-color: white;
+  width: 100%;
+  overflow-y: scroll;
 `;
 
 const MyMessageBox = styled.div`
   background-color: white;
   width: 100%;
-  height: 80px;
+  height: 60px;
   display: flex;
   align-items: center;
-  justify-content: inherit;
+  justify-content: flex-end;
 `;
 
 const MyMessageContent = styled.div`
@@ -49,7 +50,7 @@ const MyMessageContent = styled.div`
 const OtherMessageBox = styled.div`
   background-color: white;
   width: 100%;
-  height: 80px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -83,8 +84,8 @@ const OtherMessageContent = styled.div`
 const PublicChatUser = styled.div`
   overflow: hidden;
   font-size: 1px;
-  height: 100%;
-  width: 50px;
+  height: 45px;
+  width: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,7 +103,7 @@ const PublicChatRoom = () => {
     <RoomContainer
       styles={{
         flexDirection: 'column',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         height: '80vh',
         width: '50vw',
         bgColor: 'white',
@@ -114,26 +115,28 @@ const PublicChatRoom = () => {
       }}
     >
       <PublicHeader />
-      <BackDiv></BackDiv>
-      {publicChatLog.map((log, idx) => {
-        const fromUserId = log.from.userId;
-        const fromUserName = log.from.userName;
-        const msg = log.message;
-        if (fromUserId === userId) {
-          return (
-            <MyMessageBox key={`${fromUserId}_${idx}`}>
-              <MyMessageContent>{msg}</MyMessageContent>
-            </MyMessageBox>
-          );
-        } else {
-          return (
-            <OtherMessageBox key={`${fromUserId}_${idx}`}>
-              <PublicChatUser>{fromUserName}</PublicChatUser>
-              <OtherMessageContent>{msg}</OtherMessageContent>
-            </OtherMessageBox>
-          );
-        }
-      })}
+      <ChatContainer>
+        {publicChatLog.map((log, idx) => {
+          const fromUserId = log.from.userId;
+          const fromUserName = log.from.userName;
+          const msg = log.message;
+          if (fromUserId === userId) {
+            return (
+              <MyMessageBox key={`${fromUserId}_${idx}`}>
+                <MyMessageContent>{msg}</MyMessageContent>
+              </MyMessageBox>
+            );
+          } else {
+            return (
+              <OtherMessageBox key={`${fromUserId}_${idx}`}>
+                <PublicChatUser>{fromUserName}</PublicChatUser>
+                <OtherMessageContent>{msg}</OtherMessageContent>
+              </OtherMessageBox>
+            );
+          }
+        })}
+      </ChatContainer>
+
       <ChatInput />
     </RoomContainer>
   );
