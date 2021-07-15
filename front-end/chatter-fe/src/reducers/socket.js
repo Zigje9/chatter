@@ -18,6 +18,11 @@ const socket = (state = initialState, action) => {
         ...state,
         publicChatLog: [...state.publicChatLog, action.payload],
       };
+    case type.PUBLIC_CHAT_LOG_ORIGIN:
+      return {
+        ...state,
+        publicChatLog: [...state.publicChatLog, ...action.payload],
+      };
     case type.ADD_PRIVATE_ROOM:
       return {
         ...state,
