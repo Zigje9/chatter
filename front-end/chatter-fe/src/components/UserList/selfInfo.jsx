@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SelfCardContainer from '../Common/container';
 import { useSelector } from 'react-redux';
-import getProfile from '../../utils/getProfile';
+import { getProfile } from '../../utils/getProfile';
 
 const SelfProfile = styled.img`
   border-radius: 100%;

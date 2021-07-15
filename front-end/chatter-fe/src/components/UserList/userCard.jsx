@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CardListContainer from '../Common/container';
 import { LightbulbFill } from '@styled-icons/bootstrap';
 import { LightbulbOff } from '@styled-icons/bootstrap/LightbulbOff';
-import getProfile from '../../utils/getProfile';
+import { getProfile } from '../../utils/getProfile';
 
 const OnlineIcon = styled(LightbulbFill)`
   color: springgreen;
