@@ -7,29 +7,34 @@ const io = createChatServer(server, {
   cors: { origin: '*', credentials: true },
 });
 
+const sql = require('./model/db');
+const query = require('./model/query/index');
+
 io.on('connection', (socket) => {
   const onUsers = {};
   for (const [id, socket] of io.of('/').sockets) {
     onUsers[id] = socket.handshake.auth.userInfo.userId;
   }
-  console.log('onUsers', onUsers);
-  // io.emit('BROADCASTING', onUsers);
 
   socket.on('USER_ACCOUNTS', (a) => {
     console.log(a);
   });
 
+  /* Broadcasting */
   socket.on('BROADCASTING', () => {
     io.emit('BROADCASTING', onUsers);
   });
 
-  socket.on('MESSAGE', (req) => {
-    console.log(req);
-    const res = { message: req.message, from: req.from };
+  /* Public Message */
+  socket.on('MESSAGE', async (req) => {
+    const date = new Date();
+    const res = { message: req.message, from: req.from, date: date };
+    await sql(query.INSERT_PUBLIC_LOG, [req.message, req.from.userId, req.from.userName, date]);
     console.log(res);
     io.sockets.emit('MESSAGE', res);
   });
 
+  /* Create Private Chat Room */
   socket.on('REQUEST_CREATE_ROOM', (req) => {
     const [userA, userB] = req;
     const roomName = `${userA}_${userB}`;
@@ -44,13 +49,14 @@ io.on('connection', (socket) => {
     }
   });
 
+  /* Private Message */
   socket.on('SEND_PRIVATE_MSG', (req) => {
     const { roomName, from, msg } = req;
-    const roomArr = roomName.split("_");
-    const to = roomArr[0] === from.userId ? roomArr[1] : roomArr[0]
-    const msg_date = new Date()
-    const res = {}
-    res[roomName] = {from, to, msg, msg_date}
+    const roomArr = roomName.split('_');
+    const to = roomArr[0] === from.userId ? roomArr[1] : roomArr[0];
+    const msg_date = new Date();
+    const res = {};
+    res[roomName] = { from, to, msg, msg_date };
     io.to(roomName).emit('RECEIVE_PRIVATE_MSG', res);
   });
 
