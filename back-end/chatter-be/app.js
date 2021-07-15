@@ -25,6 +25,7 @@ const logoutRouter = require('./routes/logout');
 const signupRouter = require('./routes/signup');
 const authRouter = require('./routes/auth');
 const memberRouter = require('./routes/members');
+const publicRouter = require('./routes/public');
 
 const sessionStore = new MySQLStore(dbConfig);
 
@@ -47,6 +48,7 @@ app.use(logoutRouter);
 app.use(signupRouter);
 app.use(authRouter);
 app.use(memberRouter);
+app.use(publicRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
