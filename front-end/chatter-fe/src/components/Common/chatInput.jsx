@@ -31,6 +31,7 @@ const ChatInput = () => {
 
   const sendHandler = () => {
     dispatch({ type: type.SEND_TO_ALL_MSG, payload: { message, from: { userId, userName } } });
+    setMessage('');
   };
 
   const messageHandler = (e) => {
@@ -42,6 +43,7 @@ const ChatInput = () => {
     if (e.code === 'Enter') {
       setMessage(e.target.value);
       dispatch({ type: type.SEND_TO_ALL_MSG, payload: { message, from: { userId, userName } } });
+      setMessage('');
     }
   };
 

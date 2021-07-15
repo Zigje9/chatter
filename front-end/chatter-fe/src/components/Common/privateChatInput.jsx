@@ -32,6 +32,7 @@ const PrivateChatInput = ({ ...props }) => {
 
   const sendHandler = () => {
     dispatch(sendPrivateMsg({ from, roomName, msg: message }));
+    setMessage('');
   };
 
   const messageHandler = (e) => {
@@ -43,6 +44,7 @@ const PrivateChatInput = ({ ...props }) => {
     if (e.code === 'Enter') {
       setMessage(e.target.value);
       dispatch(sendPrivateMsg({ from, roomName, msg: message }));
+      setMessage('');
     }
   };
 
