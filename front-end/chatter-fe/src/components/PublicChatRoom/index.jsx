@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import RoomContainer from '../Common/container';
 import ChatInput from '../Common/chatInput';
@@ -99,6 +99,17 @@ const PublicChatUser = styled.div`
 const PublicChatRoom = () => {
   const { userId } = useSelector((state) => state.user);
   const { publicChatLog } = useSelector((state) => state.socket);
+  const scrollRef = useRef();
+
+  const scrollToBottom = () => {
+    const { scrollHeight, clientHeight } = scrollRef.current;
+    scrollRef.current.scrollTop = scrollHeight - clientHeight;
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [publicChatLog]);
+
   return (
     <RoomContainer
       styles={{
@@ -115,7 +126,7 @@ const PublicChatRoom = () => {
       }}
     >
       <PublicHeader />
-      <ChatContainer>
+      <ChatContainer ref={scrollRef}>
         {publicChatLog.map((log, idx) => {
           const fromUserId = log.from.userId;
           const fromUserName = log.from.userName;
