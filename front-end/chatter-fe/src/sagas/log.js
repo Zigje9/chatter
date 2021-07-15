@@ -6,8 +6,16 @@ import { getAxios } from '../utils/axios';
 function* getPublicLogSaga() {
   try {
     const { data } = yield call(getAxios, 'public/');
-    const chatList = data;
-    console.log(chatList);
+    const chatList = data.data.map((log) => {
+      return {
+        message: log.message,
+        from: {
+          userId: log.user_id,
+          userName: log.user_name,
+        },
+        date: log.date,
+      };
+    });
     yield put(publicChatLogOrigin(chatList));
   } catch (error) {
     console.log(error);

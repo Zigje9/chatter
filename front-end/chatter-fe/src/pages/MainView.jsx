@@ -49,7 +49,7 @@ const MainView = () => {
     }
   };
 
-  const getPublicChatLogOrigin = async () => {
+  const getPublicChatLogOrigin = () => {
     try {
       dispatch(publicChatLogOriginRequest());
     } catch (error) {
