@@ -62,7 +62,10 @@ const PrivateChatRoom = (props) => {
       </PrivateBox>
       {modal && (
         <ModalContainer>
-          <PrivateChat roomInfo={{ from, roomName }} modalClose={closeModalHandler}></PrivateChat>
+          <PrivateChat
+            roomInfo={{ from, partner, roomName }}
+            modalClose={closeModalHandler}
+          ></PrivateChat>
         </ModalContainer>
       )}
     </>
