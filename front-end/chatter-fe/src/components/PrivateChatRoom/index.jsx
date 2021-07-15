@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PrivateProfile from './privateProfile';
 import PrivateName from './privateName';
 import PrivateChat from './privateChat';
-import { useSelector, useDispatch } from 'react-redux';
-import { sendPrivateMsg } from '../../actions/socket';
+import { useSelector } from 'react-redux';
 import { getPartner, getPartnerInfo } from '../../utils/getPartner';
 import { ChatDots } from '@styled-icons/bootstrap/ChatDots';
 
@@ -23,6 +22,10 @@ const ChatIcon = styled(ChatDots)`
   width: 30px;
   color: purple;
   margin-left: 15px;
+  &:hover {
+    cursor: pointer;
+    fill: red;
+  }
 `;
 
 const ModalContainer = styled.div`
@@ -38,29 +41,28 @@ const ModalContainer = styled.div`
 `;
 
 const PrivateChatRoom = (props) => {
-  const dispatch = useDispatch();
   const { roomName, from } = props;
   const { userId } = useSelector((state) => state.user);
   const { members } = useSelector((state) => state.userList);
   const partnerId = getPartner(roomName, userId);
   const partner = getPartnerInfo(members, partnerId);
 
-  const privateMsgHandler = () => {
-    dispatch(sendPrivateMsg({ from, roomName, msg: 'TEST' }));
-  };
-
   const [modal, setModal] = useState(false);
+
+  const closeModalHandler = () => {
+    setModal(false);
+  };
 
   return (
     <>
-      <PrivateBox onClick={() => privateMsgHandler()}>
+      <PrivateBox>
         <PrivateProfile userProfile={partner.userProfile}></PrivateProfile>
         <PrivateName userName={partner.userName}></PrivateName>
         <ChatIcon onClick={() => setModal(true)}></ChatIcon>
       </PrivateBox>
       {modal && (
         <ModalContainer>
-          <PrivateChat></PrivateChat>
+          <PrivateChat roomInfo={{ from, roomName }} modalClose={closeModalHandler}></PrivateChat>
         </ModalContainer>
       )}
     </>

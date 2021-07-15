@@ -1,6 +1,6 @@
 import * as type from '../actions/type';
 
-const initialState = { members: new Array() };
+const initialState = { members: [] };
 
 const userList = (state = initialState, action) => {
   switch (action.type) {
