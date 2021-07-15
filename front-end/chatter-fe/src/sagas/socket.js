@@ -26,16 +26,9 @@ function* read(socket) {
   }
 }
 
-// function* write(socket) {
-//   while (true) {
-//     const { payload } = yield take('SENDMESSAGE');
-//     socket.emit('MESSAGE', payload);
-//   }
-// }
-
 function* sendToAllMsg(socket) {
   while (true) {
-    const { payload } = yield take('SEND_TO_ALL_MSG');
+    const { payload } = yield take(type.SEND_TO_ALL_MSG);
     socket.emit('MESSAGE', payload);
   }
 }
@@ -56,7 +49,6 @@ function* sendPrivateMsg(socket) {
 
 function* handleIO(socket) {
   yield fork(read, socket);
-  // yield fork(write, socket);
   yield fork(sendToAllMsg, socket);
   yield fork(requestCreateRoom, socket);
   yield fork(sendPrivateMsg, socket);

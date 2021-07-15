@@ -71,7 +71,7 @@ const SignUpForm = ({ onChangeHeight }) => {
       pw: password,
     };
     try {
-      const res = await postAxios('signup', req);
+      await postAxios('signup', req);
     } catch (error) {
       console.log(error);
     }

@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import InputContainer from './container';
-import * as type from '../../actions/type';
 import { Send } from '@styled-icons/feather/Send';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { sendPrivateMsg } from '../../actions/socket';
 
 const Chat = styled.input`
   width: 100%;
   height: 30px;
   border: 1px solid #e8f7ff;
   border-radius: 15px;
+  margin-left: 5px;
   &:focus {
     outline: none;
   }
@@ -24,13 +25,13 @@ const SendIcon = styled(Send)`
   }
 `;
 
-const ChatInput = () => {
+const PrivateChatInput = ({ ...props }) => {
   const [message, setMessage] = useState('');
-  const { userId, userName } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const { from, roomName } = props.roomInfo;
 
   const sendHandler = () => {
-    dispatch({ type: type.SEND_TO_ALL_MSG, payload: { message, from: { userId, userName } } });
+    dispatch(sendPrivateMsg({ from, roomName, msg: message }));
     setMessage('');
   };
 
@@ -42,13 +43,13 @@ const ChatInput = () => {
   const messageKeyHandler = (e) => {
     if (e.code === 'Enter') {
       setMessage(e.target.value);
-      dispatch({ type: type.SEND_TO_ALL_MSG, payload: { message, from: { userId, userName } } });
+      dispatch(sendPrivateMsg({ from, roomName, msg: message }));
       setMessage('');
     }
   };
 
   return (
-    <InputContainer styles={{ width: '100%', height: 'auto' }}>
+    <InputContainer styles={{ position: 'absolute', width: '100%', height: 'auto', bottom: '5px' }}>
       <Chat
         placeholder=" 메시지를 입력하세요."
         value={message}
@@ -60,4 +61,4 @@ const ChatInput = () => {
   );
 };
 
-export default ChatInput;
+export default PrivateChatInput;

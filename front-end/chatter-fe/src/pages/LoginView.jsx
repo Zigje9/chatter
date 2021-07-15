@@ -23,7 +23,7 @@ const LoginView = () => {
   const dispatch = useDispatch();
   const [formHeight, setFormHeight] = useState('400px');
 
-  const submitHandler = async (values, { setErrors, setFieldError }) => {
+  const submitHandler = (values, { setErrors, setFieldError }) => {
     const { id, pw } = values;
     dispatch(loginRequest({ id, pw }));
   };

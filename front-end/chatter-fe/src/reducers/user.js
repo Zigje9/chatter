@@ -17,7 +17,7 @@ const user = (state = {}, action) => {
         userId: action.payload.userId,
       };
     case type.LOGOUT:
-      return { isLogin: false, userName: null, userProfile: null };
+      return { isLogin: false, userName: null, userProfile: null, useId: null };
     default:
       return state;
   }

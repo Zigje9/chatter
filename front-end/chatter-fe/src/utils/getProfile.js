@@ -22,8 +22,10 @@ const AllProfile = [
   Profile_10,
 ];
 
-const getProfile = (idx) => {
+export const getProfile = (idx) => {
   return AllProfile[idx - 1];
 };
 
-export default getProfile;
+export const getProfileIdx = (members, userId) => {
+  return members.filter((member) => member.userId === userId)[0].userProfile;
+};
