@@ -4,6 +4,8 @@ import RoomContainer from '../Common/container';
 import ChatInput from '../Common/chatInput';
 import PublicHeader from './header';
 import { useSelector } from 'react-redux';
+import { getProfile, getProfileIdx } from '../../utils/getProfile';
+import getProfileColor from '../../assets/getPofileColor';
 
 const ChatContainer = styled.div`
   flex-direction: column;
@@ -15,7 +17,7 @@ const ChatContainer = styled.div`
 const MyMessageBox = styled.div`
   background-color: white;
   width: 100%;
-  height: 60px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -24,9 +26,10 @@ const MyMessageBox = styled.div`
 const MyMessageContent = styled.div`
   position: relative;
   color: white;
-  height: 45px;
-  padding: 15px;
-  background: #9ac5ff;
+  height: 40px;
+  padding: 13px;
+  font-size: 13px;
+  background: #4286f5;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
@@ -38,7 +41,7 @@ const MyMessageContent = styled.div`
     position: absolute;
     border-style: solid;
     border-width: 5px 0 5px 10px;
-    border-color: transparent #9ac5ff;
+    border-color: transparent #4286f5;
     display: block;
     width: 0;
     z-index: 1;
@@ -50,7 +53,7 @@ const MyMessageContent = styled.div`
 const OtherMessageBox = styled.div`
   background-color: white;
   width: 100%;
-  height: 60px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -58,21 +61,22 @@ const OtherMessageBox = styled.div`
 
 const OtherMessageContent = styled.div`
   position: relative;
-  height: 45px;
-  padding: 15px;
-  background: pink;
+  height: 40px;
+  padding: 13px;
+  font-size: 13px;
+  background-color: ${(props) => props.userColor};
   color: white;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
-  left: 20px;
+  left: 5px;
   margin: 3px 0;
   &:after {
     content: '';
     position: absolute;
     border-style: solid;
     border-width: 5px 10px 5px 0;
-    border-color: transparent pink;
+    border-color: transparent ${(props) => props.userColor};
     display: block;
     width: 0;
     z-index: 1;
@@ -82,22 +86,24 @@ const OtherMessageContent = styled.div`
 `;
 
 const PublicChatUser = styled.div`
-  overflow: hidden;
   font-size: 1px;
-  height: 45px;
-  width: 45px;
+  height: 50px;
+  width: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 30px;
-  background-color: #d9a7e2;
-  color: white;
-  font-weight: bold;
-  border: 0;
+  flex-direction: column;
+`;
+
+const PublicUserImage = styled.img`
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
 `;
 
 const PublicChatRoom = () => {
   const { userId } = useSelector((state) => state.user);
+  const { members } = useSelector((state) => state.userList);
   const { publicChatLog } = useSelector((state) => state.socket);
   const scrollRef = useRef();
 
@@ -109,7 +115,6 @@ const PublicChatRoom = () => {
   useEffect(() => {
     scrollToBottom();
   }, [publicChatLog]);
-
   return (
     <RoomContainer
       styles={{
@@ -138,10 +143,16 @@ const PublicChatRoom = () => {
               </MyMessageBox>
             );
           } else {
+            const userIdx = getProfileIdx(members, fromUserId);
             return (
               <OtherMessageBox key={`${fromUserId}_${idx}`}>
-                <PublicChatUser>{fromUserName}</PublicChatUser>
-                <OtherMessageContent>{msg}</OtherMessageContent>
+                <PublicChatUser>
+                  <PublicUserImage src={getProfile(userIdx)}></PublicUserImage>
+                  {fromUserName}
+                </PublicChatUser>
+                <OtherMessageContent userColor={getProfileColor(userIdx)}>
+                  {msg}
+                </OtherMessageContent>
               </OtherMessageBox>
             );
           }

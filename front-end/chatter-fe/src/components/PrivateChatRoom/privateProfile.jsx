@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import getProfile from '../../utils/getProfile';
+import { getProfile } from '../../utils/getProfile';
 
 const Profile = styled.img`
   width: 50px;
