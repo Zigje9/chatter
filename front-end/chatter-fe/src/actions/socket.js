@@ -27,6 +27,20 @@ export const publicChatLog = (payload) => {
   };
 };
 
+export const publicChatLogOriginRequest = (payload) => {
+  return {
+    type: type.PUBLIC_CHAT_LOG_ORIGIN_REQUEST,
+    payload,
+  };
+};
+
+export const publicChatLogOrigin = (payload) => {
+  return {
+    type: type.PUBLIC_CHAT_LOG_ORIGIN,
+    payload,
+  };
+};
+
 export const requestCreateRoom = (payload) => {
   return {
     type: type.REQUEST_CREATE_ROOM,

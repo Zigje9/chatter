@@ -6,7 +6,7 @@ import PublicChatRoom from '../components/PublicChatRoom';
 import 'dotenv/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUserRequest } from '../actions/userList';
-import { connectSocketInitRequest } from '../actions/socket';
+import { connectSocketInitRequest, publicChatLogOriginRequest } from '../actions/socket';
 import PrivateChatRoom from '../components/PrivateChatRoom';
 
 /* 
@@ -49,9 +49,18 @@ const MainView = () => {
     }
   };
 
+  const getPublicChatLogOrigin = () => {
+    try {
+      dispatch(publicChatLogOriginRequest());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getUserList();
     createSocket();
+    getPublicChatLogOrigin();
   }, []);
 
   return (

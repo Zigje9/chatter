@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { CloseCircleOutline } from '@styled-icons/evaicons-outline/CloseCircleOutline';
+import { UserCircle } from '@styled-icons/boxicons-solid/UserCircle';
 import PrivateChatInput from '../Common/privateChatInput';
 import { useSelector } from 'react-redux';
 import getSpecificChatLog from '../../utils/getSpecificChatLog';
@@ -25,6 +26,17 @@ const ChatHeader = styled.div`
   justify-content: flex-end;
   display: flex;
   align-items: center;
+`;
+
+const PartnerSpan = styled.span`
+  width: 90%;
+  color: black;
+`;
+
+const PartnerIcon = styled(UserCircle)`
+  width: 30px;
+  height: 30px;
+  fill: gray;
 `;
 
 const CloseIcon = styled(CloseCircleOutline)`
@@ -56,7 +68,7 @@ const ChatContainer = styled.div`
 const MyMessageBox = styled.div`
   background-color: #e8f6ff;
   width: 100%;
-  height: 50px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -65,12 +77,13 @@ const MyMessageBox = styled.div`
 const MyMessageContent = styled.div`
   position: relative;
   color: white;
-  height: 45px;
-  padding: 15px;
+  height: 40px;
+  padding: 13px;
   background: #9ac5ff;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
+  font-size: 12px;
   right: 10px;
   margin: 3px 0;
   text-overflow: ellipsis;
@@ -91,7 +104,7 @@ const MyMessageContent = styled.div`
 const OtherMessageBox = styled.div`
   background-color: #e8f6ff;
   width: 100%;
-  height: 50px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -99,13 +112,14 @@ const OtherMessageBox = styled.div`
 
 const OtherMessageContent = styled.div`
   position: relative;
-  height: 45px;
-  padding: 15px;
+  height: 40px;
+  padding: 13px;
   background: pink;
   color: white;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
+  font-size: 12px;
   left: 10px;
   margin: 3px 0;
   &:after {
@@ -124,7 +138,7 @@ const OtherMessageContent = styled.div`
 
 const PrivateChat = ({ ...props }) => {
   const close = props.modalClose;
-  const { from, roomName } = props.roomInfo;
+  const { from, partner, roomName } = props.roomInfo;
   const everyPrivateLog = useSelector((state) => state.socket.privateChatLog);
   const { userId } = useSelector((state) => state.user);
   const specificChatLog = getSpecificChatLog(everyPrivateLog, roomName);
@@ -139,17 +153,17 @@ const PrivateChat = ({ ...props }) => {
   useEffect(() => {
     scrollToBottom();
   }, [specificChatLog]);
-
   return (
     <ChatBox>
       <ChatHeader>
+        <PartnerIcon></PartnerIcon>
+        <PartnerSpan>{partner.userName}님</PartnerSpan>
         <CloseIcon onClick={() => close()}></CloseIcon>
       </ChatHeader>
       <ChatContent>
         <ChatContainer ref={scrollRef}>
           {specificChatLog.map((log, idx) => {
             const { from, to, msg, msg_date } = log[roomName];
-            console.log(userId, from, to);
             if (to !== userId) {
               return (
                 <MyMessageBox key={`${from}_${to}_${idx}`}>
