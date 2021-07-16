@@ -28,6 +28,11 @@ const socket = (state = initialState, action) => {
         ...state,
         rooms: [...state.rooms, action.payload],
       };
+    case type.PRIVATE_ROOM_ORIGIN:
+      return {
+        ...state,
+        rooms: [...state.rooms, ...action.payload],
+      };
     case type.ADD_PRIVATE_MSG:
       return {
         ...state,

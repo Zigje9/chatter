@@ -5,7 +5,8 @@ const Name = styled.div`
   width: 90px;
   height: 50px;
   text-align: center;
-  color: purple;
+  font-weight: bold;
+  color: royalblue;
   display: flex;
   align-items: center;
   padding: 10px;

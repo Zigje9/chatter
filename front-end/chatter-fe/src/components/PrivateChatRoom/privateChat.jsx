@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { CloseCircleOutline } from '@styled-icons/evaicons-outline/CloseCircleOutline';
 import { UserCircle } from '@styled-icons/boxicons-solid/UserCircle';
 import PrivateChatInput from '../Common/privateChatInput';
+import DateBox from '../Common/date';
 import { useSelector } from 'react-redux';
 import getSpecificChatLog from '../../utils/getSpecificChatLog';
 
@@ -167,6 +168,7 @@ const PrivateChat = ({ ...props }) => {
             if (to !== userId) {
               return (
                 <MyMessageBox key={`${from}_${to}_${idx}`}>
+                  <DateBox right={true} date={msg_date}></DateBox>
                   <MyMessageContent>{msg}</MyMessageContent>
                 </MyMessageBox>
               );
@@ -174,6 +176,7 @@ const PrivateChat = ({ ...props }) => {
               return (
                 <OtherMessageBox key={`${from}_${to}_${idx}`}>
                   <OtherMessageContent>{msg}</OtherMessageContent>
+                  <DateBox date={msg_date}></DateBox>
                 </OtherMessageBox>
               );
             }
