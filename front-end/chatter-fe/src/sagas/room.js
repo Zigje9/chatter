@@ -5,10 +5,11 @@ import { getAxios } from '../utils/axios';
 
 function* getPrivateRoomOriginSaga() {
   try {
-    const data = yield call(getAxios, 'room/');
-    console.log(data);
-    console.log('here', [...data]);
-    yield put(privateRoomOrigin([...data]));
+    const { data } = yield call(getAxios, 'room/');
+    const rooms = data.map((room) => {
+      return room.room_id;
+    });
+    yield put(privateRoomOrigin(rooms));
   } catch (error) {
     console.log(error);
   }
