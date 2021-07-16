@@ -35,9 +35,11 @@ io.on('connection', (socket) => {
   });
 
   /* Create Private Chat Room */
-  socket.on('REQUEST_CREATE_ROOM', (req) => {
+  socket.on('REQUEST_CREATE_ROOM', async (req) => {
     const [userA, userB] = req;
     const roomName = `${userA}_${userB}`;
+    const data = await sql(query.READ_SPECIFIC_ROOM, roomName);
+    console.log(data);
     for (const [_, socket] of io.of('/').sockets) {
       if (
         socket.handshake.auth.userInfo.userId === userB ||
