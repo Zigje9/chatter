@@ -39,14 +39,20 @@ io.on('connection', (socket) => {
     const [userA, userB] = req;
     const roomName = `${userA}_${userB}`;
     const data = await sql(query.READ_SPECIFIC_ROOM, roomName);
-    console.log(data);
-    for (const [_, socket] of io.of('/').sockets) {
-      if (
-        socket.handshake.auth.userInfo.userId === userB ||
-        socket.handshake.auth.userInfo.userId === userA
-      ) {
-        socket.join(roomName);
-        socket.emit('SUCCESS_CREATE_ROOM', roomName);
+    if (data.length === 0) {
+      //create new chat room
+      const date = new Date();
+      await sql(query.INSERT_SPECIFIC_ROOM, [roomName, date]);
+      const values = [[roomName, userA][(roomName, userB)]];
+      await sql(query.INSERT_USER_ROOM, [values]);
+      for (const [_, socket] of io.of('/').sockets) {
+        if (
+          socket.handshake.auth.userInfo.userId === userB ||
+          socket.handshake.auth.userInfo.userId === userA
+        ) {
+          socket.join(roomName);
+          socket.emit('SUCCESS_CREATE_ROOM', roomName);
+        }
       }
     }
   });
