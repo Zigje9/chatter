@@ -43,7 +43,10 @@ io.on('connection', (socket) => {
       //create new chat room
       const date = new Date();
       await sql(query.INSERT_SPECIFIC_ROOM, [roomName, date]);
-      const values = [[roomName, userA][(roomName, userB)]];
+      const values = [
+        [roomName, userA],
+        [roomName, userB],
+      ];
       await sql(query.INSERT_USER_ROOM, [values]);
       for (const [_, socket] of io.of('/').sockets) {
         if (
@@ -58,7 +61,7 @@ io.on('connection', (socket) => {
   });
 
   /* Private Message */
-  socket.on('SEND_PRIVATE_MSG', (req) => {
+  socket.on('SEND_PRIVATE_MSG', async (req) => {
     const { roomName, from, msg } = req;
     const roomArr = roomName.split('_');
     const to = roomArr[0] === from.userId ? roomArr[1] : roomArr[0];
@@ -66,6 +69,7 @@ io.on('connection', (socket) => {
     const res = {};
     res[roomName] = { from, to, msg, msg_date };
     io.to(roomName).emit('RECEIVE_PRIVATE_MSG', res);
+    await sql(query.INSERT_PRIVATE_LOG, [roomName, msg, from.userId, to, msg_date]);
   });
 
   socket.on('disconnect', () => {
