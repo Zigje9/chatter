@@ -55,6 +55,20 @@ export const addPrivateRoom = (roomName) => {
   };
 };
 
+export const privateRoomOriginRequest = (payload) => {
+  return {
+    type: type.PRIVATE_ROOM_ORIGIN_REQUEST,
+    payload,
+  };
+};
+
+export const privateRoomOrigin = (payload) => {
+  return {
+    type: type.PRIVATE_ROOM_ORIGIN,
+    payload,
+  };
+};
+
 export const sendPrivateMsg = (msgInfo) => {
   return {
     type: type.SEND_PRIVATE_MSG,
