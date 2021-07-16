@@ -27,5 +27,5 @@ export const getProfile = (idx) => {
 };
 
 export const getProfileIdx = (members, userId) => {
-  return members.filter((member) => member.userId === userId)[0].userProfile;
+  return members.filter((member) => member.userId === userId)[0]?.userProfile;
 };
