@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
   socket.on('MESSAGE', async (req) => {
     const date = new Date();
     const res = { message: req.message, from: req.from, date: date };
-    await sql(query.INSERT_PUBLIC_LOG, [req.message, req.from.userId, req.from.userName, date]);
+    await sql(query.INSERT_PUBLIC_LOG, [req.message, req.from.userId, date]);
     console.log(res);
     io.sockets.emit('MESSAGE', res);
   });
