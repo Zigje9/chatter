@@ -10,6 +10,7 @@ const Box = styled.div`
   padding: 8px;
   margin-top: 15px;
   margin-right: ${(props) => (props.right ? '5px' : '')};
+  margin-left: ${(props) => (props.left ? '5px' : '')};
   &:hover ${FullInfo} {
     display: block;
   }
@@ -23,10 +24,11 @@ const Time = styled.span`
 
 const DateBox = ({ ...props }) => {
   const newDate = new Date(props.date);
+  const min = newDate.getMinutes();
   return (
     <Box {...props}>
       <Time>
-        {newDate.getHours()}:{newDate.getMinutes()}
+        {newDate.getHours()}:{min < 10 ? '0' + min : min}
       </Time>
       <FullInfo>
         {newDate.getFullYear()}년 {newDate.getMonth() + 1}월 {newDate.getDate()}일

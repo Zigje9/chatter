@@ -176,7 +176,7 @@ const PrivateChat = ({ ...props }) => {
               return (
                 <OtherMessageBox key={`${from}_${to}_${idx}`}>
                   <OtherMessageContent>{msg}</OtherMessageContent>
-                  <DateBox date={msg_date}></DateBox>
+                  <DateBox left={true} date={msg_date}></DateBox>
                 </OtherMessageBox>
               );
             }
