@@ -72,8 +72,13 @@ const SignUpForm = ({ onChangeHeight }) => {
     };
     try {
       await postAxios('signup', req);
+      alert('회원가입이 완료 되었습니다! 로그인 해주세요!');
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.status === 401) {
+        alert('이미 가입된 회원이거나 정보가 잘못 되었습니다.');
+      } else {
+        alert('예상치 못한 에러가 발생했습니다.');
+      }
     }
   };
 

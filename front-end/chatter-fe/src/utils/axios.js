@@ -27,7 +27,6 @@ export const postAxios = (reqUrl, reqData) => {
       baseURL: process.env.REACT_APP_SERVER,
       withCredentials: true,
       method: 'post',
-      timeout: 10000,
     })
     .request({ url: reqUrl, data: reqData });
 };
