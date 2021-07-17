@@ -16,6 +16,13 @@ const user = (state = {}, action) => {
         userProfile: action.payload.userProfile,
         userId: action.payload.userId,
       };
+    case type.LOGIN_FAIL:
+      return {
+        isLogin: false,
+        userName: null,
+        userProfile: null,
+        userId: null,
+      };
     case type.LOGOUT:
       return { isLogin: false, userName: null, userProfile: null, useId: null };
     default:

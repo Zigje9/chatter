@@ -33,3 +33,9 @@ export const loginSuccess = (userName = null, userProfile = null, userId = null)
     payload: { userName, userProfile, userId },
   };
 };
+
+export const loginFail = () => {
+  return {
+    type: type.LOGIN_FAIL,
+  };
+};
