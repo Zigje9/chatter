@@ -1,5 +1,5 @@
 import { all, call, put, fork, takeEvery } from 'redux-saga/effects';
-import { publicChatLogOrigin } from '../actions/socket';
+import { publicChatLogOrigin, privateChatLogOrigin } from '../actions/socket';
 import * as type from '../actions/type';
 import { getAxios } from '../utils/axios';
 
@@ -22,10 +22,25 @@ function* getPublicLogSaga() {
   }
 }
 
+function* getPrivateLogSaga() {
+  try {
+    const { data } = yield call(getAxios, 'private/');
+    console.log(data);
+
+    // yield put(privateChatLogOrigin())
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 function* watchGetPublicLogSaga() {
   yield takeEvery(type.PUBLIC_CHAT_LOG_ORIGIN_REQUEST, getPublicLogSaga);
 }
 
-export default function* publicLogSaga() {
-  yield all([fork(watchGetPublicLogSaga)]);
+function* watchGetPrivateLogSaga() {
+  yield takeEvery(type.PRIVATE_CHAT_LOG_ORIGIN_REQUEST, getPrivateLogSaga);
+}
+
+export default function* LogSaga() {
+  yield all([fork(watchGetPublicLogSaga), fork(watchGetPrivateLogSaga)]);
 }

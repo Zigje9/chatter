@@ -41,6 +41,20 @@ export const publicChatLogOrigin = (payload) => {
   };
 };
 
+export const privateChatLogOriginRequest = (payload) => {
+  return {
+    type: type.PRIVATE_CHAT_LOG_ORIGIN_REQUEST,
+    payload,
+  };
+};
+
+export const privateChatLogOrigin = (payload) => {
+  return {
+    type: type.PRIVATE_CHAT_LOG_ORIGIN,
+    payload,
+  };
+};
+
 export const requestCreateRoom = (payload) => {
   return {
     type: type.REQUEST_CREATE_ROOM,
