@@ -10,6 +10,7 @@ import {
   connectSocketInitRequest,
   publicChatLogOriginRequest,
   privateRoomOriginRequest,
+  privateChatLogOriginRequest,
 } from '../actions/socket';
 import PrivateChatRoom from '../components/PrivateChatRoom';
 
@@ -52,6 +53,14 @@ const MainView = () => {
     }
   };
 
+  const getPrivateChatLogOrigin = () => {
+    try {
+      dispatch(privateChatLogOriginRequest());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getPrivateRoomOrigin = () => {
     try {
       dispatch(privateRoomOriginRequest());
@@ -65,6 +74,7 @@ const MainView = () => {
     createSocket();
     getPublicChatLogOrigin();
     getPrivateRoomOrigin();
+    getPrivateChatLogOrigin();
   }, []);
 
   return (
