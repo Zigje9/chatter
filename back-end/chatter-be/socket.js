@@ -13,7 +13,7 @@ const query = require('./model/query/index');
 io.on('connection', (socket) => {
   const onUsers = {};
   for (const [id, socket] of io.of('/').sockets) {
-    onUsers[id] = socket.handshake.auth.userInfo.userId;
+    onUsers[id] = socket.handshake.auth.userInfo;
   }
 
   socket.on('USER_ACCOUNTS', (a) => {
