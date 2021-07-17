@@ -79,6 +79,11 @@ io.on('connection', (socket) => {
     await sql(query.INSERT_PRIVATE_LOG, [roomName, msg, from.userId, to, date]);
   });
 
+  socket.on('LOGOUT_SOCKET', () => {
+    delete onUsers[socket.id];
+    socket.broadcast.emit('BROADCASTING', onUsers);
+  });
+
   socket.on('disconnect', () => {
     console.log(socket.id);
     delete onUsers[socket.id];
