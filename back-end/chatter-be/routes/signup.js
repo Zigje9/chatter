@@ -9,13 +9,11 @@ router.post('/signup', async (req, res) => {
   const { id, pw, userName } = req.body;
   const [result] = await sql(query.READ_USER, id);
   if (result) {
-    console.log('headers', req.headers);
-    console.log('cookie'.req.cookies);
-    return res.status(200).send('가입된 회원입니다.');
+    res.status(401).send({ msg: '이미 가입된 회원입니다.' });
   } else {
     const profile_idx = random();
     await sql(query.INSERT_USER, [id, userName, pw, profile_idx]);
-    res.send('회원가입 완료.');
+    res.status(200).send({ msg: '회원가입 완료,' });
   }
 });
 

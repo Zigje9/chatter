@@ -13,7 +13,7 @@ const query = require('./model/query/index');
 io.on('connection', (socket) => {
   const onUsers = {};
   for (const [id, socket] of io.of('/').sockets) {
-    onUsers[id] = socket.handshake.auth.userInfo.userId;
+    onUsers[id] = socket.handshake.auth.userInfo;
   }
 
   socket.on('USER_ACCOUNTS', (a) => {
@@ -29,35 +29,59 @@ io.on('connection', (socket) => {
   socket.on('MESSAGE', async (req) => {
     const date = new Date();
     const res = { message: req.message, from: req.from, date: date };
-    await sql(query.INSERT_PUBLIC_LOG, [req.message, req.from.userId, req.from.userName, date]);
-    console.log(res);
+    await sql(query.INSERT_PUBLIC_LOG, [req.message, req.from.userId, date]);
     io.sockets.emit('MESSAGE', res);
   });
 
   /* Create Private Chat Room */
-  socket.on('REQUEST_CREATE_ROOM', (req) => {
+  socket.on('REQUEST_CREATE_ROOM', async (req) => {
     const [userA, userB] = req;
     const roomName = `${userA}_${userB}`;
-    for (const [_, socket] of io.of('/').sockets) {
-      if (
-        socket.handshake.auth.userInfo.userId === userB ||
-        socket.handshake.auth.userInfo.userId === userA
-      ) {
-        socket.join(roomName);
-        socket.emit('SUCCESS_CREATE_ROOM', roomName);
+    const data = await sql(query.READ_SPECIFIC_ROOM, roomName);
+    if (data.length === 0) {
+      //create new chat room
+      const date = new Date();
+      await sql(query.INSERT_SPECIFIC_ROOM, [roomName, date]);
+      const values = [
+        [roomName, userA],
+        [roomName, userB],
+      ];
+      await sql(query.INSERT_USER_ROOM, [values]);
+      for (const [_, socket] of io.of('/').sockets) {
+        if (
+          socket.handshake.auth.userInfo.userId === userB ||
+          socket.handshake.auth.userInfo.userId === userA
+        ) {
+          socket.join(roomName);
+          socket.emit('SUCCESS_CREATE_ROOM', roomName);
+        }
       }
     }
   });
 
   /* Private Message */
-  socket.on('SEND_PRIVATE_MSG', (req) => {
+  socket.on('SEND_PRIVATE_MSG', async (req) => {
     const { roomName, from, msg } = req;
     const roomArr = roomName.split('_');
     const to = roomArr[0] === from.userId ? roomArr[1] : roomArr[0];
-    const msg_date = new Date();
+    const date = new Date();
     const res = {};
-    res[roomName] = { from, to, msg, msg_date };
+    res[roomName] = { from: from.userId, to, msg, date };
+    for (const [_, socket] of io.of('/').sockets) {
+      if (
+        socket.handshake.auth.userInfo.userId === from.userId ||
+        socket.handshake.auth.userInfo.userId === to
+      ) {
+        socket.join(roomName);
+      }
+    }
     io.to(roomName).emit('RECEIVE_PRIVATE_MSG', res);
+    await sql(query.INSERT_PRIVATE_LOG, [roomName, msg, from.userId, to, date]);
+  });
+
+  socket.on('LOGOUT_SOCKET', () => {
+    delete onUsers[socket.id];
+    socket.broadcast.emit('BROADCASTING', onUsers);
   });
 
   socket.on('disconnect', () => {
