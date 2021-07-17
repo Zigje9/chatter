@@ -26,8 +26,18 @@ function* getPrivateLogSaga() {
   try {
     const { data } = yield call(getAxios, 'private/');
     console.log(data);
+    const chatLog = data.map((log) => {
+      const msgInfo = {};
+      msgInfo[log.room_id] = {
+        from: log.from_id,
+        to: log.to_id,
+        msg: log.message,
+        date: log.date,
+      };
+      return msgInfo;
+    });
 
-    // yield put(privateChatLogOrigin())
+    yield put(privateChatLogOrigin(chatLog));
   } catch (error) {
     console.log(error);
   }

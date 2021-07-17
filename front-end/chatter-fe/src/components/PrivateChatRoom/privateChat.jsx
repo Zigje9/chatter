@@ -164,11 +164,11 @@ const PrivateChat = ({ ...props }) => {
       <ChatContent>
         <ChatContainer ref={scrollRef}>
           {specificChatLog.map((log, idx) => {
-            const { from, to, msg, msg_date } = log[roomName];
+            const { from, to, msg, date } = log[roomName];
             if (to !== userId) {
               return (
                 <MyMessageBox key={`${from}_${to}_${idx}`}>
-                  <DateBox right={true} date={msg_date}></DateBox>
+                  <DateBox right={true} date={date}></DateBox>
                   <MyMessageContent>{msg}</MyMessageContent>
                 </MyMessageBox>
               );
@@ -176,7 +176,7 @@ const PrivateChat = ({ ...props }) => {
               return (
                 <OtherMessageBox key={`${from}_${to}_${idx}`}>
                   <OtherMessageContent>{msg}</OtherMessageContent>
-                  <DateBox left={true} date={msg_date}></DateBox>
+                  <DateBox left={true} date={date}></DateBox>
                 </OtherMessageBox>
               );
             }
