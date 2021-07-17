@@ -10,7 +10,6 @@ router.get('/room', async (req, res) => {
     const [result] = await sql(query.READ_SESSION_USER, sid);
     const userId = JSON.parse(result.data).userId;
     const data = await sql(query.READ_PRIVATE_ROOMS, userId);
-    console.log([...data]);
     return res.status(200).json([...data]);
   } catch (error) {
     console.log(error);

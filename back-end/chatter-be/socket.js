@@ -30,7 +30,6 @@ io.on('connection', (socket) => {
     const date = new Date();
     const res = { message: req.message, from: req.from, date: date };
     await sql(query.INSERT_PUBLIC_LOG, [req.message, req.from.userId, date]);
-    console.log(res);
     io.sockets.emit('MESSAGE', res);
   });
 
@@ -68,8 +67,10 @@ io.on('connection', (socket) => {
     const msg_date = new Date();
     const res = {};
     res[roomName] = { from, to, msg, msg_date };
-    io.to(roomName).emit('RECEIVE_PRIVATE_MSG', res);
-    await sql(query.INSERT_PRIVATE_LOG, [roomName, msg, from.userId, to, msg_date]);
+    socket.join(roomName, () => {
+      io.to(roomName).emit('RECEIVE_PRIVATE_MSG', res);
+      await sql(query.INSERT_PRIVATE_LOG, [roomName, msg, from.userId, to, msg_date]);
+    })
   });
 
   socket.on('disconnect', () => {
