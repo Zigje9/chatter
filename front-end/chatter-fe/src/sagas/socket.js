@@ -47,11 +47,19 @@ function* sendPrivateMsg(socket) {
   }
 }
 
+function* selfLogout(socket) {
+  while (true) {
+    yield take(type.LOGOUT_SOCKET);
+    socket.emit(type.LOGOUT_SOCKET);
+  }
+}
+
 function* handleIO(socket) {
   yield fork(read, socket);
   yield fork(sendToAllMsg, socket);
   yield fork(requestCreateRoom, socket);
   yield fork(sendPrivateMsg, socket);
+  yield fork(selfLogout, socket);
 }
 
 function* flow() {

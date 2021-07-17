@@ -96,3 +96,9 @@ export const addPrivateMsg = (msgInfo) => {
     payload: msgInfo,
   };
 };
+
+export const selfLogout = () => {
+  return {
+    type: type.LOGOUT_SOCKET,
+  };
+};
