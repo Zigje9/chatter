@@ -67,7 +67,14 @@ io.on('connection', (socket) => {
     const msg_date = new Date();
     const res = {};
     res[roomName] = { from, to, msg, msg_date };
-    socket.join(roomName);
+    for (const [_, socket] of io.of('/').sockets) {
+      if (
+        socket.handshake.auth.userInfo.userId === from.userId ||
+        socket.handshake.auth.userInfo.userId === to
+      ) {
+        socket.join(roomName);
+      }
+    }
     io.to(roomName).emit('RECEIVE_PRIVATE_MSG', res);
     await sql(query.INSERT_PRIVATE_LOG, [roomName, msg, from.userId, to, msg_date]);
   });
