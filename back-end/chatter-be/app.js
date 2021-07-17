@@ -27,6 +27,7 @@ const authRouter = require('./routes/auth');
 const memberRouter = require('./routes/members');
 const publicRouter = require('./routes/public');
 const roomRouter = require('./routes/room');
+const privateRouter = require('./routes/private');
 
 const sessionStore = new MySQLStore(dbConfig);
 
@@ -51,6 +52,7 @@ app.use(authRouter);
 app.use(memberRouter);
 app.use(publicRouter);
 app.use(roomRouter);
+app.use(privateRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
