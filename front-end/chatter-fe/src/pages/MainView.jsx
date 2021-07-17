@@ -6,17 +6,13 @@ import PublicChatRoom from '../components/PublicChatRoom';
 import 'dotenv/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUserRequest } from '../actions/userList';
-import { connectSocketInitRequest, publicChatLogOriginRequest } from '../actions/socket';
+import {
+  connectSocketInitRequest,
+  publicChatLogOriginRequest,
+  privateRoomOriginRequest,
+  privateChatLogOriginRequest,
+} from '../actions/socket';
 import PrivateChatRoom from '../components/PrivateChatRoom';
-
-/* 
-TODO
-- userName + 회원 리스트 띄울 스크롤바 UI
-- 회원 리스트 받아오는 API (가입된 회원들)
-- 회원 리스트 + 현재 접속자 Redux state [{name:"abc", nowLogin:true}, ... ]
-- 소켓으로 들어와있는 사람들 브로드캐스팅 알림 
-- 채팅 Room UI
-*/
 
 const PrivateContainer = styled.div`
   display: flex;
@@ -30,7 +26,7 @@ const PrivateContainer = styled.div`
 
 const MainView = () => {
   const dispatch = useDispatch();
-  const { userId, userName } = useSelector((state) => state.user);
+  const { userId, userName, userProfile } = useSelector((state) => state.user);
   const { rooms } = useSelector((state) => state.socket);
 
   const getUserList = () => {
@@ -43,7 +39,7 @@ const MainView = () => {
 
   const createSocket = () => {
     try {
-      dispatch(connectSocketInitRequest({ userId, userName }));
+      dispatch(connectSocketInitRequest({ userId, userName, userProfile }));
     } catch (error) {
       console.log(error);
     }
@@ -57,10 +53,28 @@ const MainView = () => {
     }
   };
 
+  const getPrivateChatLogOrigin = () => {
+    try {
+      dispatch(privateChatLogOriginRequest());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getPrivateRoomOrigin = () => {
+    try {
+      dispatch(privateRoomOriginRequest());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    getUserList();
     createSocket();
+    getUserList();
     getPublicChatLogOrigin();
+    getPrivateRoomOrigin();
+    getPrivateChatLogOrigin();
   }, []);
 
   return (

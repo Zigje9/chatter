@@ -10,12 +10,44 @@ const userList = (state = initialState, action) => {
         members: action.payload,
       };
     case type.CHANGE_ALL_USER_ONLINE:
-      const onUsersName = Object.values(action.payload);
-      const changeMembers = state.members.map(({ userId, isLogin, ...rest }) => {
-        if (onUsersName.includes(userId)) {
-          return { userId, isLogin: true, ...rest };
+      const onUserInfo = Object.values(action.payload);
+      const onMembers = [...state.members];
+      const tempMember = {};
+      const tempOnUser = {};
+
+      onMembers.forEach((ob) => {
+        tempMember[ob.userId] = ob;
+      });
+      onUserInfo.forEach((ob) => {
+        tempOnUser[ob.userId] = ob;
+      });
+
+      const changeMembers = onMembers.map((ob) => {
+        if (ob.userId in tempOnUser) {
+          return {
+            userId: ob.userId,
+            isLogin: true,
+            userName: ob.userName,
+            userProfile: ob.userProfile,
+          };
         } else {
-          return { userId, isLogin: false, ...rest };
+          return {
+            userId: ob.userId,
+            isLogin: false,
+            userName: ob.userName,
+            userProfile: ob.userProfile,
+          };
+        }
+      });
+
+      onUserInfo.forEach((ob) => {
+        if (!(ob.userId in tempMember)) {
+          changeMembers.push({
+            userId: ob.userId,
+            isLogin: true,
+            userName: ob.userName,
+            userProfile: ob.userProfile,
+          });
         }
       });
       return {

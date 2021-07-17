@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import RoomContainer from '../Common/container';
 import ChatInput from '../Common/chatInput';
 import PublicHeader from './header';
+import DateBox from '../Common/date';
 import { useSelector } from 'react-redux';
 import { getProfile, getProfileIdx } from '../../utils/getProfile';
 import getProfileColor from '../../assets/getPofileColor';
@@ -136,9 +137,11 @@ const PublicChatRoom = () => {
           const fromUserId = log.from.userId;
           const fromUserName = log.from.userName;
           const msg = log.message;
+          const date = log.date;
           if (fromUserId === userId) {
             return (
               <MyMessageBox key={`${fromUserId}_${idx}`}>
+                <DateBox right={true} date={date}></DateBox>
                 <MyMessageContent>{msg}</MyMessageContent>
               </MyMessageBox>
             );
@@ -153,6 +156,7 @@ const PublicChatRoom = () => {
                 <OtherMessageContent userColor={getProfileColor(userIdx)}>
                   {msg}
                 </OtherMessageContent>
+                <DateBox date={date}></DateBox>
               </OtherMessageBox>
             );
           }

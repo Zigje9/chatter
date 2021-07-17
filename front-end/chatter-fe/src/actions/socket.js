@@ -41,6 +41,20 @@ export const publicChatLogOrigin = (payload) => {
   };
 };
 
+export const privateChatLogOriginRequest = (payload) => {
+  return {
+    type: type.PRIVATE_CHAT_LOG_ORIGIN_REQUEST,
+    payload,
+  };
+};
+
+export const privateChatLogOrigin = (payload) => {
+  return {
+    type: type.PRIVATE_CHAT_LOG_ORIGIN,
+    payload,
+  };
+};
+
 export const requestCreateRoom = (payload) => {
   return {
     type: type.REQUEST_CREATE_ROOM,
@@ -55,6 +69,20 @@ export const addPrivateRoom = (roomName) => {
   };
 };
 
+export const privateRoomOriginRequest = (payload) => {
+  return {
+    type: type.PRIVATE_ROOM_ORIGIN_REQUEST,
+    payload,
+  };
+};
+
+export const privateRoomOrigin = (payload) => {
+  return {
+    type: type.PRIVATE_ROOM_ORIGIN,
+    payload,
+  };
+};
+
 export const sendPrivateMsg = (msgInfo) => {
   return {
     type: type.SEND_PRIVATE_MSG,
@@ -66,5 +94,11 @@ export const addPrivateMsg = (msgInfo) => {
   return {
     type: type.ADD_PRIVATE_MSG,
     payload: msgInfo,
+  };
+};
+
+export const selfLogout = () => {
+  return {
+    type: type.LOGOUT_SOCKET,
   };
 };
