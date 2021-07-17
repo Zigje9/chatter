@@ -1,5 +1,5 @@
 import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
-import { loginInitSuccess, loginSuccess } from '../actions/user';
+import { loginInitSuccess, loginSuccess, loginFail } from '../actions/user';
 import * as type from '../actions/type';
 import { getAxios, postAxios } from '../utils/axios';
 import Cookies from 'js-cookie';
@@ -28,6 +28,8 @@ function* loginSaga(action) {
       expires: new Date(cookie.expire),
     });
   } catch (error) {
+    yield put(loginFail());
+    alert('로그인 실패\n비밀번호 혹은 아이디를 확인해주세요!');
     console.log(error);
   }
 }

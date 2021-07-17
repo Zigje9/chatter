@@ -25,10 +25,11 @@ const Time = styled.span`
 const DateBox = ({ ...props }) => {
   const newDate = new Date(props.date);
   const min = newDate.getMinutes();
+  const hour = newDate.getHours();
   return (
     <Box {...props}>
       <Time>
-        {newDate.getHours()}:{min < 10 ? '0' + min : min}
+        {hour < 10 ? '0' + hour : hour}:{min < 10 ? '0' + min : min}
       </Time>
       <FullInfo>
         {newDate.getFullYear()}년 {newDate.getMonth() + 1}월 {newDate.getDate()}일

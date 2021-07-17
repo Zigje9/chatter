@@ -25,7 +25,6 @@ function* getPublicLogSaga() {
 function* getPrivateLogSaga() {
   try {
     const { data } = yield call(getAxios, 'private/');
-    console.log(data);
     const chatLog = data.map((log) => {
       const msgInfo = {};
       msgInfo[log.room_id] = {
