@@ -26,7 +26,7 @@ const PrivateContainer = styled.div`
 
 const MainView = () => {
   const dispatch = useDispatch();
-  const { userId, userName } = useSelector((state) => state.user);
+  const { userId, userName, userProfile } = useSelector((state) => state.user);
   const { rooms } = useSelector((state) => state.socket);
 
   const getUserList = () => {
@@ -39,7 +39,7 @@ const MainView = () => {
 
   const createSocket = () => {
     try {
-      dispatch(connectSocketInitRequest({ userId, userName }));
+      dispatch(connectSocketInitRequest({ userId, userName, userProfile }));
     } catch (error) {
       console.log(error);
     }
@@ -70,8 +70,8 @@ const MainView = () => {
   };
 
   useEffect(() => {
-    getUserList();
     createSocket();
+    getUserList();
     getPublicChatLogOrigin();
     getPrivateRoomOrigin();
     getPrivateChatLogOrigin();
