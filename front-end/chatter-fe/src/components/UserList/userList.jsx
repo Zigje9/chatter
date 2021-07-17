@@ -20,9 +20,9 @@ const UserList = () => {
       const userAccounts = [userInfo.userId, receiverId];
       userAccounts.sort();
       rooms.some((roomName) =>
-        roomName === userAccounts.join('-')
-          ? dispatch(requestCreateRoom(userAccounts))
-          : alert('이미 채팅중입니다.'),
+        roomName === userAccounts.join('_')
+          ? alert('이미 채팅중입니다.')
+          : dispatch(requestCreateRoom(userAccounts)),
       );
     } else {
       console.log('NO');
