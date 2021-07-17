@@ -19,7 +19,7 @@ const userList = (state = initialState, action) => {
         }
       });
       return {
-        members: changeMembers,
+        members: [...changeMembers],
       };
     default:
       return state;
