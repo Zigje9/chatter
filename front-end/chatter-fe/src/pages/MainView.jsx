@@ -14,6 +14,7 @@ import {
 } from '../actions/socket';
 import { toastRequest } from '../actions/toast';
 import PrivateChatRoom from '../components/PrivateChatRoom';
+import Toast from '../components/Common/toast';
 
 const PrivateContainer = styled.div`
   display: flex;
@@ -29,6 +30,7 @@ const MainView = () => {
   const dispatch = useDispatch();
   const { userId, userName, userProfile } = useSelector((state) => state.user);
   const { rooms } = useSelector((state) => state.socket);
+  const { msgQueue } = useSelector((state) => state.toast);
 
   const getUserList = () => {
     try {
@@ -105,6 +107,9 @@ const MainView = () => {
           ))}
         </PrivateContainer>
       </Container>
+      {msgQueue.map((el, idx) => {
+        return <Toast key={idx}>{el.msg}</Toast>;
+      })}
       <TEMP onClick={() => toastHandler()}>TEMP</TEMP>
     </>
   );
