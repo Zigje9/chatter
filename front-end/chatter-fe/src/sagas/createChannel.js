@@ -10,7 +10,7 @@ export function createChannel(socket) {
       emit(changeAllUserOnline(onUsers));
     });
 
-    socket.on('MESSAGE', (message) => {
+    socket.on(type.MESSAGE, (message) => {
       emit(publicChatLog(message));
     });
 
@@ -18,10 +18,14 @@ export function createChannel(socket) {
       emit(addPrivateRoom(roomName));
     });
 
-    socket.on(type.RECEIVE_PRIVATE_MSG, ({ msgInfo, toastMsg }) => {
+    socket.on(type.RECEIVE_PRIVATE_MSG, (msgInfo) => {
       emit(addPrivateMsg(msgInfo));
-      emit(toastRequest(toastMsg));
     });
+
+    socket.on(type.RECEIVE_TOAST_MSG, (toastInfo) => {
+      emit(toastRequest(toastInfo));
+    });
+
     return () => {
       socket.off(type.BROADCASTING, (onUsers) => {
         emit(changeAllUserOnline(onUsers));

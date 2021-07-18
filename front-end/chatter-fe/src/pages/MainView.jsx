@@ -72,22 +72,6 @@ const MainView = () => {
     }
   };
 
-  const TEMP = styled.div`
-    width: 50px;
-    height: 50px;
-    background-color: red;
-  `;
-
-  const toastHandler = () => {
-    const temp = new Date();
-    const msgInfo = {
-      from_id: temp.getHours(),
-      from_name: temp.getHours(),
-      msg: 'hi',
-    };
-    dispatch(toastRequest(msgInfo));
-  };
-
   useEffect(() => {
     createSocket();
     getUserList();
@@ -107,10 +91,9 @@ const MainView = () => {
           ))}
         </PrivateContainer>
       </Container>
-      {msgQueue.map((el, idx) => {
-        return <Toast key={idx}>{el.msg}</Toast>;
+      {msgQueue.map((info, idx) => {
+        return <Toast key={`${info}_${idx}`} msgInfo={info}></Toast>;
       })}
-      <TEMP onClick={() => toastHandler()}>TEMP</TEMP>
     </>
   );
 };
