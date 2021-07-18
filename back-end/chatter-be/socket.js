@@ -66,6 +66,11 @@ io.on('connection', (socket) => {
     const to = roomArr[0] === from.userId ? roomArr[1] : roomArr[0];
     const date = new Date();
     const res = {};
+    const toastInfo = {
+      from_id: from.userId,
+      from_name: from.userName,
+      msg,
+    };
     res[roomName] = { from: from.userId, to, msg, date };
     for (const [_, socket] of io.of('/').sockets) {
       if (
@@ -75,6 +80,7 @@ io.on('connection', (socket) => {
         socket.join(roomName);
       }
     }
+    socket.broadcast.to(roomName).emit('RECEIVE_TOST_MSG', toastInfo);
     io.to(roomName).emit('RECEIVE_PRIVATE_MSG', res);
     await sql(query.INSERT_PRIVATE_LOG, [roomName, msg, from.userId, to, date]);
   });
