@@ -20,7 +20,8 @@ const toast = (state = initialState, action) => {
         msgQueue: [...state.msgQueue, action.payload],
       };
     case type.TOAST_DELETE_MESSAGE:
-      const deleteQueue = state.msgQueue.shift(0);
+      const deleteQueue = [...state.msgQueue];
+      deleteQueue.shift(0);
       return {
         ...state,
         msgQueue: deleteQueue,

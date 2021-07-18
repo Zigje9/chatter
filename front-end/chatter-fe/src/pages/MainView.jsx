@@ -12,6 +12,7 @@ import {
   privateRoomOriginRequest,
   privateChatLogOriginRequest,
 } from '../actions/socket';
+import { toastRequest } from '../actions/toast';
 import PrivateChatRoom from '../components/PrivateChatRoom';
 
 const PrivateContainer = styled.div`
@@ -69,6 +70,22 @@ const MainView = () => {
     }
   };
 
+  const TEMP = styled.div`
+    width: 50px;
+    height: 50px;
+    background-color: red;
+  `;
+
+  const toastHandler = () => {
+    const temp = new Date();
+    const msgInfo = {
+      from_id: temp.getHours(),
+      from_name: temp.getHours(),
+      msg: 'hi',
+    };
+    dispatch(toastRequest(msgInfo));
+  };
+
   useEffect(() => {
     createSocket();
     getUserList();
@@ -88,6 +105,7 @@ const MainView = () => {
           ))}
         </PrivateContainer>
       </Container>
+      <TEMP onClick={() => toastHandler()}>TEMP</TEMP>
     </>
   );
 };
