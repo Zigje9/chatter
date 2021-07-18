@@ -5,18 +5,23 @@ const sql = require('../model/db');
 const query = require('../model/query/user');
 
 router.post('/login', async (req, res) => {
-  const { id, pw } = req.body;
-  const [result] = await sql(query.READ_USER, id);
-  if (pw === result.user_password) {
-    req.session.userId = result.user_id;
-    req.session.name = result.user_name;
-    req.session.profile = result.user_profile;
-    req.session.save(() => {
-      req.session.sid = req.sessionID;
-      return res.status(200).send(req.session);
-    });
-  } else {
+  if (req.session.userId) {
+    console.log(req.session.userId);
     res.status(401).send('login failed');
+  } else {
+    const { id, pw } = req.body;
+    const [result] = await sql(query.READ_USER, id);
+    if (pw === result.user_password) {
+      req.session.userId = result.user_id;
+      req.session.name = result.user_name;
+      req.session.profile = result.user_profile;
+      req.session.save(() => {
+        req.session.sid = req.sessionID;
+        return res.status(200).send(req.session);
+      });
+    } else {
+      res.status(401).send('login failed');
+    }
   }
 });
 
