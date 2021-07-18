@@ -4,9 +4,10 @@ import socket from './socket';
 import userList from './userList';
 import log from './log';
 import room from './room';
+import toast from './toast';
 
 function* rootSaga() {
-  yield all([fork(user), fork(userList), fork(socket), fork(log), fork(room)]);
+  yield all([fork(user), fork(userList), fork(socket), fork(log), fork(room), fork(toast)]);
 }
 
 export default rootSaga;
