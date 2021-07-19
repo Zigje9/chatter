@@ -1,13 +1,5 @@
 import * as type from '../actions/type';
 
-/*
-msgInfo = {
-  from_id: "aa"
-  from_name: "bb"
-  msg: "aaaaa"
-}
-*/
-
 const initialState = {
   msgQueue: [],
 };

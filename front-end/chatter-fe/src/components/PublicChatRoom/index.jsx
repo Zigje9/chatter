@@ -6,7 +6,7 @@ import PublicHeader from './header';
 import DateBox from '../Common/date';
 import { useSelector } from 'react-redux';
 import { getProfile, getProfileIdx } from '../../utils/getProfile';
-import getProfileColor from '../../assets/getPofileColor';
+import getProfileColor from '../../assets/getProfileColor';
 
 const ChatContainer = styled.div`
   flex-direction: column;
