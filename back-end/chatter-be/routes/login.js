@@ -10,7 +10,7 @@ const getSaltPw = (id, pw) => {
   return new Promise(async (resolve, reject) => {
     const [result] = await sql(query.READ_USER, id);
     const salt = result.user_salt;
-    crypto.pbkdf2(pw, salt, process.env.SALT_NUM, 64, 'sha512', (err, key) => {
+    crypto.pbkdf2(pw, salt, +process.env.SALT_NUM, 64, 'sha512', (err, key) => {
       if (err) reject(err);
       resolve(key.toString('base64'));
     });
