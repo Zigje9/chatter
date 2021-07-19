@@ -25,25 +25,23 @@ const ChatHeader = styled.div`
   position: absolute;
   width: 100%;
   height: 40px;
-  justify-content: flex-end;
   display: flex;
   align-items: center;
+  padding: 10px;
 `;
 
 const PartnerSpan = styled.span`
-  width: 90%;
+  width: 80%;
   color: black;
 `;
 
 const PartnerIcon = styled(UserCircle)`
-  width: 30px;
-  height: 30px;
-  fill: gray;
+  width: 10%;
+  fill: pink;
 `;
 
 const CloseIcon = styled(CloseCircleOutline)`
-  width: 30px;
-  height: 30px;
+  width: 10%;
   fill: red;
   &:hover {
     cursor: pointer;
@@ -88,7 +86,7 @@ const PrivateChat = ({ ...props }) => {
     <ChatBox>
       <ChatHeader>
         <PartnerIcon></PartnerIcon>
-        <PartnerSpan>{partner.userName}님</PartnerSpan>
+        <PartnerSpan>{partner.userName}</PartnerSpan>
         <CloseIcon onClick={() => close()}></CloseIcon>
       </ChatHeader>
       <ChatContent>
