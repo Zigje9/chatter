@@ -11,7 +11,8 @@ const cookieParser = require('cookie-parser');
 const socketServer = require('./socket');
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  // origin: 'http://localhost:3000',
+  origin: 'http://chatter.kro.kr',
   credentials: true,
 };
 
