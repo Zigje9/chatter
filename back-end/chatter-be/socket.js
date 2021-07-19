@@ -80,7 +80,7 @@ io.on('connection', (socket) => {
         socket.join(roomName);
       }
     }
-    socket.broadcast.to(roomName).emit('RECEIVE_TOST_MSG', toastInfo);
+    socket.broadcast.to(roomName).emit('RECEIVE_TOAST_MSG', toastInfo);
     io.to(roomName).emit('RECEIVE_PRIVATE_MSG', res);
     await sql(query.INSERT_PRIVATE_LOG, [roomName, msg, from.userId, to, date]);
   });
