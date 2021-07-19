@@ -1,35 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
+import getProfileColor from '../../assets/getProfileColor';
 
 const MsgContent = styled.div`
   position: relative;
-  color: white;
   height: 40px;
   padding: 13px;
   font-size: 13px;
-  background: #4286f5;
+  background-color: ${(props) => props.userColor};
+  color: white;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
-  right: 10px;
+  left: 5px;
   margin: 3px 0;
-  text-overflow: ellipsis;
   &:after {
     content: '';
     position: absolute;
     border-style: solid;
-    border-width: 5px 0 5px 10px;
-    border-color: transparent #4286f5;
+    border-width: 5px 10px 5px 0;
+    border-color: transparent ${(props) => props.userColor};
     display: block;
     width: 0;
     z-index: 1;
-    right: -10px;
+    left: -10px;
     top: 16px;
   }
 `;
 
-const SelfMsgContent = ({ children }) => {
-  return <MsgContent>{children}</MsgContent>;
+const OtherMsgContent = ({ children, ...props }) => {
+  return <MsgContent userColor={getProfileColor(props.userIdx)}>{children}</MsgContent>;
 };
 
-export default SelfMsgContent;
+export default OtherMsgContent;
