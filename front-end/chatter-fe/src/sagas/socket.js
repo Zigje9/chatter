@@ -3,6 +3,7 @@ import { createChannel } from './createChannel';
 import { io } from 'socket.io-client';
 import * as type from '../actions/type';
 import 'dotenv/config';
+import { getAxios } from '../utils/axios';
 
 const connect = (userInfo) => {
   const socket = io(process.env.REACT_APP_SOCKET_SERVER, {
@@ -29,7 +30,7 @@ function* read(socket) {
 function* sendToAllMsg(socket) {
   while (true) {
     const { payload } = yield take(type.SEND_TO_ALL_MSG);
-    socket.emit('MESSAGE', payload);
+    socket.emit(type.MESSAGE, payload);
   }
 }
 
@@ -49,6 +50,7 @@ function* sendPrivateMsg(socket) {
 
 function* selfLogout(socket) {
   while (true) {
+    yield call(getAxios, 'logout/');
     yield take(type.LOGOUT_SOCKET);
     socket.emit(type.LOGOUT_SOCKET);
   }
