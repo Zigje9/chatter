@@ -25,7 +25,6 @@ export const postAxios = (reqUrl, reqData) => {
   return axios
     .create({
       baseURL: process.env.REACT_APP_SERVER,
-      withCredentials: true,
       method: 'post',
     })
     .request({ url: reqUrl, data: reqData });
