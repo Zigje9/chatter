@@ -11,16 +11,16 @@ function App() {
   const serviceRouter = (
     <>
       <Switch>
-        <Route path="http://www.chatter.kro.kr/main" component={MainView} />
-        <Redirect from="*" to="http://www.chatter.kro.kr/main" />
+        <Route path="/main" component={MainView} />
+        <Redirect from="*" to="/main" />
       </Switch>
     </>
   );
 
   const unAuthorizedRouter = (
     <>
-      <Route path="http://www.chatter.kro.kr/login" component={LoginView} />
-      <Redirect from="*" to="http://www.chatter.kro.kr/login" />
+      <Route path="/login" component={LoginView} />
+      <Redirect from="*" to="/login" />
     </>
   );
 
